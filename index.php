@@ -296,7 +296,7 @@ if(isset($_SESSION['login'])){
         $mhsJenisKelamin = $_POST['mhsJenisKelamin'] ?? 'L';
         $mhsKodeKelas = $_POST['mhsKodeKelas'] ?? 'A';
         $stmt = $koneksi->prepare("INSERT INTO mahasiswa (mhsNim, mhsNama, mhsTempatLahir, mhsTglLahir, mhsJenisKelamin, mhsJurId, mhsProdiId, mhsKodeKelas, mhsStsAkademik, mhsSmsAktif) VALUES (?, ?, '', ?, ?, ?, ?, ?, 'A', 0)");
-        $stmt->bind_param("sssiis", $mhsNim, $mhsNama, $mhsTglLahir, $mhsJenisKelamin, $mhsJurId, $mhsProdiId);
+        $stmt->bind_param("sssiis", $mhsNim, $mhsNama, $mhsTglLahir, $mhsJenisKelamin, $mhsJurId, $mhsProdiId, $mhsKodeKelas, $mhsStsAkademik, $mhsSmsAktif);
         // Note: binding mixed types; adjust pattern or cast above if issues.
         $stmt->execute();
         $stmt->close();
