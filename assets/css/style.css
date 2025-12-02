@@ -1,0 +1,22 @@
+body { margin:0; font-family: Arial; background:#f3f6fa; }
+
+/* SIDEBAR */
+.sidebar {
+    width:260px; height:100vh; position:fixed; left:0; top:0;
+    background:#eef6ff; padding:20px; border-right:1px solid #dce6f2;
+}
+.sidebar-title { font-weight:bold; text-align:center; font-size:20px; margin-bottom:10px; }
+.sidebar-user { background:white; padding:12px; border-radius:6px; text-align:center; margin-bottom:15px; }
+.sidebar a { display:block; padding:8px 10px; margin:4px 0; text-decoration:none; border-radius:6px; color:#0a3b6f; }
+.sidebar a:hover { background:#dceefb; }
+
+/* CONTENT */
+.content { margin-left:280px; padding:25px; }
+
+/* TABLE */
+.table { width:100%; border-collapse: collapse; }
+.table th, .table td { padding:10px; border:1px solid #e5eaf0; }
+
+/* BUTTONS */
+.btn { background:#2380d9; color:white; padding:8px 12px; text-decoration:none; border-radius:6px; }
+.btn.small { padding:5px 8px; font-size:12px; }
