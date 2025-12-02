@@ -28,8 +28,12 @@
         <input type="checkbox" name="jurIsAktif" <?= isset($old['jurIsAktif']) ? 'checked' : 'checked' ?>> Aktif
     </label><br><br>
 
-    <button class="btn" type="submit" name="save_jurusan">Simpan</button>
-    <a class="btn" style="background:#777" href="index.php?page=jurusan">Batal</a>
+
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button class="btn" type="submit" name="save_jurusan" style="flex: 1;">Simpan</button>
+        
+        <a class="btn" style="background:#777; flex: 1;" href="index.php?page=jurusan">Batal</a>
+    </div>
 
 </form>
 

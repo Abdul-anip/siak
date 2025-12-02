@@ -71,8 +71,10 @@
     <label>Semester Aktif</label>
     <input class="input" type="number" name="mhsSmsAktif" value="<?= $data['mhsSmsAktif'] ?>">
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="update_mahasiswa">Update</button>
     <a class="btn" style="background:#777" href="index.php?page=mahasiswa">Batal</a>
+    </div>
 
 </form>
 

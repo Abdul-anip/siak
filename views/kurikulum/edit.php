@@ -32,8 +32,10 @@
         <input type="checkbox" name="kurIsAktif" <?= $data['kurIsAktif'] ? 'checked' : '' ?>> Aktif
     </label><br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="update_kurikulum" type="submit">Update</button>
     <a class="btn" style="background:#777" href="index.php?page=kurikulum">Batal</a>
+    </div>
 
 </form>
 

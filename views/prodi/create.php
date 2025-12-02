@@ -44,8 +44,10 @@
         <input type="checkbox" name="prodiIsAktif" checked> Aktif
     </label><br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" type="submit" name="save_prodi">Simpan</button>
     <a class="btn" style="background:#777" href="index.php?page=prodi">Batal</a>
+    </div>
 
 </form>
 

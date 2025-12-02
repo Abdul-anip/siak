@@ -1,22 +1,435 @@
-body { margin:0; font-family: Arial; background:#f3f6fa; }
+/*
+ * SIAKAD MODERN STYLE
+ */
 
-/* SIDEBAR */
-.sidebar {
-    width:260px; height:100vh; position:fixed; left:0; top:0;
-    background:#eef6ff; padding:20px; border-right:1px solid #dce6f2;
+/* 1. CSS VARIABLES (Colors & Spacing) */
+:root {
+    --color-primary: #0A3B6F; /* Dark Blue - Profesional */
+    --color-secondary: #1E88E5; /* Bright Blue - Aksen Utama */
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-background: #F4F7FC; /* Light Blue-Gray Background */
+    --color-sidebar-bg: #FFFFFF;
+    --color-card-bg: #FFFFFF;
+    --color-border-light: #E0E0E0;
+    --color-table-header-bg: #EAF4FF; /* Sangat muda, cerah */
+    --color-danger: #D9534F; /* Merah untuk Hapus */
+    --color-success: #5CB85C; /* Hijau untuk Sukses */
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
 }
-.sidebar-title { font-weight:bold; text-align:center; font-size:20px; margin-bottom:10px; }
-.sidebar-user { background:white; padding:12px; border-radius:6px; text-align:center; margin-bottom:15px; }
-.sidebar a { display:block; padding:8px 10px; margin:4px 0; text-decoration:none; border-radius:6px; color:#0a3b6f; }
-.sidebar a:hover { background:#dceefb; }
 
-/* CONTENT */
-.content { margin-left:280px; padding:25px; }
+/* 2. BASE STYLES & LAYOUT */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+}
 
-/* TABLE */
-.table { width:100%; border-collapse: collapse; }
-.table th, .table td { padding:10px; border:1px solid #e5eaf0; }
+/* Container utama untuk Sidebar + Content */
+.main-container {
+    display: flex;
+    min-height: 100vh;
+}
 
-/* BUTTONS */
-.btn { background:#2380d9; color:white; padding:8px 12px; text-decoration:none; border-radius:6px; }
-.btn.small { padding:5px 8px; font-size:12px; }
+/* 3. SIDEBAR (DIPERBAIKI UNTUK SCROLL) */
+.sidebar {
+    width: 260px;
+    height: 100vh; /* Menggunakan 100vh agar fixed */
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: var(--color-sidebar-bg);
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-right: 1px solid var(--color-border-light);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    z-index: 100;
+    overflow-y: auto; /* KUNCI PERBAIKAN: Memungkinkan konten sidebar di-scroll */
+}
+.sidebar-title {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5rem; /* 24px */
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+.sidebar-user {
+    background: var(--color-table-header-bg);
+    padding: var(--spacing-sm);
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.9rem;
+    border: 1px solid var(--color-border-light);
+}
+.sidebar-user strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin-top: var(--spacing-xs);
+}
+
+.menu-title {
+    font-weight: 700;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.sidebar a {
+    display: block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-xs) 0;
+    text-decoration: none;
+    border-radius: 6px;
+    color: var(--color-text);
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.95rem;
+}
+.sidebar a:hover,
+.sidebar a.active {
+    background: #EAF4FF;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* 4. MAIN CONTENT AREA */
+.content-wrapper {
+    margin-left: 260px; /* Offset untuk sidebar tetap */
+    padding: var(--spacing-xl);
+    flex-grow: 1;
+}
+
+/* 5. COMPONENTS */
+
+/* Top Bar (Header di dalam konten) */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 2px solid var(--color-border-light);
+}
+.topbar h2 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Card Content */
+.card-content {
+    background: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: var(--color-secondary);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    text-align: center;
+    user-select: none;
+}
+.btn:hover {
+    background: #1565C0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn.small {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+}
+/* Style untuk tombol Hapus (merah) */
+.btn[style*="#d9534f"], .btn[name*="delete"] {
+    background: var(--color-danger) !important;
+}
+.btn[style*="#d9534f"]:hover, .btn[name*="delete"]:hover {
+    background: #C9302C !important;
+}
+/* Style untuk tombol Batal (abu-abu) */
+.btn[style*="#777"] {
+    background: var(--color-text-light) !important;
+}
+.btn[style*="#777"]:hover {
+    background: #555 !important;
+}
+
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+    font-size: 0.9rem;
+}
+.input, select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: var(--color-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: var(--spacing-md);
+}
+.input:focus, select:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.2);
+    outline: none;
+}
+small {
+    display: block;
+    color: var(--color-text-light);
+    margin-top: -12px;
+    margin-bottom: var(--spacing-md);
+    font-size: 0.85rem;
+}
+
+/* Alert/Error Messages */
+.message-box {
+    padding: var(--spacing-md);
+    border-radius: 6px;
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid transparent;
+    font-size: 0.95rem;
+}
+.message-box.error {
+    background: #FFEBEE;
+    border-color: #FFCDD2;
+    color: #C62828;
+}
+.message-box.success {
+    background: #E8F5E9;
+    border-color: #C8E6C9;
+    color: #2E7D32;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: var(--spacing-md);
+}
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.table th, .table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--color-border-light);
+    text-align: left;
+    font-size: 0.9rem;
+}
+.table th {
+    background: var(--color-table-header-bg);
+    color: var(--color-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.table tr:last-child td {
+    border-bottom: none;
+}
+.table tbody tr:hover td {
+    background-color: #FAFAFA;
+}
+.table th:first-child { border-top-left-radius: 8px; }
+.table th:last-child { border-top-right-radius: 8px; }
+
+
+/* Menu Box (for Beranda) */
+.menu-box {
+    background: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--color-border-light);
+}
+.menu-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.menu-box img {
+    width: 50px;
+    margin-bottom: var(--spacing-md);
+}
+.menu-box .menu-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 0;
+    text-transform: none;
+    letter-spacing: normal;
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+
+/* Login/Register Page */
+.center-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--color-background);
+}
+.center-wrap .card {
+    width: 380px;
+    background: var(--color-card-bg);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.center-wrap .card h2 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    margin-top: 0;
+}
+.center-wrap .card hr {
+    border: none;
+    border-top: 1px solid var(--color-border-light);
+    margin: var(--spacing-lg) 0;
+}
+.center-wrap .card p {
+    color: var(--color-text-light);
+    text-align: center;
+}
+.center-wrap .card .btn {
+    width: 100%;
+    display: block;
+    margin-top: var(--spacing-md);
+}
+
+/* Footer */
+footer {
+    padding: var(--spacing-md) var(--spacing-xl);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-left: 260px;
+}
+
+
+/* 6. RESPONSIVENESS (Mobile First) */
+@media (max-width: 860px) {
+    /* Layout */
+    .sidebar {
+        width: 100%;
+        height: auto; /* Disesuaikan untuk mobile */
+        position: relative;
+        border-right: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding: var(--spacing-md);
+        min-height: unset;
+        flex-shrink: 0;
+        overflow-y: visible; /* Di mobile, biarkan body yang scroll */
+    }
+    .main-container {
+        flex-direction: column;
+    }
+    .content-wrapper {
+        margin-left: 0;
+        padding: var(--spacing-md);
+    }
+    footer {
+        margin-left: 0;
+    }
+
+    /* Components */
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    .topbar h2 {
+        font-size: 1.3rem;
+    }
+    .topbar .btn {
+        width: 100%;
+    }
+    .card-content {
+        padding: var(--spacing-md);
+    }
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    /* Table (Card View on Mobile) */
+    .table {
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .table thead {
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    .table tr {
+        margin-bottom: var(--spacing-md);
+        border: 1px solid var(--color-border-light);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #F0F0F0;
+    }
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: var(--spacing-md);
+        font-weight: 600;
+        color: var(--color-primary);
+        text-align: left;
+    }
+    .table tr:last-child td:last-child {
+         border-bottom: none;
+    }
+}

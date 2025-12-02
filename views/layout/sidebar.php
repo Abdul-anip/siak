@@ -1,4 +1,4 @@
-<div class="sidebar">
+<aside class="sidebar">
     <div class="sidebar-title">SIAKAD</div>
     <div class="sidebar-user">
         Welcome,<br><strong><?= htmlspecialchars($_SESSION['user']) ?></strong>
@@ -22,6 +22,6 @@
     <div class="menu-title">User</div>
     <a href="index.php?page=password">🔑 Password</a>
     <a href="index.php?page=logout">🚪 Logout</a>
-</div>
+</aside>
 
-<div class="content">
+<main class="content-wrapper">

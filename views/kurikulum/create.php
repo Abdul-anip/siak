@@ -33,8 +33,10 @@
         <input type="checkbox" name="kurIsAktif" checked> Aktif
     </label><br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" type="submit" name="save_kurikulum">Simpan</button>
     <a class="btn" style="background:#777" href="index.php?page=kurikulum">Batal</a>
+    </div>
 
 </form>
 

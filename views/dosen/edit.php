@@ -45,8 +45,10 @@
         <?php endwhile; ?>
     </select>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="update_dosen" type="submit">Update</button>
     <a class="btn" style="background:#777" href="index.php?page=dosen">Batal</a>
+    </div>
 
 </form>
 

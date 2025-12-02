@@ -24,8 +24,10 @@
         <input type="checkbox" name="jurIsAktif" <?= $data['jurIsAktif'] ? 'checked' : '' ?>> Aktif
     </label><br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" type="submit" name="update_jurusan">Update</button>
     <a class="btn" style="background:#777" href="index.php?page=jurusan">Batal</a>
+    </div>
 
 </form>
 

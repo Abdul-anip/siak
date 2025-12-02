@@ -61,8 +61,10 @@
         <option value="D">D</option>
     </select>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="save_mahasiswa">Simpan</button>
     <a class="btn" style="background:#777" href="index.php?page=mahasiswa">Batal</a>
+    </div>
 </form>
 
 </div>

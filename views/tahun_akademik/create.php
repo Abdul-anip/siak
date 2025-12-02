@@ -85,9 +85,10 @@
 
     <br><br>
 
-    <!-- Buttons -->
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="save_ta">Simpan</button>
     <a class="btn" style="background:#777" href="index.php?page=tahun_akademik">Batal</a>
+    </div>
 
 </form>
 

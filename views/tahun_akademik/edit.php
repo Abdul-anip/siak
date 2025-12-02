@@ -26,8 +26,10 @@
 
     <br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="update_ta">Update</button>
     <a class="btn" style="background:#777" href="index.php?page=tahun_akademik">Batal</a>
+    </div>
 
 </form>
 

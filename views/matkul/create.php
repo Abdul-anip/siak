@@ -49,8 +49,10 @@
         Aktif
     </label><br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" type="submit" name="save_matkul">Simpan</button>
     <a class="btn" style="background:#777" href="index.php?page=matkul">Batal</a>
+    </div>
 
 </form>
 

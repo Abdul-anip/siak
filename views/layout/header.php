@@ -1,4 +1,5 @@
 <?php
+// Pastikan sesi login tetap dipertahankan
 if (!isset($_SESSION['login'])) {
     header("Location: index.php?page=login");
     exit;
@@ -13,3 +14,4 @@ if (!isset($_SESSION['login'])) {
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<div class="main-container">

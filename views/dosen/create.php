@@ -8,7 +8,7 @@
 <div class="card-content">
 
 <?php if (isset($error)): ?>
-<div style="padding:10px;background:#fdd;border:1px solid #f99;margin-bottom:10px;border-radius:6px;">
+<div class="message-box error"> 
     <?= $error ?>
 </div>
 <?php endif; ?>
@@ -59,8 +59,10 @@
         <?php endwhile; ?>
     </select>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="save_dosen" type="submit">Simpan</button>
-    <a class="btn" style="background:#777" href="index.php?page=dosen">Batal</a>
+        <a class="btn" style="background:#777" href="index.php?page=dosen">Batal</a>
+    </div>
 
 </form>
 

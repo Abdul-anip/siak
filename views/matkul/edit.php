@@ -38,8 +38,10 @@
         <input type="checkbox" name="mkIsAktif" <?= $data['mkIsAktif'] ? 'checked' : '' ?>> Aktif
     </label><br><br>
 
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
     <button class="btn" name="update_matkul" type="submit">Update</button>
     <a class="btn" style="background:#777" href="index.php?page=matkul">Batal</a>
+    </div>
 
 </form>
 
