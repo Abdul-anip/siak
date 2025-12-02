@@ -19,6 +19,31 @@ class Jurusan {
     }
 
     function store($data){
+        // VALIDASI AWAL
+        if (!isset($data['jurKode']) || !isset($data['jurNama'])) {
+            return [
+                'status' => false,
+                'error' => "Form tidak lengkap! Pastikan semua field terisi."
+            ];
+        }
+
+        $jurKode = $data['jurKode'];
+        $jurNama = $data['jurNama'];
+
+        // VALIDASI DUPLIKASI KODE
+        $cek = $this->db->query("
+            SELECT jurId FROM jurusan 
+            WHERE jurKode='$jurKode'
+        ");
+
+        if ($cek->num_rows > 0) {
+            return [
+                'status' => false,
+                'error' => "Kode jurusan <b>$jurKode</b> sudah terdaftar."
+            ];
+        }
+
+        // INSERT DATA
         $isAktif = isset($data['jurIsAktif']) ? 1 : 0;
 
         $stmt = $this->db->prepare("
@@ -33,7 +58,9 @@ class Jurusan {
             $isAktif
         );
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return ['status' => true];
     }
 
     function update($id, $data){

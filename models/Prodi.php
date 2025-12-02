@@ -24,6 +24,31 @@ class Prodi {
     }
 
     function store($data){
+        // VALIDASI AWAL
+        if (!isset($data['prodiKode']) || !isset($data['prodiNama']) || !isset($data['prodiJurId'])) {
+            return [
+                'status' => false,
+                'error' => "Form tidak lengkap! Pastikan semua field terisi."
+            ];
+        }
+
+        $prodiKode = $data['prodiKode'];
+        $prodiJurId = $data['prodiJurId'];
+
+        // VALIDASI DUPLIKASI KODE
+        $cek = $this->db->query("
+            SELECT prodiId FROM program_studi 
+            WHERE prodiKode='$prodiKode'
+        ");
+
+        if ($cek->num_rows > 0) {
+            return [
+                'status' => false,
+                'error' => "Kode prodi <b>$prodiKode</b> sudah terdaftar."
+            ];
+        }
+
+        // INSERT DATA
         $isAktif = isset($data['prodiIsAktif']) ? 1 : 0;
 
         $stmt = $this->db->prepare("
@@ -42,7 +67,9 @@ class Prodi {
             $isAktif
         );
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return ['status' => true];
     }
 
     function update($id, $data){

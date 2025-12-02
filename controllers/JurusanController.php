@@ -18,8 +18,20 @@ else if ($aksi == "tambah") {
 
 // --- SIMPAN TAMBAH ---
 else if ($aksi == "save" && isset($_POST['save_jurusan'])) {
-    $jurusan->store($_POST);
+    $result = $jurusan->store($_POST);
+
+    // Jika ERROR → tampilkan form create dengan pesan error
+    if (!$result['status']) {
+        $error = $result['error'];
+        $old = $_POST;
+
+        require "views/jurusan/create.php";
+        exit;
+    }
+
+    // Jika sukses → redirect
     header("Location: index.php?page=jurusan");
+    exit;
 }
 
 // --- FORM EDIT ---

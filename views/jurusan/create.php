@@ -7,19 +7,25 @@
 
 <div class="card-content">
 
+<?php if (isset($error)): ?>
+<div style="padding:10px;background:#fdd;border:1px solid #f99;margin-bottom:10px;border-radius:6px;">
+    <?= $error ?>
+</div>
+<?php endif; ?>
+
 <form method="post" action="index.php?page=jurusan&aksi=save">
 
     <label>Kode</label>
-    <input class="input" name="jurKode">
+    <input class="input" name="jurKode" value="<?= $old['jurKode'] ?? '' ?>" required>
 
     <label>Nama Jurusan</label>
-    <input class="input" name="jurNama" required>
+    <input class="input" name="jurNama" value="<?= $old['jurNama'] ?? '' ?>" required>
 
     <label>Nama Asing</label>
-    <input class="input" name="jurNamaAsing">
+    <input class="input" name="jurNamaAsing" value="<?= $old['jurNamaAsing'] ?? '' ?>">
 
     <label>
-        <input type="checkbox" name="jurIsAktif" checked> Aktif
+        <input type="checkbox" name="jurIsAktif" <?= isset($old['jurIsAktif']) ? 'checked' : 'checked' ?>> Aktif
     </label><br><br>
 
     <button class="btn" type="submit" name="save_jurusan">Simpan</button>

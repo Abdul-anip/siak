@@ -7,35 +7,55 @@
 
 <div class="card-content">
 
+<?php if (isset($error)): ?>
+<div style="padding:10px;background:#fdd;border:1px solid #f99;margin-bottom:10px;border-radius:6px;">
+    <?= $error ?>
+</div>
+<?php endif; ?>
+
 <form method="post" action="index.php?page=dosen&aksi=save">
 
     <label>NIDN</label>
-    <input class="input" name="dsnNidn" required>
+    <input class="input" name="dsnNidn" required
+        value="<?= isset($old['dsnNidn']) ? htmlspecialchars($old['dsnNidn']) : '' ?>">
 
     <label>Nama Lengkap</label>
-    <input class="input" name="dsnNama" required>
+    <input class="input" name="dsnNama" required
+        value="<?= isset($old['dsnNama']) ? htmlspecialchars($old['dsnNama']) : '' ?>">
 
     <label>Jenis Kelamin</label>
     <select class="input" name="dsnJenisKelaminKode">
-        <option value="L">Laki-laki</option>
-        <option value="P">Perempuan</option>
+        <option value="L" <?= (isset($old['dsnJenisKelaminKode']) && $old['dsnJenisKelaminKode']=='L') ? 'selected' : '' ?>>
+            Laki-laki
+        </option>
+        <option value="P" <?= (isset($old['dsnJenisKelaminKode']) && $old['dsnJenisKelaminKode']=='P') ? 'selected' : '' ?>>
+            Perempuan
+        </option>
     </select>
 
     <label>Jurusan</label>
-    <select name="dsnJurId" class="input">
+    <select name="dsnJurId" class="input" required>
         <option value="0">-- Pilih Jurusan --</option>
-        <?php 
-        /** @var mysqli_result $jur */
-        while($j = $jur->fetch_assoc()): ?>
-            <option value="<?= $j['jurId'] ?>"><?= $j['jurNama'] ?></option>
+
+        <?php
+        
+        while($j = $jurusan->fetch_assoc()): ?>
+            <option value="<?= $j['jurId'] ?>"
+                <?= (isset($old['dsnJurId']) && $old['dsnJurId'] == $j['jurId']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($j['jurNama']) ?>
+            </option>
         <?php endwhile; ?>
     </select>
 
     <label>Program Studi</label>
     <select name="dsnProdiId" class="input" required>
         <option value="0">-- Pilih Prodi --</option>
+
         <?php while($p = $listProdi->fetch_assoc()): ?>
-            <option value="<?= $p['prodiId'] ?>"><?= $p['prodiNama'] ?></option>
+            <option value="<?= $p['prodiId'] ?>"
+                <?= (isset($old['dsnProdiId']) && $old['dsnProdiId'] == $p['prodiId']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($p['prodiNama']) ?>
+            </option>
         <?php endwhile; ?>
     </select>
 

@@ -7,23 +7,85 @@
 
 <div class="card-content">
 
+<?php if (isset($error)): ?>
+<div style="padding:10px;background:#fdd;border:1px solid #f99;margin-bottom:10px;border-radius:6px;">
+    <?= $error ?>
+</div>
+<?php endif; ?>
+
 <form method="post" action="index.php?page=tahun_akademik&aksi=save">
 
-    <label>Kode Tahun Akademik (contoh: 20241)</label>
-    <input class="input" name="taKode" required>
+    <!-- ID Tahun Akademik -->
+    <label>ID Tahun Akademik (contoh: 20241)</label>
+    <input 
+        class="input" 
+        name="thakdId" 
+        type="number" 
+        minlength="5"
+        placeholder="20241"
+        value="<?= htmlspecialchars($old['thakdId'] ?? '') ?>" 
+        required
+    >
+    <small style="color:#666">
+        Format: TAHUN (YYYY) + SEMESTER (1 = Ganjil, 2 = Genap)<br>
+        Contoh: 2024 Ganjil → 20241, 2024 Genap → 20242
+    </small>
 
+    <!-- Tahun -->
+    <label>Tahun (YYYY)</label>
+    <input 
+        class="input" 
+        name="thakdTahun" 
+        type="text"
+        minlength="4"
+        maxlength="4"
+        placeholder="2024"
+        value="<?= htmlspecialchars($old['thakdTahun'] ?? '') ?>" 
+        required
+    >
+
+    <!-- Semester -->
     <label>Semester</label>
-    <select class="input" name="taSemester" required>
-        <option value="Ganjil">Ganjil</option>
-        <option value="Genap">Genap</option>
+    <select class="input" name="thakdSemester" required>
+        <option value="1" <?= isset($old['thakdSemester']) && $old['thakdSemester'] == '1' ? 'selected' : '' ?>>
+            Ganjil (1)
+        </option>
+        <option value="2" <?= isset($old['thakdSemester']) && $old['thakdSemester'] == '2' ? 'selected' : '' ?>>
+            Genap (2)
+        </option>
     </select>
 
+    <!-- Tanggal Mulai -->
+    <label>Tanggal Mulai</label>
+    <input 
+        class="input" 
+        name="thakdTglMulai" 
+        type="date"
+        value="<?= htmlspecialchars($old['thakdTglMulai'] ?? '') ?>"
+    >
+
+    <!-- Tanggal Selesai -->
+    <label>Tanggal Selesai</label>
+    <input 
+        class="input" 
+        name="thakdTglSelesai" 
+        type="date"
+        value="<?= htmlspecialchars($old['thakdTglSelesai'] ?? '') ?>"
+    >
+
+    <!-- Aktif -->
     <label>
-        <input type="checkbox" name="taIsAktif"> Aktif
+        <input 
+            type="checkbox" 
+            name="thakdIsAktif"
+            <?= isset($old['thakdIsAktif']) ? 'checked' : '' ?>
+        >
+        Aktif
     </label>
 
     <br><br>
-    
+
+    <!-- Buttons -->
     <button class="btn" name="save_ta">Simpan</button>
     <a class="btn" style="background:#777" href="index.php?page=tahun_akademik">Batal</a>
 

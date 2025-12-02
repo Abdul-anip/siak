@@ -1637,7 +1637,8 @@ else if($page == "tahun_akademik"){
         ?>
         <h3>Tambah Tahun Akademik</h3>
         <form method="post" action="index.php?act=thakd_add">
-            <label>ID (angka unik)</label><input class="input" name="thakdId" type="number" required />
+            <label>ID (angka unik)</label>
+            <input class="input" name="thakdId" type="number" required />
             <label>Tahun (YYYY)</label><input class="input" name="thakdTahun" required />
             <label>Semester</label>
             <select class="input" name="thakdSemester">

@@ -22,8 +22,21 @@ else if ($aksi == "tambah") {
 
 // SIMPAN TAMBAH
 else if ($aksi == "save" && isset($_POST['save_prodi'])) {
-    $prodi->store($_POST);
+    $result = $prodi->store($_POST);
+
+    // Jika ERROR → tampilkan form create dengan pesan error
+    if (!$result['status']) {
+        $error = $result['error'];
+        $jurusan = $jur->all();
+        $old = $_POST;
+
+        require "views/prodi/create.php";
+        exit;
+    }
+
+    // Jika sukses → redirect
     header("Location: index.php?page=prodi");
+    exit;
 }
 
 // FORM EDIT

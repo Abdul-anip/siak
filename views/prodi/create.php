@@ -7,6 +7,12 @@
 
 <div class="card-content">
 
+<?php if (isset($error)): ?>
+<div style="padding:10px;background:#fdd;border:1px solid #f99;margin-bottom:10px;border-radius:6px;">
+    <?= $error ?>
+</div>
+<?php endif; ?>
+
 <form method="post" action="index.php?page=prodi&aksi=save">
 
     <label>Jurusan</label>
