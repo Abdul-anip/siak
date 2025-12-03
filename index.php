@@ -68,12 +68,12 @@ switch ($page) {
         break;
 
     case "daftarKelas":
-        require "controllers/DaftarKelasController.php"; // Menggunakan Controller baru
+        require "controllers/DaftarKelasController.php";
         break;
 
     case "kelas":
-    require "controllers/KelasController.php";
-    break;
+        require "controllers/KelasController.php";
+        break;
     
 
     /* ===================== DATA MASTER ===================== */
