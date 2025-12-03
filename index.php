@@ -58,6 +58,10 @@ switch ($page) {
         require "views/prakuliah/index.php";
         break;
 
+    case "daftarKelas":
+        require "views/daftarKelas/index.php";
+        break;
+
     case "perkuliahan":
         require "views/perkuliahan/index.php";
         break;
@@ -65,6 +69,9 @@ switch ($page) {
     case "pascakuliah":
         require "views/pascakuliah/index.php";
         break;
+
+
+    
 
     /* ===================== DATA MASTER ===================== */
     case "jurusan":

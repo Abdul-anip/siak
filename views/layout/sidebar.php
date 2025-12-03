@@ -5,10 +5,13 @@
     </div>
 
     <div class="menu-title">Menu Utama</div>
-    <a href="index.php?page=beranda">🏠 Beranda</a>
-    <a href="index.php?page=prakuliah">📌 Pra Kuliah</a>
-    <a href="index.php?page=perkuliahan">📚 Perkuliahan</a>
-    <a href="index.php?page=pascakuliah">🎓 Pasca Kuliah</a>
+    <a href="index.php?page=beranda">Beranda</a>
+    <a href="index.php?page=mahasiswa">Mahasiswa</a>
+    <a href="index.php?page=prakuliah">Pra Kuliah</a>
+    <a href="index.php?page=perkuliahan">Perkuliahan</a>
+    <a href="index.php?page=pascakuliah">Pasca Kuliah</a>
+    <a href="index.php?page=dataMaster">Data Master</a>
+    <a href="index.php?page=user">User</a>
 
     <div class="menu-title">Data Master</div>
     <a href="index.php?page=jurusan">📁 Jurusan</a>
