@@ -58,9 +58,6 @@ switch ($page) {
         require "views/prakuliah/index.php";
         break;
 
-    case "daftarKelas":
-        require "views/daftarKelas/index.php";
-        break;
 
     case "perkuliahan":
         require "views/perkuliahan/index.php";
@@ -70,7 +67,13 @@ switch ($page) {
         require "views/pascakuliah/index.php";
         break;
 
+    case "daftarKelas":
+        require "controllers/DaftarKelasController.php"; // Menggunakan Controller baru
+        break;
 
+    case "kelas":
+    require "controllers/KelasController.php";
+    break;
     
 
     /* ===================== DATA MASTER ===================== */

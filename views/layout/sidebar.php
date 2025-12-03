@@ -14,6 +14,7 @@
     <a href="index.php?page=user">User</a>
 
     <div class="menu-title">Data Master</div>
+    <a href="index.php?page=kelas">Kelas</a>
     <a href="index.php?page=jurusan">📁 Jurusan</a>
     <a href="index.php?page=prodi">📁 Program Studi</a>
     <a href="index.php?page=kurikulum">📁 Kurikulum</a>

@@ -15,13 +15,13 @@
 
 <form method="post" action="index.php?page=tahun_akademik&aksi=save">
 
-    <!-- ID Tahun Akademik -->
     <label>ID Tahun Akademik (contoh: 20241)</label>
     <input 
         class="input" 
         name="thakdId" 
         type="number" 
-        minlength="5"
+        minlength="5" 
+        maxlength="5"
         placeholder="20241"
         value="<?= htmlspecialchars($old['thakdId'] ?? '') ?>" 
         required
@@ -31,20 +31,17 @@
         Contoh: 2024 Ganjil → 20241, 2024 Genap → 20242
     </small>
 
-    <!-- Tahun -->
-    <label>Tahun (YYYY)</label>
-    <input 
+    <label>Tahun Akademik Awal (YYYY)</label> <input 
         class="input" 
         name="thakdTahun" 
         type="text"
-        minlength="4"
-        maxlength="4"
-        placeholder="2024"
-        value="<?= htmlspecialchars($old['thakdTahun'] ?? '') ?>" 
+        placeholder="Contoh: 2025" value="<?= htmlspecialchars($old['thakdTahun'] ?? '') ?>" 
         required
     >
+    <small style="color:#666">
+        Masukkan tahun awal akademik. Tampilan pada sistem: **2025/2026**.
+    </small>
 
-    <!-- Semester -->
     <label>Semester</label>
     <select class="input" name="thakdSemester" required>
         <option value="1" <?= isset($old['thakdSemester']) && $old['thakdSemester'] == '1' ? 'selected' : '' ?>>
@@ -55,7 +52,6 @@
         </option>
     </select>
 
-    <!-- Tanggal Mulai -->
     <label>Tanggal Mulai</label>
     <input 
         class="input" 
@@ -64,7 +60,6 @@
         value="<?= htmlspecialchars($old['thakdTglMulai'] ?? '') ?>"
     >
 
-    <!-- Tanggal Selesai -->
     <label>Tanggal Selesai</label>
     <input 
         class="input" 
@@ -73,7 +68,6 @@
         value="<?= htmlspecialchars($old['thakdTglSelesai'] ?? '') ?>"
     >
 
-    <!-- Aktif -->
     <label>
         <input 
             type="checkbox" 
