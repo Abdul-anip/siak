@@ -26,8 +26,8 @@
        value="<?= $old['mhsTempatLahir'] ?? '' ?>">
 
     <label>Tanggal Lahir</label>
-    <input class="input" type="date" name="mhsTanggalLahir"
-       value="<?= $old['mhsTanggalLahir'] ?? '' ?>">
+    <input class="input" type="date" name="mhsTglLahir"
+       value="<?= $old['mhsTglLahir'] ?? '' ?>">
 
     <label>Jenis Kelamin</label>
     <select class="input" name="mhsJenisKelamin">

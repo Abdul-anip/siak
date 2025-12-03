@@ -88,9 +88,6 @@ class Dosen {
 
     function update($nidn, $data){
 
-        // Jika suatu saat kamu butuh update NIDN, tambahkan validasi duplicate di sini.
-        // Untuk sekarang tidak perlu karena NIDN dikunci (disabled di form)
-
         $stmt = $this->db->prepare("
             UPDATE dosen
             SET dsnJurId=?, dsnProdiId=?, dsnNama=?, dsnJenisKelaminKode=?
@@ -112,6 +109,23 @@ class Dosen {
     function delete($nidn){
         $nidn = $this->db->real_escape_string($nidn);
         return $this->db->query("DELETE FROM dosen WHERE dsnNidn = '$nidn'");
+    }
+
+    function countDosen($klsId){
+        $klsId = $this->db->real_escape_string($klsId);
+        
+        $sql = "
+            SELECT COUNT(DISTINCT klsdsnDsnNidn) AS total 
+            FROM kelas_dosen 
+            WHERE klsdsnKlsId = '$klsId' AND klsdsnIsAktif = 1
+        ";
+        
+        $result = $this->db->query($sql);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            return $row['total'];
+        }
+        return 0; 
     }
 }
 ?>

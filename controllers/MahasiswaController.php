@@ -39,7 +39,44 @@ else if ($aksi == "save" && isset($_POST['save_mahasiswa'])) {
         exit;
     }
 
-    // Jika sukses → redirect
+//DAFTARKAN MAHASISWA BARU KE KELAS
+    $mhsNim    = $_POST['mhsNim'];
+    $prodiId   = $_POST['mhsProdiId'];
+    $kodeKelas = $_POST['mhsKodeKelas'];
+
+    $taAktif = $koneksi->query("SELECT thakdId FROM tahun_akademik WHERE thakdIsAktif = 1 LIMIT 1")->fetch_assoc();
+    $thakdId = $taAktif['thakdId'] ?? 0;
+    
+    if ($thakdId > 0) {
+        
+        $kelasNamaPattern = "%." . $kodeKelas; 
+        
+        $stmtKelas = $koneksi->prepare("
+            SELECT klsId FROM kelas
+            WHERE klsThakdId = ? AND klsProdiId = ? AND klsNama LIKE ? 
+            LIMIT 1
+        ");
+
+        $stmtKelas->bind_param("iis", $thakdId, $prodiId, $kelasNamaPattern);
+        $stmtKelas->execute();
+        $resKelas = $stmtKelas->get_result();
+        $dataKelas = $resKelas->fetch_assoc();
+        $stmtKelas->close();
+
+        if ($dataKelas) {
+            $klsId = $dataKelas['klsId'];
+            
+            $stmtEnroll = $koneksi->prepare("
+                INSERT INTO kelas_mahasiswa (klsmhsKlsId, klsmhsMhsNim, klsmhsIsAktif)
+                VALUES (?, ?, 1)
+            ");
+            $stmtEnroll->bind_param("is", $klsId, $mhsNim);
+            $stmtEnroll->execute();
+            $stmtEnroll->close();
+        }
+    }
+
+
     header("Location: index.php?page=mahasiswa");
     exit;
 }
