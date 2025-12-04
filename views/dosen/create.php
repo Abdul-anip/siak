@@ -15,16 +15,31 @@
 
 <form method="post" action="index.php?page=dosen&aksi=save">
 
-    <label>NIDN</label>
+    <label>NIDN <span style="color:red">*</span></label>
     <input class="input" name="dsnNidn" required
-        value="<?= isset($old['dsnNidn']) ? htmlspecialchars($old['dsnNidn']) : '' ?>">
+        value="<?= isset($old['dsnNidn']) ? htmlspecialchars($old['dsnNidn']) : '' ?>"
+        placeholder="Contoh: 0006058102">
+    <small>Nomor Induk Dosen Nasional (10 digit)</small>
 
-    <label>Nama Lengkap</label>
+    <label>Gelar Depan</label>
+    <input class="input" name="dsnGelarDepan"
+        value="<?= isset($old['dsnGelarDepan']) ? htmlspecialchars($old['dsnGelarDepan']) : '' ?>"
+        placeholder="Contoh: Dr., Ir., Prof.">
+    <small>Opsional - Gelar akademik sebelum nama</small>
+
+    <label>Nama Lengkap <span style="color:red">*</span></label>
     <input class="input" name="dsnNama" required
-        value="<?= isset($old['dsnNama']) ? htmlspecialchars($old['dsnNama']) : '' ?>">
+        value="<?= isset($old['dsnNama']) ? htmlspecialchars($old['dsnNama']) : '' ?>"
+        placeholder="Contoh: Ahmad Dahlan">
 
-    <label>Jenis Kelamin</label>
-    <select class="input" name="dsnJenisKelaminKode">
+    <label>Gelar Belakang</label>
+    <input class="input" name="dsnGelarBelakang"
+        value="<?= isset($old['dsnGelarBelakang']) ? htmlspecialchars($old['dsnGelarBelakang']) : '' ?>"
+        placeholder="Contoh: S.T., M.T., Ph.D">
+    <small>Opsional - Gelar akademik setelah nama</small>
+
+    <label>Jenis Kelamin <span style="color:red">*</span></label>
+    <select class="input" name="dsnJenisKelaminKode" required>
         <option value="L" <?= (isset($old['dsnJenisKelaminKode']) && $old['dsnJenisKelaminKode']=='L') ? 'selected' : '' ?>>
             Laki-laki
         </option>
@@ -33,12 +48,11 @@
         </option>
     </select>
 
-    <label>Jurusan</label>
+    <label>Jurusan <span style="color:red">*</span></label>
     <select name="dsnJurId" class="input" id="jurusan-select" required>
         <option value="0">-- Pilih Jurusan --</option>
 
         <?php
-        // Menggunakan data_seek(0) untuk memastikan pointer di awal
         $jurusan->data_seek(0); 
         while($j = $jurusan->fetch_assoc()): ?>
             <option value="<?= $j['jurId'] ?>"
@@ -48,21 +62,33 @@
         <?php endwhile; ?>
     </select>
 
-    <label>Program Studi</label>
+    <label>Program Studi <span style="color:red">*</span></label>
     <select name="dsnProdiId" class="input" id="prodi-select" required>
         <option value="0">-- Pilih Prodi --</option>
-        </select>
+    </select>
 
-    <label>Kelas</label>
+    <label>Kelas (Opsional)</label>
     <select name="klsId" class="input" id="kelas-select">
         <option value="0">-- Pilih Kelas --</option>
     </select>
-    <div style="display: flex; gap: 10px; margin-top: 10px;">
-    <button class="btn" name="save_dosen" type="submit">Simpan</button>
-        <a class="btn" style="background:#777" href="index.php?page=dosen">Batal</a>
+    <small>Jika dipilih, dosen akan didaftarkan ke semua matakuliah di kelas tersebut</small>
+
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button class="btn" name="save_dosen" type="submit">💾 Simpan</button>
+        <a class="btn" style="background:#777" href="index.php?page=dosen">❌ Batal</a>
     </div>
 
 </form>
+
+<!-- INFO BOX -->
+<div style="margin-top: 30px; padding: 15px; background: #E3F2FD; border-radius: 8px; border-left: 4px solid #2196F3;">
+    <strong>💡 Tips Pengisian:</strong>
+    <ul style="margin: 10px 0 0 20px; padding: 0;">
+        <li><strong>NIDN</strong>: Nomor unik dosen (10 digit)</li>
+        <li><strong>Gelar</strong>: Pisahkan gelar depan (Dr., Prof.) dan belakang (S.T., M.T.)</li>
+        <li><strong>Kelas</strong>: Jika dipilih, dosen otomatis mengampu semua matakuliah di kelas</li>
+    </ul>
+</div>
 
 </div>
 
@@ -72,7 +98,6 @@
         const prodiSelect = document.getElementById('prodi-select');
         const kelasSelect = document.getElementById('kelas-select');
         
-        // Simpan nilai lama (jika ada error)
         const oldJurusanId = jurusanSelect.value;
         const oldProdiId = '<?= isset($old['dsnProdiId']) ? htmlspecialchars($old['dsnProdiId']) : '' ?>';
         const oldKelasId = '<?= isset($old['klsId']) ? htmlspecialchars($old['klsId']) : '' ?>'; 
@@ -80,7 +105,6 @@
         prodiSelect.disabled = true;
         kelasSelect.disabled = true;
 
-        // FUNGSI 1: Memuat Opsi Kelas
         function updateKelasOptions(prodiId, selectedKelasId = '') {
             kelasSelect.innerHTML = '<option value="0">Memuat...</option>';
             kelasSelect.disabled = true;
@@ -90,7 +114,6 @@
                 return;
             }
 
-            // Memanggil endpoint AJAX listKelasByProdi
             fetch(`index.php?page=prodi&aksi=listKelasByProdi&prodiId=${prodiId}`)
                 .then(response => response.json())
                 .then(data => {
@@ -98,7 +121,7 @@
                     
                     const defaultOpt = document.createElement('option');
                     defaultOpt.value = '0';
-                    defaultOpt.textContent = '-- Pilih Kelas --';
+                    defaultOpt.textContent = '-- Pilih Kelas (Opsional) --';
                     kelasSelect.appendChild(defaultOpt);
 
                     if (data.kelas && data.kelas.length > 0) {
@@ -122,7 +145,6 @@
                 });
         }
         
-        // FUNGSI 2: Memuat Opsi Prodi (Pemicu Kelas)
         function updateProdiOptions(jurId, selectedProdiId = '') {
             prodiSelect.innerHTML = '<option value="0">Memuat...</option>';
             prodiSelect.disabled = true;
@@ -134,7 +156,6 @@
                 return;
             }
 
-            // Memanggil endpoint AJAX listByJurusan
             fetch(`index.php?page=prodi&aksi=listByJurusan&jurId=${jurId}`)
                 .then(response => response.json())
                 .then(data => {
@@ -157,7 +178,6 @@
                         });
                         prodiSelect.disabled = false;
                         
-                        // CHAINING: Jika Prodi dipilih, muat Kelas
                         if (selectedProdiId) {
                             updateKelasOptions(selectedProdiId, oldKelasId);
                         }
@@ -172,17 +192,14 @@
                 });
         }
         
-        // Event Listener: Jurusan change -> load Prodi
         jurusanSelect.addEventListener('change', function() {
             updateProdiOptions(this.value); 
         });
 
-        // Event Listener: Prodi change -> load Kelas
         prodiSelect.addEventListener('change', function() {
             updateKelasOptions(this.value);
         });
 
-        // Initial Load Logic (untuk mempertahankan data lama)
         if (oldJurusanId && oldJurusanId != '0') {
             updateProdiOptions(oldJurusanId, oldProdiId);
         } else if (jurusanSelect.value != '0') {

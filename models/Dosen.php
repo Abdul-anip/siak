@@ -34,7 +34,7 @@ class Dosen {
 
             return [
                 'status' => false,
-                'error'  => "Pastikan semua field sudah diisi."
+                'error'  => "Pastikan semua field wajib sudah diisi."
             ];
         }
 
@@ -65,23 +65,38 @@ class Dosen {
         }
 
         // ------------------------
-        // INSERT DATA
+        // INSERT DATA DENGAN GELAR
         // ------------------------
         $stmt = $this->db->prepare("
-            INSERT INTO dosen (dsnNidn, dsnJurId, dsnProdiId, dsnNama, dsnJenisKelaminKode)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO dosen (
+                dsnNidn, 
+                dsnJurId, 
+                dsnProdiId, 
+                dsnNama, 
+                dsnJenisKelaminKode,
+                dsnGelarDepan,
+                dsnGelarBelakang
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
 
+        // Ambil gelar atau kosongkan jika tidak diisi
+        $gelarDepan = $data['dsnGelarDepan'] ?? '';
+        $gelarBelakang = $data['dsnGelarBelakang'] ?? '';
+
         $stmt->bind_param(
-            "siiss",
+            "siissss",
             $data['dsnNidn'],
             $data['dsnJurId'],
             $data['dsnProdiId'],
             $data['dsnNama'],
-            $data['dsnJenisKelaminKode']
+            $data['dsnJenisKelaminKode'],
+            $gelarDepan,
+            $gelarBelakang
         );
 
         $stmt->execute();
+        $stmt->close();
 
         return ['status' => true];
     }
@@ -90,16 +105,26 @@ class Dosen {
 
         $stmt = $this->db->prepare("
             UPDATE dosen
-            SET dsnJurId=?, dsnProdiId=?, dsnNama=?, dsnJenisKelaminKode=?
+            SET dsnJurId=?, 
+                dsnProdiId=?, 
+                dsnNama=?, 
+                dsnJenisKelaminKode=?,
+                dsnGelarDepan=?,
+                dsnGelarBelakang=?
             WHERE dsnNidn=?
         ");
 
+        $gelarDepan = $data['dsnGelarDepan'] ?? '';
+        $gelarBelakang = $data['dsnGelarBelakang'] ?? '';
+
         $stmt->bind_param(
-            "iisss",
+            "iisssss",
             $data['dsnJurId'],
             $data['dsnProdiId'],
             $data['dsnNama'],
             $data['dsnJenisKelaminKode'],
+            $gelarDepan,
+            $gelarBelakang,
             $nidn
         );
 
@@ -141,9 +166,7 @@ class Dosen {
                 mk.mkKode,
                 mk.mkSks
             FROM kelas_dosen kdsn
-            -- JOIN ke tabel Dosen
             JOIN dosen d ON kdsn.klsdsnDsnNidn = d.dsnNidn
-            -- JOIN ke tabel Mata Kuliah (PENTING)
             JOIN matakuliah mk ON kdsn.klsdsnMkId = mk.mkId
             WHERE kdsn.klsdsnKlsId = '$klsId' 
               AND kdsn.klsdsnIsAktif = 1
@@ -153,6 +176,5 @@ class Dosen {
         return $this->db->query($sql);
     }
 }
-
 
 ?>

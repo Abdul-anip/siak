@@ -13,9 +13,20 @@
 
     <label>NIDN</label>
     <input class="input" value="<?= $data['dsnNidn'] ?>" disabled style="background:#eee">
+    <small>NIDN tidak dapat diubah</small>
+
+    <label>Gelar Depan</label>
+    <input class="input" name="dsnGelarDepan" 
+        value="<?= htmlspecialchars($data['dsnGelarDepan'] ?? '') ?>"
+        placeholder="Contoh: Dr., Ir., Prof.">
 
     <label>Nama Lengkap</label>
     <input class="input" name="dsnNama" value="<?= htmlspecialchars($data['dsnNama']) ?>" required>
+
+    <label>Gelar Belakang</label>
+    <input class="input" name="dsnGelarBelakang" 
+        value="<?= htmlspecialchars($data['dsnGelarBelakang'] ?? '') ?>"
+        placeholder="Contoh: S.T., M.T., Ph.D">
 
     <label>Jenis Kelamin</label>
     <select class="input" name="dsnJenisKelaminKode">
@@ -45,9 +56,9 @@
         <?php endwhile; ?>
     </select>
 
-    <div style="display: flex; gap: 10px; margin-top: 10px;">
-    <button class="btn" name="update_dosen" type="submit">Update</button>
-    <a class="btn" style="background:#777" href="index.php?page=dosen">Batal</a>
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button class="btn" name="update_dosen" type="submit">💾 Update</button>
+        <a class="btn" style="background:#777" href="index.php?page=dosen">❌ Batal</a>
     </div>
 
 </form>

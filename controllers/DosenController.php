@@ -38,48 +38,46 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
     if (!$result['status']) {
 
         $error     = $result['error'];   
-        $jurusan   = $jur->all();        // HARUS ADA!
-        $listProdi = $prodi->all();      // Prodi
-        $old       = $_POST;             // Data sebelumnya
+        $jurusan   = $jur->all();        
+        $listProdi = $prodi->all();      
+        $old       = $_POST;             
 
         require "views/dosen/create.php";
         exit;
     }
 
     /* =========================================================
-       LANGKAH BARU: OTOMATIS DAFTARKAN DOSEN KE KELAS (Asumsi)
+       PERBAIKAN: Daftarkan Dosen ke Kelas dengan Matakuliah
        ========================================================= */
 
     $dsnNidn = $_POST['dsnNidn'];
-    $klsId = $_POST['klsId'] ?? 0; // Dapatkan klsId dari form
+    $klsId = $_POST['klsId'] ?? 0;
 
     // Hanya lanjutkan jika klsId valid
     if ($klsId > 0) {
         
-        // 1. CARI ID MATAKULIAH PERTAMA di Kelas ini (Karena tidak ada input MK di form)
-        // Dosen harus ditugaskan ke sebuah MK agar record di kelas_dosen valid.
+        // Ambil SEMUA matakuliah di kelas ini (bukan hanya 1)
         $mkKelas = $koneksi->query("
             SELECT klsmkMkId FROM kelas_matakuliah 
-            WHERE klsmkKlsId = " . intval($klsId) . " 
-            LIMIT 1
-        ")->fetch_assoc();
+            WHERE klsmkKlsId = " . intval($klsId)
+        );
         
-        $mkId = $mkKelas['klsmkMkId'] ?? 0;
-        
-        // 2. Jika ID Mata Kuliah ditemukan, lakukan penugasan Dosen
-        if ($mkId > 0) {
+        // Daftarkan dosen ke SEMUA matakuliah di kelas
+        if ($mkKelas && $mkKelas->num_rows > 0) {
             
             $stmtEnroll = $koneksi->prepare("
                 INSERT INTO kelas_dosen (klsdsnKlsId, klsdsnDsnNidn, klsdsnMkId, klsdsnIsAktif)
                 VALUES (?, ?, ?, 1)
             ");
             
-            // klsId (i), dsnNidn (s), mkId (i)
-            $stmtEnroll->bind_param("isi", $klsId, $dsnNidn, $mkId);
-            $stmtEnroll->execute();
+            while ($mk = $mkKelas->fetch_assoc()) {
+                $mkId = $mk['klsmkMkId'];
+                $stmtEnroll->bind_param("isi", $klsId, $dsnNidn, $mkId);
+                $stmtEnroll->execute();
+            }
+            
             $stmtEnroll->close();
         }
-        
     }
 
     header("Location: index.php?page=dosen");
