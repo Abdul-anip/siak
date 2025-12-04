@@ -10,7 +10,7 @@ include "views/layout/sidebar.php";
     <p>Selamat datang, <?= isset($_SESSION['user']) ? htmlspecialchars($_SESSION['user']) : 'Tamu' ?>.</p>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px">
-        <div class="menu-box" onclick="location.href='index.php?page=prakuliah'">
+        <div class="menu-box" onclick="location.href='index.php?page=contentMahasiswa'">
             <img src="assets/img/folder-mhs.png" style="width:60px">
             <div class="menu-title">Mahasiswa</div>
         </div>

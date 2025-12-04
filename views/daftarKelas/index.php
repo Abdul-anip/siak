@@ -18,7 +18,7 @@
         <input type="hidden" name="page" value="daftarKelas">
 
         <div style="background:#f0f7ff;padding:20px;border-radius:8px;margin-bottom:20px;border:1px solid #dbe9fb;">
-            <h3 style="margin-top:0;color:#0A3B6F;">📊 Pencarian Daftar Data Kelas Berdasarkan:</h3>
+            <h3 style="margin-top:0;color:#0A3B6F;">Pencarian Daftar Data Kelas Berdasarkan:</h3>
             
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
                 <!-- TAHUN AKADEMIK -->
@@ -73,7 +73,7 @@
     <?php if (isset($_GET['cari']) && $rows !== null): ?>
 
         <div style="margin-bottom:15px;padding:12px;background:#e3f2fd;border-left:4px solid #2196F3;border-radius:4px;">
-            <strong>📌 Menampilkan hasil untuk:</strong><br>
+            <strong>Menampilkan hasil untuk:</strong><br>
             Tahun Akademik: <strong><?= isset($thakdId) ? htmlspecialchars($thakdId) : '-' ?></strong> | 
             Program Studi: <strong><?= isset($prodiId) ? htmlspecialchars($prodiId) : '-' ?></strong>
         </div>

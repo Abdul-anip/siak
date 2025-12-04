@@ -14,15 +14,15 @@ include "views/layout/sidebar.php";
             <img src="assets/img/kelas.png" style="width:60px">
             <div class="menu-title">Daftar Kelas</div>
         </div>
-        <div class="menu-box" onclick="location.href='index.php?page=prakuliah'">
+        <div class="menu-box" onclick="location.href='index.php?page=daftarMatkulKelas'">
             <img src="assets/img/matakuliah.png" style="width:60px">
             <div class="menu-title">Daftar Mata Kuliah</div>
         </div>
-        <div class="menu-box" onclick="location.href='index.php?page=prakuliah'">
+        <div class="menu-box" onclick="location.href='index.php?page=daftarDosenKelas'">
             <img src="assets/img/dosen.png" style="width:60px">
             <div class="menu-title">Dosen Kelas</div>
         </div>
-        <div class="menu-box" onclick="location.href='index.php?page=prakuliah'">
+        <div class="menu-box" onclick="location.href='index.php?page=daftarMahasiswaKelas'">
             <img src="assets/img/mahasiswa.png" style="width:60px">
             <div class="menu-title">Mahasiswa Kelas</div>
         </div>

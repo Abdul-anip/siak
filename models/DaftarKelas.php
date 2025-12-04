@@ -65,9 +65,6 @@ class DaftarKelas {
         return $this->db->query($query);
     }
     
-    /**
-     * Debug: Cek apakah data kelas ada untuk filter tertentu
-     */
     function debugCheckData($thakdId, $prodiId) {
         $thakdId = $this->db->real_escape_string($thakdId);
         $prodiId = $this->db->real_escape_string($prodiId);

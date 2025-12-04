@@ -46,7 +46,44 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
         exit;
     }
 
+    /* =========================================================
+       LANGKAH BARU: OTOMATIS DAFTARKAN DOSEN KE KELAS (Asumsi)
+       ========================================================= */
+
+    $dsnNidn = $_POST['dsnNidn'];
+    $klsId = $_POST['klsId'] ?? 0; // Dapatkan klsId dari form
+
+    // Hanya lanjutkan jika klsId valid
+    if ($klsId > 0) {
+        
+        // 1. CARI ID MATAKULIAH PERTAMA di Kelas ini (Karena tidak ada input MK di form)
+        // Dosen harus ditugaskan ke sebuah MK agar record di kelas_dosen valid.
+        $mkKelas = $koneksi->query("
+            SELECT klsmkMkId FROM kelas_matakuliah 
+            WHERE klsmkKlsId = " . intval($klsId) . " 
+            LIMIT 1
+        ")->fetch_assoc();
+        
+        $mkId = $mkKelas['klsmkMkId'] ?? 0;
+        
+        // 2. Jika ID Mata Kuliah ditemukan, lakukan penugasan Dosen
+        if ($mkId > 0) {
+            
+            $stmtEnroll = $koneksi->prepare("
+                INSERT INTO kelas_dosen (klsdsnKlsId, klsdsnDsnNidn, klsdsnMkId, klsdsnIsAktif)
+                VALUES (?, ?, ?, 1)
+            ");
+            
+            // klsId (i), dsnNidn (s), mkId (i)
+            $stmtEnroll->bind_param("isi", $klsId, $dsnNidn, $mkId);
+            $stmtEnroll->execute();
+            $stmtEnroll->close();
+        }
+        
+    }
+
     header("Location: index.php?page=dosen");
+    exit;
 }
 
 

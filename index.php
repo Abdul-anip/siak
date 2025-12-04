@@ -66,14 +66,32 @@ switch ($page) {
     case "pascakuliah":
         require "views/pascakuliah/index.php";
         break;
+    
+    case "contentMahasiswa":
+        require "views/contentMahasiswa/index.php";
+        break;
+    
+    case "kelas":
+        require "controllers/KelasController.php";
+        break;
+
+    /* ===================== KONTEN PRAKULIAH ===================== */
 
     case "daftarKelas":
         require "controllers/DaftarKelasController.php";
         break;
-
-    case "kelas":
-        require "controllers/KelasController.php";
+        
+    case "daftarDosenKelas":
+        require "controllers/DaftarDosenKelasController.php";
         break;
+
+    case "daftarMatkulKelas":
+        require "controllers/DaftarMatkulKelasController.php";
+        break;
+
+    case "daftarMahasiswaKelas":
+    require "controllers/DaftarMahasiswaKelasController.php";
+    break;
     
 
     /* ===================== DATA MASTER ===================== */

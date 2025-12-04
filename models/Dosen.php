@@ -127,5 +127,32 @@ class Dosen {
         }
         return 0; 
     }
+
+    function getDosenByKelas($klsId){
+        $klsId = $this->db->real_escape_string($klsId);
+        
+        $sql = "
+            SELECT 
+                d.dsnNidn, 
+                d.dsnNama, 
+                d.dsnGelarDepan, 
+                d.dsnGelarBelakang,
+                mk.mkNama,
+                mk.mkKode,
+                mk.mkSks
+            FROM kelas_dosen kdsn
+            -- JOIN ke tabel Dosen
+            JOIN dosen d ON kdsn.klsdsnDsnNidn = d.dsnNidn
+            -- JOIN ke tabel Mata Kuliah (PENTING)
+            JOIN matakuliah mk ON kdsn.klsdsnMkId = mk.mkId
+            WHERE kdsn.klsdsnKlsId = '$klsId' 
+              AND kdsn.klsdsnIsAktif = 1
+            ORDER BY mk.mkNama, d.dsnNama
+        ";
+        
+        return $this->db->query($sql);
+    }
 }
+
+
 ?>

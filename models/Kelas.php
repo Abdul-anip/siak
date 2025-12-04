@@ -139,5 +139,65 @@ class Kelas {
         $row = $result->fetch_assoc();
         return $row['total'] ?? 0;
     }
+
+    /**
+     * Mencari daftar kelas dan menghitung agregasi (Mhs, Dosen, MK, SKS, Jam)
+     */
+    function findKelas($thakdId, $prodiId){
+        // Escape input
+        $thakdId = $this->db->real_escape_string($thakdId);
+        $prodiId = $this->db->real_escape_string($prodiId);
+
+        $sql = "
+            SELECT 
+                k.klsId,
+                k.klsNama AS NamaKelas,
+                
+                -- Hitung Jumlah Mahasiswa
+                (SELECT COUNT(klsmhsId) FROM kelas_mahasiswa WHERE klsmhsKlsId = k.klsId AND klsmhsIsAktif = 1) AS JlhMahasiswa,
+                
+                -- Hitung Jumlah Dosen (Distinct NIDN)
+                (
+                    SELECT COUNT(DISTINCT klsdsnDsnNidn) 
+                    FROM kelas_dosen 
+                    WHERE klsdsnKlsId = k.klsId AND klsdsnIsAktif = 1
+                ) AS JlhDosen,
+                
+                -- Hitung Jumlah Mata Kuliah
+                (SELECT COUNT(klsmkId) FROM kelas_matakuliah WHERE klsmkKlsId = k.klsId) AS JlhMK,
+                
+                -- Hitung Total SKS
+                (
+                    SELECT SUM(m.mkSks) 
+                    FROM kelas_matakuliah km 
+                    JOIN matakuliah m ON km.klsmkMkId = m.mkId
+                    WHERE km.klsmkKlsId = k.klsId
+                ) AS JlhSKS,
+                
+                -- Hitung Total Jam (diasumsikan sama dengan Jlh SKS)
+                (
+                    SELECT SUM(m.mkSks) 
+                    FROM kelas_matakuliah km 
+                    JOIN matakuliah m ON km.klsmkMkId = m.mkId
+                    WHERE km.klsmkKlsId = k.klsId
+                ) AS JlhJam
+                
+            FROM kelas k
+            WHERE 1=1
+        ";
+
+        if (!empty($thakdId)) {
+            $sql .= " AND k.klsThakdId = '$thakdId'";
+        }
+        if (!empty($prodiId)) {
+            $sql .= " AND k.klsProdiId = '$prodiId'";
+        }
+        
+        $sql .= " ORDER BY k.klsNama ASC";
+
+        return $this->db->query($sql);
+    }
+
+    
 }
 ?>

@@ -6,7 +6,7 @@
 
     <div class="menu-title">Menu Utama</div>
     <a href="index.php?page=beranda">Beranda</a>
-    <a href="index.php?page=mahasiswa">Mahasiswa</a>
+    <a href="index.php?page=contentMahasiswa">Mahasiswa</a>
     <a href="index.php?page=prakuliah">Pra Kuliah</a>
     <a href="index.php?page=perkuliahan">Perkuliahan</a>
     <a href="index.php?page=pascakuliah">Pasca Kuliah</a>
