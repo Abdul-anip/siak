@@ -38,19 +38,41 @@ else if ($aksi == "save" && isset($_POST['save_mahasiswa'])) {
         exit;
     }
 
-    $mhsNim = $_POST['mhsNim'];
-    $klsId = $_POST['klsId'] ?? 0; 
+    /* =========================================================
+       PERBAIKAN: Daftarkan Mahasiswa ke Kelas
+       ========================================================= */
 
+    $mhsNim = $koneksi->real_escape_string($_POST['mhsNim']);
+    $klsId = isset($_POST['klsId']) ? intval($_POST['klsId']) : 0;
+
+    // Hanya lanjutkan jika klsId valid (bukan 0 atau kosong)
     if ($klsId > 0) {
         
-        $stmtEnroll = $koneksi->prepare("
-            INSERT INTO kelas_mahasiswa (klsmhsKlsId, klsmhsMhsNim, klsmhsIsAktif)
-            VALUES (?, ?, 1)
+        // Cek apakah mahasiswa sudah terdaftar di kelas ini
+        $cekExist = $koneksi->query("
+            SELECT klsmhsId FROM kelas_mahasiswa 
+            WHERE klsmhsKlsId = $klsId AND klsmhsMhsNim = '$mhsNim'
         ");
         
-        $stmtEnroll->bind_param("is", $klsId, $mhsNim);
-        $stmtEnroll->execute();
-        $stmtEnroll->close();
+        // Jika belum terdaftar, baru insert
+        if ($cekExist->num_rows == 0) {
+            $stmtEnroll = $koneksi->prepare("
+                INSERT INTO kelas_mahasiswa (klsmhsKlsId, klsmhsMhsNim, klsmhsIsAktif)
+                VALUES (?, ?, 1)
+            ");
+            
+            if ($stmtEnroll) {
+                $stmtEnroll->bind_param("is", $klsId, $mhsNim);
+                
+                if (!$stmtEnroll->execute()) {
+                    error_log("Insert kelas_mahasiswa gagal: " . $stmtEnroll->error);
+                }
+                
+                $stmtEnroll->close();
+            } else {
+                error_log("Prepare statement kelas_mahasiswa gagal: " . $koneksi->error);
+            }
+        }
     }
 
     header("Location: index.php?page=mahasiswa");

@@ -1,46 +1,141 @@
 <?php include "views/layout/header.php"; ?>
 <?php include "views/layout/sidebar.php"; ?>
 
-<div class="topbar">
-    <h2>Data Tahun Akademik</h2>
-    <a class="btn" href="index.php?page=tahun_akademik&aksi=tambah">+ Tambah Tahun Akademik</a>
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+            <i class="fas fa-calendar-alt text-primary-600 mr-3"></i>Data Tahun Akademik
+        </h1>
+        <p class="text-gray-600">Kelola data tahun akademik dengan mudah dan efisien</p>
+    </div>
+
+    <a href="index.php?page=tahun_akademik&aksi=tambah"
+        class="mt-4 md:mt-0 inline-flex items-center px-6 py-3 
+               bg-gradient-to-r from-primary-600 to-secondary-600 
+               text-white font-semibold rounded-xl shadow-lg 
+               hover:shadow-xl transform hover:-translate-y-1 
+               transition duration-200">
+        <i class="fas fa-plus-circle mr-2"></i>
+        Tambah Tahun Akademik
+    </a>
 </div>
 
-<div class="card-content">
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-xl">
+        <div class="flex items-center justify-between mb-2">
+            <i class="fas fa-calendar-week text-3xl opacity-80"></i>
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-semibold">Total</span>
+        </div>
+        <p class="text-3xl font-bold"><?= $rows->num_rows ?></p>
+        <p class="text-sm opacity-90">Total Tahun Akademik</p>
+    </div>
+</div>
 
-<table class="table">
-    <tr>
-        <th>#</th>
-        <th>ID</th>
-        <th>Tahun</th>
-        <th>Semester</th>
-        <th>Tanggal Mulai</th>
-        <th>Tanggal Selesai</th>
-        <th>Aktif</th>
-        <th>Aksi</th>
-    </tr>
+<!-- Data Table -->
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
 
-    <?php $no=1; while($r = $rows->fetch_assoc()): ?>
-    <tr>
-        <td><?= $no++ ?></td>
-        <td><?= htmlspecialchars($r['thakdId']) ?></td>
-        <td><?= htmlspecialchars($r['thakdTahun']) ?></td>
-        <td><?= htmlspecialchars($r['thakdSemester']) ?></td>
-        <td><?= htmlspecialchars($r['thakdTglMulai']) ?></td>
-        <td><?= htmlspecialchars($r['thakdTglSelesai']) ?></td>
-        <td><?= $r['thakdIsAktif'] ? 'Ya' : 'Tidak' ?></td>
+    <!-- Table Header -->
+    <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-800">Daftar Tahun Akademik</h3>
+            <button onclick="window.print()"
+                class="px-4 py-2 bg-white border border-gray-300 rounded-lg 
+                       text-gray-700 hover:bg-gray-50 transition text-sm">
+                <i class="fas fa-print mr-2"></i> Print
+            </button>
+        </div>
+    </div>
 
-        <td>
+    <!-- Table Content -->
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50 border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-12">#</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tahun</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Semester</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tanggal Mulai</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tanggal Selesai</th>
+                    <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Aktif</th>
+                    <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-48">Aksi</th>
+                </tr>
+            </thead>
 
-            <a class="btn small" style="background:#d9534f"
-                onclick="return confirm('Hapus tahun akademik ini?')"
-                href="index.php?page=tahun_akademik&aksi=delete&id=<?= $r['thakdId'] ?>">Hapus</a>
-        </td>
-    </tr>
-    <?php endwhile; ?>
+            <tbody class="divide-y divide-gray-200">
+                <?php $no = 1; while ($r = $rows->fetch_assoc()): ?>
+                <tr class="hover:bg-gray-50 transition duration-200">
+                    <td class="px-6 py-4 text-sm text-gray-600 font-medium"><?= $no++ ?></td>
+                    <td class="px-6 py-4 text-sm text-gray-700"><?= $r['thakdId'] ?></td>
+                    <td class="px-6 py-4 text-sm text-gray-700"><?= $r['thakdTahun'] ?></td>
+                    <td class="px-6 py-4 text-sm text-gray-700"><?= $r['thakdSemester'] ?></td>
+                    <td class="px-6 py-4 text-sm text-gray-700"><?= $r['thakdTglMulai'] ?></td>
+                    <td class="px-6 py-4 text-sm text-gray-700"><?= $r['thakdTglSelesai'] ?></td>
 
-</table>
+                    <!-- Status -->
+                    <td class="px-6 py-4 text-center">
+                        <?php if($r['thakdIsAktif']): ?>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full 
+                                         text-xs font-semibold bg-green-100 text-green-700">
+                                <i class="fas fa-check-circle mr-1"></i> Aktif
+                            </span>
+                        <?php else: ?>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full 
+                                         text-xs font-semibold bg-gray-200 text-gray-700">
+                                <i class="fas fa-times-circle mr-1"></i> Non-Aktif
+                            </span>
+                        <?php endif; ?>
+                    </td>
 
+                    <!-- Action Buttons -->
+                    <td class="px-6 py-4">
+                        <div class="flex items-center justify-center space-x-2">
+
+                            <a href="index.php?page=tahun_akademik&aksi=delete&id=<?= $r['thakdId'] ?>"
+                               onclick="return confirm('⚠️ Yakin ingin menghapus data ini?')"
+                               class="inline-flex items-center px-4 py-2 bg-red-100 text-red-700
+                                      rounded-lg hover:bg-red-200 transition font-medium">
+                                <i class="fas fa-trash-alt mr-1"></i> Hapus
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+
+                <?php if ($rows->num_rows == 0): ?>
+                <tr>
+                    <td colspan="8" class="px-6 py-16 text-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500 text-lg font-semibold mb-2">Belum Ada Data Tahun Akademik</p>
+                            <p class="text-gray-400 text-sm mb-6">Mulai dengan menambahkan data pertama</p>
+
+                            <a href="index.php?page=tahun_akademik&aksi=tambah"
+                               class="inline-flex items-center px-6 py-3 bg-gradient-to-r 
+                                      from-primary-600 to-secondary-600 text-white rounded-xl 
+                                      hover:shadow-xl transform hover:-translate-y-1 transition font-semibold">
+                                <i class="fas fa-plus-circle mr-2"></i>Tambah Data
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <?php endif; ?>
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <?php if ($rows->num_rows > 0): ?>
+    <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+        <p class="text-sm text-gray-600">
+            Menampilkan <span class="font-semibold text-gray-800"><?= $rows->num_rows ?></span> data
+        </p>
+    </div>
+    <?php endif; ?>
 </div>
 
 <?php include "views/layout/footer.php"; ?>

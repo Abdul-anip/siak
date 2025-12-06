@@ -1,211 +1,166 @@
 <?php include "views/layout/header.php"; ?>
 <?php include "views/layout/sidebar.php"; ?>
 
-<div class="topbar">
-    <h2>Tambah Dosen</h2>
+<div class="mb-8">
+    <div class="flex items-center space-x-3 mb-4">
+        <a href="index.php?page=dosen" class="text-gray-600 hover:text-gray-800">
+            <i class="fas fa-arrow-left text-xl"></i>
+        </a>
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">
+                <i class="fas fa-plus-circle text-primary-600 mr-3"></i>Tambah Dosen
+            </h1>
+            <p class="text-gray-600 mt-1">Lengkapi form berikut untuk menambahkan data dosen baru</p>
+        </div>
+    </div>
 </div>
 
-<div class="card-content">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-<?php if (isset($error)): ?>
-<div class="message-box error"> 
-    <?= $error ?>
-</div>
-<?php endif; ?>
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
 
-<form method="post" action="index.php?page=dosen&aksi=save">
+            <div class="bg-gradient-to-r from-primary-600 to-secondary-600 px-6 py-4">
+                <h3 class="text-lg font-bold text-white">Form Data Dosen</h3>
+            </div>
 
-    <label>NIDN <span style="color:red">*</span></label>
-    <input class="input" name="dsnNidn" required
-        value="<?= isset($old['dsnNidn']) ? htmlspecialchars($old['dsnNidn']) : '' ?>"
-        placeholder="Contoh: 0006058102">
-    <small>Nomor Induk Dosen Nasional (10 digit)</small>
+            <div class="p-6">
 
-    <label>Gelar Depan</label>
-    <input class="input" name="dsnGelarDepan"
-        value="<?= isset($old['dsnGelarDepan']) ? htmlspecialchars($old['dsnGelarDepan']) : '' ?>"
-        placeholder="Contoh: Dr., Ir., Prof.">
-    <small>Opsional - Gelar akademik sebelum nama</small>
+                <?php if (isset($error)): ?>
+                <div class="mb-6 bg-red-50 border-l-4 border-red-500 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-500 text-xl mr-3"></i>
+                        <div>
+                            <p class="text-sm font-medium text-red-800">Terjadi Kesalahan!</p>
+                            <p class="text-sm text-red-700 mt-1"><?= $error ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
 
-    <label>Nama Lengkap <span style="color:red">*</span></label>
-    <input class="input" name="dsnNama" required
-        value="<?= isset($old['dsnNama']) ? htmlspecialchars($old['dsnNama']) : '' ?>"
-        placeholder="Contoh: Ahmad Dahlan">
+                <form method="post" action="index.php?page=dosen&aksi=save" class="space-y-6">
 
-    <label>Gelar Belakang</label>
-    <input class="input" name="dsnGelarBelakang"
-        value="<?= isset($old['dsnGelarBelakang']) ? htmlspecialchars($old['dsnGelarBelakang']) : '' ?>"
-        placeholder="Contoh: S.T., M.T., Ph.D">
-    <small>Opsional - Gelar akademik setelah nama</small>
+                    <!-- NIDN -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            NIDN <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="dsnNidn" required
+                            value="<?= $old['dsnNidn'] ?? '' ?>"
+                            placeholder="Contoh: 0006058102"
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                        <p class="text-xs text-gray-500"><i class="fas fa-info-circle mr-1"></i>Nomor Induk Dosen Nasional</p>
+                    </div>
 
-    <label>Jenis Kelamin <span style="color:red">*</span></label>
-    <select class="input" name="dsnJenisKelaminKode" required>
-        <option value="L" <?= (isset($old['dsnJenisKelaminKode']) && $old['dsnJenisKelaminKode']=='L') ? 'selected' : '' ?>>
-            Laki-laki
-        </option>
-        <option value="P" <?= (isset($old['dsnJenisKelaminKode']) && $old['dsnJenisKelaminKode']=='P') ? 'selected' : '' ?>>
-            Perempuan
-        </option>
-    </select>
+                    <!-- Gelar Depan -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">Gelar Depan</label>
+                        <input type="text" name="dsnGelarDepan"
+                            value="<?= $old['dsnGelarDepan'] ?? '' ?>"
+                            placeholder="Contoh: Dr., Prof."
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                    </div>
 
-    <label>Jurusan <span style="color:red">*</span></label>
-    <select name="dsnJurId" class="input" id="jurusan-select" required>
-        <option value="0">-- Pilih Jurusan --</option>
+                    <!-- Nama Lengkap -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            Nama Lengkap <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="dsnNama" required
+                            value="<?= $old['dsnNama'] ?? '' ?>"
+                            placeholder="Contoh: Ahmad Dahlan"
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                    </div>
 
-        <?php
-        $jurusan->data_seek(0); 
-        while($j = $jurusan->fetch_assoc()): ?>
-            <option value="<?= $j['jurId'] ?>"
-                <?= (isset($old['dsnJurId']) && $old['dsnJurId'] == $j['jurId']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($j['jurNama']) ?>
-            </option>
-        <?php endwhile; ?>
-    </select>
+                    <!-- Gelar Belakang -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">Gelar Belakang</label>
+                        <input type="text" name="dsnGelarBelakang"
+                            value="<?= $old['dsnGelarBelakang'] ?? '' ?>"
+                            placeholder="Contoh: S.T., M.T., Ph.D"
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                    </div>
 
-    <label>Program Studi <span style="color:red">*</span></label>
-    <select name="dsnProdiId" class="input" id="prodi-select" required>
-        <option value="0">-- Pilih Prodi --</option>
-    </select>
+                    <!-- Jenis Kelamin -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">Jenis Kelamin</label>
+                        <select name="dsnJenisKelaminKode" class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                            <option value="L" <?= ($old['dsnJenisKelaminKode'] ?? '') == 'L' ? 'selected' : '' ?>>Laki-laki</option>
+                            <option value="P" <?= ($old['dsnJenisKelaminKode'] ?? '') == 'P' ? 'selected' : '' ?>>Perempuan</option>
+                        </select>
+                    </div>
 
-    <label>Kelas (Opsional)</label>
-    <select name="klsId" class="input" id="kelas-select">
-        <option value="0">-- Pilih Kelas --</option>
-    </select>
-    <small>Jika dipilih, dosen akan didaftarkan ke semua matakuliah di kelas tersebut</small>
+                    <!-- Jurusan -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">Jurusan</label>
+                        <select name="dsnJurId" id="jurusan-select"
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl" required>
+                            <option value="0">-- Pilih Jurusan --</option>
+                            <?php $jurusan->data_seek(0); while($j = $jurusan->fetch_assoc()): ?>
+                                <option value="<?= $j['jurId'] ?>" <?= ($old['dsnJurId'] ?? '') == $j['jurId'] ? 'selected' : '' ?>>
+                                    <?= $j['jurNama'] ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
 
-    <div style="display: flex; gap: 10px; margin-top: 20px;">
-        <button class="btn" name="save_dosen" type="submit">💾 Simpan</button>
-        <a class="btn" style="background:#777" href="index.php?page=dosen">❌ Batal</a>
+                    <!-- Prodi -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">Program Studi</label>
+                        <select name="dsnProdiId" id="prodi-select"
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl" required>
+                            <option value="0">-- Pilih Prodi --</option>
+                        </select>
+                    </div>
+
+                    <!-- Kelas -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">Kelas (Opsional)</label>
+                        <select name="klsId" id="kelas-select"
+                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                            <option value="0">-- Pilih Kelas --</option>
+                        </select>
+                        <p class="text-xs text-gray-500"><i class="fas fa-info-circle mr-1"></i>Dosen akan terdaftar pada semua matakuliah kelas tersebut</p>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
+                        
+                        <button type="submit" name="save_dosen"
+                            class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-xl shadow-lg">
+                            <i class="fas fa-save mr-2"></i> Simpan Data
+                        </button>
+
+                        <a href="index.php?page=dosen"
+                            class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gray-200 text-gray-700 rounded-xl">
+                            <i class="fas fa-times mr-2"></i> Batal
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
 
-</form>
+    <!-- Sidebar -->
+    <div class="lg:col-span-1 space-y-6">
 
-<!-- INFO BOX -->
-<div style="margin-top: 30px; padding: 15px; background: #E3F2FD; border-radius: 8px; border-left: 4px solid #2196F3;">
-    <strong>💡 Tips Pengisian:</strong>
-    <ul style="margin: 10px 0 0 20px; padding: 0;">
-        <li><strong>NIDN</strong>: Nomor unik dosen (10 digit)</li>
-        <li><strong>Gelar</strong>: Pisahkan gelar depan (Dr., Prof.) dan belakang (S.T., M.T.)</li>
-        <li><strong>Kelas</strong>: Jika dipilih, dosen otomatis mengampu semua matakuliah di kelas</li>
-    </ul>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
+            <h4 class="font-bold text-blue-800 mb-2">💡 Tips Pengisian</h4>
+            <ul class="text-sm text-blue-700 space-y-2">
+                <li>NIDN wajib 10 digit</li>
+                <li>Gelar depan & belakang bersifat opsional</li>
+                <li>Prodi muncul setelah memilih jurusan</li>
+                <li>Kelas bersifat opsional</li>
+            </ul>
+        </div>
+
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-6">
+            <h4 class="font-bold text-yellow-800 mb-2">⚠️ Perhatian</h4>
+            <p class="text-sm text-yellow-700">Pastikan data dosen benar sebelum menyimpan.</p>
+        </div>
+
+    </div>
 </div>
-
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const jurusanSelect = document.getElementById('jurusan-select');
-        const prodiSelect = document.getElementById('prodi-select');
-        const kelasSelect = document.getElementById('kelas-select');
-        
-        const oldJurusanId = jurusanSelect.value;
-        const oldProdiId = '<?= isset($old['dsnProdiId']) ? htmlspecialchars($old['dsnProdiId']) : '' ?>';
-        const oldKelasId = '<?= isset($old['klsId']) ? htmlspecialchars($old['klsId']) : '' ?>'; 
-
-        prodiSelect.disabled = true;
-        kelasSelect.disabled = true;
-
-        function updateKelasOptions(prodiId, selectedKelasId = '') {
-            kelasSelect.innerHTML = '<option value="0">Memuat...</option>';
-            kelasSelect.disabled = true;
-
-            if (prodiId === "" || prodiId === "0") {
-                kelasSelect.innerHTML = '<option value="0">-- Pilih Kelas --</option>';
-                return;
-            }
-
-            fetch(`index.php?page=prodi&aksi=listKelasByProdi&prodiId=${prodiId}`)
-                .then(response => response.json())
-                .then(data => {
-                    kelasSelect.innerHTML = '';
-                    
-                    const defaultOpt = document.createElement('option');
-                    defaultOpt.value = '0';
-                    defaultOpt.textContent = '-- Pilih Kelas (Opsional) --';
-                    kelasSelect.appendChild(defaultOpt);
-
-                    if (data.kelas && data.kelas.length > 0) {
-                        data.kelas.forEach(kelas => {
-                            const option = document.createElement('option');
-                            option.value = kelas.id;
-                            option.textContent = kelas.nama;
-                            if (kelas.id == selectedKelasId) {
-                                option.selected = true;
-                            }
-                            kelasSelect.appendChild(option);
-                        });
-                        kelasSelect.disabled = false;
-                    } else {
-                        kelasSelect.innerHTML = '<option value="0">-- Tidak ada Kelas Aktif --</option>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching kelas:', error);
-                    kelasSelect.innerHTML = '<option value="0">-- Error memuat data --</option>';
-                });
-        }
-        
-        function updateProdiOptions(jurId, selectedProdiId = '') {
-            prodiSelect.innerHTML = '<option value="0">Memuat...</option>';
-            prodiSelect.disabled = true;
-            kelasSelect.innerHTML = '<option value="0">-- Pilih Kelas --</option>';
-            kelasSelect.disabled = true;
-
-            if (jurId === "" || jurId === "0") {
-                prodiSelect.innerHTML = '<option value="0">-- Pilih Prodi --</option>';
-                return;
-            }
-
-            fetch(`index.php?page=prodi&aksi=listByJurusan&jurId=${jurId}`)
-                .then(response => response.json())
-                .then(data => {
-                    prodiSelect.innerHTML = '';
-                    
-                    const defaultOpt = document.createElement('option');
-                    defaultOpt.value = '0';
-                    defaultOpt.textContent = '-- Pilih Prodi --';
-                    prodiSelect.appendChild(defaultOpt);
-
-                    if (data.prodis && data.prodis.length > 0) {
-                        data.prodis.forEach(prodi => {
-                            const option = document.createElement('option');
-                            option.value = prodi.id;
-                            option.textContent = prodi.label;
-                            if (prodi.id == selectedProdiId) {
-                                option.selected = true;
-                            }
-                            prodiSelect.appendChild(option);
-                        });
-                        prodiSelect.disabled = false;
-                        
-                        if (selectedProdiId) {
-                            updateKelasOptions(selectedProdiId, oldKelasId);
-                        }
-
-                    } else {
-                        prodiSelect.innerHTML = '<option value="0">-- Tidak ada Prodi --</option>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching prodi:', error);
-                    prodiSelect.innerHTML = '<option value="0">-- Error memuat data --</option>';
-                });
-        }
-        
-        jurusanSelect.addEventListener('change', function() {
-            updateProdiOptions(this.value); 
-        });
-
-        prodiSelect.addEventListener('change', function() {
-            updateKelasOptions(this.value);
-        });
-
-        if (oldJurusanId && oldJurusanId != '0') {
-            updateProdiOptions(oldJurusanId, oldProdiId);
-        } else if (jurusanSelect.value != '0') {
-            updateProdiOptions(jurusanSelect.value, oldProdiId);
-        }
-    });
-</script>
 
 <?php include "views/layout/footer.php"; ?>

@@ -48,26 +48,38 @@ class Prodi {
             ];
         }
 
-        // INSERT DATA
+        // INSERT DATA - PERBAIKAN: Tambahkan prodiNamaAsing
         $isAktif = isset($data['prodiIsAktif']) ? 1 : 0;
 
         $stmt = $this->db->prepare("
             INSERT INTO program_studi 
             (prodiJurId, prodiKode, prodiNama, prodiNamaAsing, prodiJenjang, prodiEmail, prodiWebsite, prodiIsAktif)
-            VALUES (?, ?, ?, '', ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ");
 
-        $stmt->bind_param("isssssi",
+        // 8 parameter sekarang (tambah prodiNamaAsing)
+        $prodiNamaAsing = $data['prodiNamaAsing'] ?? '';
+        
+        $stmt->bind_param("issssssi",
             $data['prodiJurId'],
             $data['prodiKode'],
             $data['prodiNama'],
+            $prodiNamaAsing,
             $data['prodiJenjang'],
             $data['prodiEmail'],
             $data['prodiWebsite'],
             $isAktif
         );
 
-        $stmt->execute();
+        $result = $stmt->execute();
+        $stmt->close();
+
+        if (!$result) {
+            return [
+                'status' => false,
+                'error' => "Gagal menyimpan data: " . $this->db->error
+            ];
+        }
 
         return ['status' => true];
     }

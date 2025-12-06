@@ -47,39 +47,57 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
     }
 
     /* =========================================================
-       PERBAIKAN: Daftarkan Dosen ke Kelas dengan Matakuliah
+       PERBAIKAN CRITICAL: Daftarkan Dosen ke Kelas dengan Matakuliah
        ========================================================= */
 
-    $dsnNidn = $_POST['dsnNidn'];
-    $klsId = $_POST['klsId'] ?? 0;
+    $dsnNidn = $koneksi->real_escape_string($_POST['dsnNidn']);
+    $klsId = isset($_POST['klsId']) ? intval($_POST['klsId']) : 0;
 
-    // Hanya lanjutkan jika klsId valid
+    // Hanya lanjutkan jika klsId valid (bukan 0)
     if ($klsId > 0) {
         
-        // Ambil SEMUA matakuliah di kelas ini (bukan hanya 1)
+        // Ambil SEMUA matakuliah di kelas ini
         $mkKelas = $koneksi->query("
             SELECT klsmkMkId FROM kelas_matakuliah 
-            WHERE klsmkKlsId = " . intval($klsId)
+            WHERE klsmkKlsId = " . $klsId
         );
         
-        // Daftarkan dosen ke SEMUA matakuliah di kelas
+        // Jika ada matakuliah di kelas
         if ($mkKelas && $mkKelas->num_rows > 0) {
             
+            // Siapkan prepared statement untuk insert ke kelas_dosen
             $stmtEnroll = $koneksi->prepare("
                 INSERT INTO kelas_dosen (klsdsnKlsId, klsdsnDsnNidn, klsdsnMkId, klsdsnIsAktif)
                 VALUES (?, ?, ?, 1)
             ");
             
-            while ($mk = $mkKelas->fetch_assoc()) {
-                $mkId = $mk['klsmkMkId'];
-                $stmtEnroll->bind_param("isi", $klsId, $dsnNidn, $mkId);
-                $stmtEnroll->execute();
+            if (!$stmtEnroll) {
+                // Jika prepare gagal, log error
+                error_log("Prepare statement gagal: " . $koneksi->error);
+            } else {
+                // Loop untuk setiap matakuliah di kelas
+                while ($mk = $mkKelas->fetch_assoc()) {
+                    $mkId = intval($mk['klsmkMkId']);
+                    
+                    // Bind parameter dan execute
+                    $stmtEnroll->bind_param("isi", $klsId, $dsnNidn, $mkId);
+                    
+                    if (!$stmtEnroll->execute()) {
+                        // Log jika insert gagal
+                        error_log("Insert kelas_dosen gagal untuk mkId=$mkId: " . $stmtEnroll->error);
+                    }
+                }
+                
+                $stmtEnroll->close();
             }
             
-            $stmtEnroll->close();
+        } else {
+            // Tidak ada matakuliah di kelas (opsional: tampilkan warning)
+            // $_SESSION['warning'] = "Kelas belum memiliki matakuliah yang terdaftar.";
         }
     }
 
+    // Redirect ke halaman daftar dosen
     header("Location: index.php?page=dosen");
     exit;
 }
