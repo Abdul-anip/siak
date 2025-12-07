@@ -1,39 +1,64 @@
 <?php include "views/layout/header.php"; ?>
 <?php include "views/layout/sidebar.php"; ?>
 
-<div class="topbar">
-    <h2>Daftar Data Mahasiswa Kelas</h2>
+<!-- HEADER SECTION -->
+<div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 mb-6 text-white shadow-xl">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+            <h1 class="text-2xl font-bold mb-1">Daftar Data Mahasiswa Kelas</h1>
+            <p class="text-white/90 text-sm">
+                Cari dan kelola data mahasiswa per kelas berdasarkan tahun akademik, program studi, dan kelas
+            </p>
+        </div>
+        <div class="hidden md:block">
+            <span class="px-4 py-2 rounded-lg bg-white/15 text-white text-sm font-medium border border-white/30 flex items-center gap-2">
+                <i class="fas fa-user-graduate"></i>
+                Kemahasiswaan
+            </span>
+        </div>
+    </div>
 </div>
 
 <div class="card-content">
 
+    <!-- ERROR MESSAGE -->
     <?php if (isset($error)): ?>
-        <div class="message-box error"> 
-            <?= $error ?>
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mb-6">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle text-red-500 text-xl mr-3"></i>
+                <p class="text-red-700 font-medium"><?= $error ?></p>
+            </div>
         </div>
     <?php endif; ?>
 
+    <!-- ================================================== -->
     <!-- FORM PENCARIAN -->
+    <!-- ================================================== -->
     <?php if (!isset($_GET['cari'])): ?>
-    
-    <form method="get" action="index.php">
+
+    <form method="get" action="index.php" class="mb-6">
         <input type="hidden" name="page" value="daftarMahasiswaKelas">
 
-        <div style="background:#E8D5F2;padding:20px;border-radius:8px;margin-bottom:20px;">
-            <h3 style="margin-top:0;color:#6A1B9A;text-align:center;">
-                Pencarian Daftar Data Mahasiswa Kelas Berdasarkan :
+        <div class="bg-purple-50 border border-purple-100 rounded-2xl shadow-lg p-6 mb-6">
+            <h3 class="text-center text-lg font-bold text-purple-900 mb-6">
+                Pencarian Daftar Data Mahasiswa Kelas Berdasarkan:
             </h3>
-            
-            <!-- ROW 1: Tahun Akademik -->
-            <div style="display:grid; grid-template-columns: 200px 1fr; gap: 15px; align-items:center; margin-bottom: 15px;">
-                <label style="margin:0;font-weight:600;text-align:right;">Thn-Smt Akademik</label>
-                <div style="display:flex; gap:10px;">
-                    <!-- Tahun -->
-                    <select name="thakdId" class="input" required style="width:150px;">
-                        <option value="">2025/2026</option>
+
+            <!-- ROW 1: Tahun Akademik & Semester -->
+            <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                <label class="md:w-52 text-sm font-semibold text-gray-700 md:text-right">
+                    Thn-Smt Akademik
+                </label>
+                <div class="flex flex-col sm:flex-row gap-3 w-full">
+                    <!-- Tahun Akademik -->
+                    <select name="thakdId"
+                            class="input w-full sm:w-52 px-4 py-2.5 border-2 border-gray-200 rounded-xl 
+                                   focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+                            required>
+                        <option value="">-- Pilih Tahun Akademik --</option>
                         <?php 
                         $listTa->data_seek(0);
-                        while($t = $listTa->fetch_assoc()): 
+                        while($t = $listTa->fetch_assoc()):
                             $tahunDisplay = $t['thakdTahun'] . '/' . ($t['thakdTahun'] + 1);
                             $selected = (isset($thakdId) && $thakdId == $t['thakdId']) ? 'selected' : '';
                         ?>
@@ -42,24 +67,31 @@
                             </option>
                         <?php endwhile; ?>
                     </select>
-                    
+
                     <!-- Semester -->
-                    <select name="semester" class="input" style="width:120px;">
-                        <option value="">Ganjil</option>
-                        <option value="1">Ganjil</option>
-                        <option value="2">Genap</option>
+                    <select name="semester"
+                            class="input w-full sm:w-40 px-4 py-2.5 border-2 border-gray-200 rounded-xl 
+                                   focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
+                        <option value="">-- Pilih Semester --</option>
+                        <option value="1" <?= (isset($semester) && $semester == '1') ? 'selected' : '' ?>>Ganjil</option>
+                        <option value="2" <?= (isset($semester) && $semester == '2') ? 'selected' : '' ?>>Genap</option>
                     </select>
                 </div>
             </div>
-            
+
             <!-- ROW 2: Program Studi -->
-            <div style="display:grid; grid-template-columns: 200px 1fr; gap: 15px; align-items:center; margin-bottom: 15px;">
-                <label style="margin:0;font-weight:600;text-align:right;">Program Studi</label>
-                <select name="prodiId" class="input" required>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                <label class="md:w-52 text-sm font-semibold text-gray-700 md:text-right">
+                    Program Studi
+                </label>
+                <select name="prodiId"
+                        class="input w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl 
+                               focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                        required>
                     <option value="">-- Pilih Program Studi --</option>
                     <?php 
                     $listProdi->data_seek(0);
-                    while($p = $listProdi->fetch_assoc()): 
+                    while($p = $listProdi->fetch_assoc()):
                         $selected = (isset($prodiId) && $prodiId == $p['prodiId']) ? 'selected' : '';
                     ?>
                         <option value="<?= $p['prodiId'] ?>" <?= $selected ?>>
@@ -68,11 +100,17 @@
                     <?php endwhile; ?>
                 </select>
             </div>
-            
+
             <!-- ROW 3: Nama Kelas -->
-            <div style="display:grid; grid-template-columns: 200px 1fr; gap: 15px; align-items:center; margin-bottom: 15px;">
-                <label style="margin:0;font-weight:600;text-align:right;">Nama Kelas</label>
-                <select name="klsId" class="input" required id="kelasSelect">
+            <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                <label class="md:w-52 text-sm font-semibold text-gray-700 md:text-right">
+                    Nama Kelas
+                </label>
+                <select name="klsId"
+                        class="input w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl 
+                               focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+                        required
+                        id="kelasSelect">
                     <option value="">-- Pilih Kelas --</option>
                     <?php if(isset($listKelas)): ?>
                         <?php while($k = $listKelas->fetch_assoc()): ?>
@@ -84,10 +122,13 @@
                 </select>
             </div>
 
-            <!-- TOMBOL CARI -->
-            <div style="text-align:center; margin-top:20px;">
-                <button class="btn" type="submit" name="cari" value="1" 
-                        style="background:#C5E1A5; color:#33691E; font-size:16px; padding:12px 40px; font-weight:bold;">
+            <!-- BUTTON CARI -->
+            <div class="mt-6 flex justify-center">
+                <button class="btn bg-gradient-to-r from-green-500 to-lime-500 hover:from-green-600 hover:to-lime-600 
+                               text-green-950 font-bold px-10 py-3 rounded-xl shadow-lg hover:shadow-xl 
+                               transform hover:-translate-y-0.5 transition duration-200 flex items-center justify-center"
+                        type="submit" name="cari" value="1">
+                    <i class="fas fa-search mr-2"></i>
                     Cari
                 </button>
             </div>
@@ -96,155 +137,177 @@
 
     <?php endif; ?>
 
-    <!-- HASIL PENCARIAN: Tabel Mahasiswa -->
+
+    <!-- ================================================== -->
+    <!-- HASIL PENCARIAN: ADA DATA MAHASISWA -->
+    <!-- ================================================== -->
     <?php if (isset($_GET['cari']) && $kelasInfo && $rows && $rows->num_rows > 0): ?>
 
-        <!-- HEADER INFO KELAS & STATISTIK -->
-        <div style="background:#fff;padding:20px;border-radius:8px;margin-bottom:20px;border:2px solid #E8D5F2;">
-            <h3 style="margin:0 0 15px 0;color:#6A1B9A;text-align:center;">
-                Data Mahasiswa Kelas <?= htmlspecialchars($kelasInfo['klsNama']) ?> 
-                TA <?= htmlspecialchars($kelasInfo['tahunAkademikLabel']) ?>
+        <!-- HEADER INFO & STATISTIK -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-purple-100">
+            <h3 class="text-center text-lg font-bold text-purple-900 mb-2">
+                Data Mahasiswa Kelas <?= htmlspecialchars($kelasInfo['klsNama']) ?>
             </h3>
-            
-            <!-- STATISTIK CARDS -->
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px; margin-top:20px;">
-                
+            <p class="text-center text-sm text-gray-600 mb-6">
+                Tahun Akademik <?= htmlspecialchars($kelasInfo['tahunAkademikLabel']) ?>
+            </p>
+
+            <!-- Statistik Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <!-- Total Mahasiswa -->
-                <div style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;padding:20px;border-radius:8px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-                    <div style="font-size:36px;font-weight:bold;"><?= $totalMahasiswa ?></div>
-                    <div style="font-size:14px;opacity:0.9;">Total Mahasiswa</div>
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl p-4 text-center shadow-md">
+                    <div class="text-3xl font-bold mb-1"><?= $totalMahasiswa ?></div>
+                    <div class="text-sm opacity-90">Total Mahasiswa</div>
                 </div>
-                
+
                 <!-- Laki-laki -->
-                <div style="background:linear-gradient(135deg, #3498db 0%, #2980b9 100%);color:white;padding:20px;border-radius:8px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-                    <div style="font-size:36px;font-weight:bold;"><?= $statsByGender['L'] ?></div>
-                    <div style="font-size:14px;opacity:0.9;">Laki-laki</div>
+                <div class="bg-gradient-to-br from-blue-500 to-sky-600 text-white rounded-xl p-4 text-center shadow-md">
+                    <div class="text-3xl font-bold mb-1"><?= $statsByGender['L'] ?? 0 ?></div>
+                    <div class="text-sm opacity-90">Laki-laki</div>
                 </div>
-                
+
                 <!-- Perempuan -->
-                <div style="background:linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);color:white;padding:20px;border-radius:8px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-                    <div style="font-size:36px;font-weight:bold;"><?= $statsByGender['P'] ?></div>
-                    <div style="font-size:14px;opacity:0.9;">Perempuan</div>
+                <div class="bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-xl p-4 text-center shadow-md">
+                    <div class="text-3xl font-bold mb-1"><?= $statsByGender['P'] ?? 0 ?></div>
+                    <div class="text-sm opacity-90">Perempuan</div>
                 </div>
-                
+
                 <!-- Status Aktif -->
-                <div style="background:linear-gradient(135deg, #27ae60 0%, #229954 100%);color:white;padding:20px;border-radius:8px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-                    <div style="font-size:36px;font-weight:bold;"><?= $statsByStatus['Aktif'] ?? 0 ?></div>
-                    <div style="font-size:14px;opacity:0.9;">Status Aktif</div>
+                <div class="bg-gradient-to-br from-emerald-500 to-green-600 text-white rounded-xl p-4 text-center shadow-md">
+                    <div class="text-3xl font-bold mb-1"><?= $statsByStatus['Aktif'] ?? 0 ?></div>
+                    <div class="text-sm opacity-90">Status Aktif</div>
                 </div>
             </div>
         </div>
 
         <!-- TABEL MAHASISWA -->
-        <div style="overflow-x:auto;">
-            <table class="table">
-                <thead>
-                    <tr style="background:#FFD54F;">
-                        <th style="width:50px;text-align:center;">No.</th>
-                        <th style="width:120px;">NIM</th>
-                        <th>Nama Mahasiswa</th>
-                        <th style="width:180px;">Tempat/Tgl Lahir</th>
-                        <th style="text-align:center;width:60px;">JK</th>
-                        <th style="width:200px;">Prodi</th>
-                        <th style="text-align:center;width:100px;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $no = 1; 
-                    $rows->data_seek(0); // Reset pointer
-                    while($r = $rows->fetch_assoc()): 
-                    ?>
-                    <tr>
-                        <td data-label="No." style="text-align:center;"><?= $no++ ?></td>
-                        <td data-label="NIM">
-                            <strong style="color:#1976D2;font-family:monospace;">
-                                <?= htmlspecialchars($r['NIM']) ?>
-                            </strong>
-                        </td>
-                        <td data-label="Nama Mahasiswa">
-                            <strong><?= htmlspecialchars($r['NamaMahasiswa']) ?></strong>
-                        </td>
-                        <td data-label="Tempat/Tgl Lahir">
-                            <?= htmlspecialchars($r['TempatTglLahir']) ?>
-                        </td>
-                        <td data-label="JK" style="text-align:center;">
-                            <span style="display:inline-block; width:32px; height:32px; border-radius:50%; 
-                                        line-height:32px; font-weight:bold; font-size:14px;
-                                        background:<?= $r['JK']=='L' ? '#BBDEFB' : '#F8BBD0' ?>; 
-                                        color:<?= $r['JK']=='L' ? '#1565C0' : '#C2185B' ?>;">
-                                <?= $r['JK'] == 'L' ? 'L' : 'P' ?>
-                            </span>
-                        </td>
-                        <td data-label="Prodi">
-                            <div style="font-weight:600;color:#424242;">
-                                <?= htmlspecialchars($r['ProdiKode']) ?>
-                            </div>
-                            <div style="font-size:0.85em;color:#757575;">
-                                <?= htmlspecialchars($r['Prodi']) ?>
-                            </div>
-                        </td>
-                        <td data-label="Status" style="text-align:center;">
-                            <?php
-                            $statusColors = [
-                                'Aktif' => ['bg' => '#C8E6C9', 'text' => '#2E7D32'],
-                                'Lulus' => ['bg' => '#BBDEFB', 'text' => '#1565C0'],
-                                'Cuti' => ['bg' => '#FFF9C4', 'text' => '#F57F17'],
-                                'DO' => ['bg' => '#FFCDD2', 'text' => '#C62828'],
-                                'Keluar' => ['bg' => '#FFE0B2', 'text' => '#E65100'],
-                                'Meninggal' => ['bg' => '#B0BEC5', 'text' => '#263238']
-                            ];
-                            
-                            $status = $r['Status'];
-                            $color = $statusColors[$status] ?? ['bg' => '#E0E0E0', 'text' => '#424242'];
-                            ?>
-                            <span style="display:inline-block; padding:5px 12px; border-radius:12px; 
-                                        font-weight:600; font-size:0.85em;
-                                        background:<?= $color['bg'] ?>; 
-                                        color:<?= $color['text'] ?>;">
-                                <?= $status ?>
-                            </span>
-                        </td>
-                    </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+            <div class="p-4 border-b border-gray-100 flex flex-wrap justify-between items-center gap-4">
+                <div>
+                    <h4 class="text-sm font-bold text-gray-800">
+                        Kelas <?= htmlspecialchars($kelasInfo['klsNama']) ?>
+                    </h4>
+                    <p class="text-xs text-gray-500">
+                        Total <?= $rows->num_rows ?> mahasiswa
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <a href="index.php?page=daftarMahasiswaKelas" 
+                       class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
+                        <i class="fas fa-search mr-1"></i> Cari Kelas Lain
+                    </a>
+                    <button onclick="window.print()" 
+                            class="inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
+                        <i class="fas fa-print mr-1"></i> Cetak
+                    </button>
+                    <button onclick="exportToExcel()" 
+                            class="inline-flex items-center px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm transition">
+                        <i class="fas fa-file-excel mr-1"></i> Export Excel
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900">
+                            <th class="px-4 py-3 text-center text-xs font-bold uppercase tracking-wide w-14">No.</th>
+                            <th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide w-32">NIM</th>
+                            <th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Nama Mahasiswa</th>
+                            <th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Tempat / Tgl Lahir</th>
+                            <th class="px-4 py-3 text-center text-xs font-bold uppercase tracking-wide w-20">JK</th>
+                            <th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Prodi</th>
+                            <th class="px-4 py-3 text-center text-xs font-bold uppercase tracking-wide w-28">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <?php 
+                        $no = 1;
+                        $rows->data_seek(0);
+                        while($r = $rows->fetch_assoc()):
+                        ?>
+                        <tr class="hover:bg-purple-50 transition duration-200">
+                            <td data-label="No." class="px-4 py-3 text-center text-sm text-gray-700 font-semibold">
+                                <?= $no++ ?>
+                            </td>
+                            <td data-label="NIM" class="px-4 py-3 text-sm">
+                                <span class="font-mono text-sm font-semibold text-indigo-700 bg-indigo-50 px-2 py-1 rounded">
+                                    <?= htmlspecialchars($r['NIM']) ?>
+                                </span>
+                            </td>
+                            <td data-label="Nama Mahasiswa" class="px-4 py-3 text-sm">
+                                <span class="font-semibold text-gray-800">
+                                    <?= htmlspecialchars($r['NamaMahasiswa']) ?>
+                                </span>
+                            </td>
+                            <td data-label="Tempat/Tgl Lahir" class="px-4 py-3 text-sm text-gray-700">
+                                <i class="far fa-calendar-alt text-gray-400 mr-1.5 text-xs"></i>
+                                <?= htmlspecialchars($r['TempatTglLahir']) ?>
+                            </td>
+                            <td data-label="JK" class="px-4 py-3 text-center text-sm">
+                                <?php if($r['JK'] == 'L'): ?>
+                                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 text-xs font-bold" title="Laki-laki">L</span>
+                                <?php else: ?>
+                                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-pink-100 text-pink-600 text-xs font-bold" title="Perempuan">P</span>
+                                <?php endif; ?>
+                            </td>
+                            <td data-label="Prodi" class="px-4 py-3 text-sm">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-medium text-gray-800">
+                                        <?= htmlspecialchars($r['ProdiKode']) ?>
+                                    </span>
+                                    <span class="text-xs text-gray-500 truncate max-w-[180px]">
+                                        <?= htmlspecialchars($r['Prodi']) ?>
+                                    </span>
+                                </div>
+                            </td>
+                            <td data-label="Status" class="px-4 py-3 text-center text-sm">
+                                <?php
+                                $statusColors = [
+                                    'Aktif'   => ['bg' => '#ECFDF5', 'text' => '#047857', 'border' => '#A7F3D0'], // Emerald
+                                    'Lulus'   => ['bg' => '#EFF6FF', 'text' => '#1D4ED8', 'border' => '#BFDBFE'], // Blue
+                                    'Cuti'    => ['bg' => '#FFFBEB', 'text' => '#B45309', 'border' => '#FDE68A'], // Amber
+                                    'DO'      => ['bg' => '#FEF2F2', 'text' => '#B91C1C', 'border' => '#FECACA'], // Red
+                                    'Keluar'  => ['bg' => '#FFF7ED', 'text' => '#C2410C', 'border' => '#FED7AA'], // Orange
+                                    'Meninggal' => ['bg' => '#F3F4F6', 'text' => '#374151', 'border' => '#E5E7EB'],
+                                ];
+                                $st = $r['Status'];
+                                $c = $statusColors[$st] ?? ['bg' => '#F3F4F6', 'text' => '#374151', 'border' => '#E5E7EB'];
+                                ?>
+                                <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold border"
+                                      style="background-color: <?= $c['bg'] ?>; color: <?= $c['text'] ?>; border-color: <?= $c['border'] ?>;">
+                                    <?= $st ?>
+                                </span>
+                            </td>
+                        </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- FOOTER INFO -->
-        <div style="margin-top:15px;padding:12px;background:#f1f8e9;border-left:4px solid #8bc34a;border-radius:4px;">
-            Total <strong><?= $rows->num_rows ?></strong> mahasiswa | 
-            Laki-laki: <strong><?= $statsByGender['L'] ?></strong> | 
-            Perempuan: <strong><?= $statsByGender['P'] ?></strong>
-        </div>
-
-        <!-- FOOTER ACTIONS -->
-        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="index.php?page=daftarMahasiswaKelas" class="btn" style="background:#2196F3;">
-                Cari Kelas Lain
-            </a>
-            <button onclick="window.print()" class="btn" style="background:#4CAF50;">
-                Cetak Daftar
-            </button>
-            <button onclick="exportToExcel()" class="btn" style="background:#FF9800;">
-                Export Excel
-            </button>
-        </div>
-
+    <!-- ================================================== -->
+    <!-- HASIL PENCARIAN: TIDAK ADA DATA MAHASISWA -->
+    <!-- ================================================== -->
     <?php elseif (isset($_GET['cari']) && $kelasInfo): ?>
-        
-        <!-- TIDAK ADA DATA MAHASISWA -->
-        <div style="padding:40px;text-align:center;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;">
-            <div style="font-size:48px;margin-bottom:15px;"></div>
-            <h3 style="margin:0 0 10px 0;color:#856404;">Tidak Ada Mahasiswa</h3>
-            <p style="color:#856404;margin-bottom:20px;">
+
+        <div class="bg-white rounded-2xl shadow-lg p-10 text-center border border-yellow-200">
+            <div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-user-slash text-4xl text-yellow-700"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-yellow-800 mb-3">Tidak Ada Mahasiswa</h3>
+            <p class="text-yellow-800/90 mb-6 max-w-md mx-auto">
                 Kelas <strong><?= htmlspecialchars($kelasInfo['klsNama']) ?></strong> belum memiliki mahasiswa yang terdaftar.
             </p>
-            <div style="display:flex;gap:10px;justify-content:center;">
-                <a href="index.php?page=daftarMahasiswaKelas" class="btn" style="background:#2196F3;">
+            <div class="flex justify-center gap-3">
+                <a href="index.php?page=daftarMahasiswaKelas" 
+                   class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition duration-200">
+                    <i class="fas fa-sync-alt mr-2"></i>
                     Pilih Kelas Lain
                 </a>
-                <a href="index.php?page=mahasiswa&aksi=tambah" class="btn" style="background:#4CAF50;">
+                <a href="index.php?page=mahasiswa&aksi=tambah"
+                   class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition duration-200">
+                    <i class="fas fa-plus mr-2"></i>
                     Tambah Mahasiswa
                 </a>
             </div>
@@ -256,38 +319,41 @@
 
 <!-- JAVASCRIPT -->
 <script>
-// Auto-load kelas saat prodi dipilih
+// Auto-load kelas saat prodi atau tahun dipilih
 document.addEventListener('DOMContentLoaded', function() {
     const prodiSelect = document.querySelector('select[name="prodiId"]');
     const thakdSelect = document.querySelector('select[name="thakdId"]');
     const kelasSelect = document.getElementById('kelasSelect');
-    
+
     if (prodiSelect && thakdSelect && kelasSelect) {
         prodiSelect.addEventListener('change', loadKelas);
         thakdSelect.addEventListener('change', loadKelas);
     }
-    
+
     function loadKelas() {
         const thakdId = thakdSelect.value;
         const prodiId = prodiSelect.value;
-        
+
         if (thakdId && prodiId) {
             window.location.href = `index.php?page=daftarMahasiswaKelas&tahap=pilih_kelas&thakdId=${thakdId}&prodiId=${prodiId}`;
         }
     }
 });
 
+<?php if (isset($kelasInfo)): ?>
 // Export to Excel
 function exportToExcel() {
     const table = document.querySelector('.table');
+    if (!table) return;
+
     const kelasName = '<?= htmlspecialchars($kelasInfo['klsNama'] ?? 'Kelas') ?>';
     const ta = '<?= htmlspecialchars($kelasInfo['tahunAkademikLabel'] ?? '') ?>';
-    
-    let html = table.outerHTML;
+
+    const html = table.outerHTML;
     const blob = new Blob(['\ufeff', html], {
         type: 'application/vnd.ms-excel'
     });
-    
+
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -295,103 +361,93 @@ function exportToExcel() {
     a.click();
     window.URL.revokeObjectURL(url);
 }
-
-
+<?php endif; ?>
 </script>
 
-<!-- CSS TAMBAHAN -->
+<!-- CSS TAMBAHAN UNTUK PRINT & RESPONSIVE TABLE -->
 <style>
-/* Hover effect untuk baris tabel */
-.table tbody tr:hover {
-    background-color: #FFF9C4 !important;
-    transform: scale(1.01);
-    transition: all 0.2s ease;
-}
-
-/* Print Styles */
 @media print {
-    .sidebar, .topbar .btn, .btn, form {
+    .sidebar,
+    .topbar .btn,
+    .btn,
+    form,
+    a[href*="page=daftarMahasiswaKelas"] {
         display: none !important;
     }
-    
+
     .content-wrapper {
         margin-left: 0 !important;
         padding: 20px !important;
     }
-    
+
     .card-content {
         box-shadow: none !important;
         border: 1px solid #000;
     }
-    
-    /* Print statistik cards */
-    .card-content > div:first-of-type {
-        page-break-after: avoid;
-    }
-    
+
     table {
         page-break-inside: auto;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #000;
+        padding: 4px;
         font-size: 11px;
     }
-    
+
     tr {
         page-break-inside: avoid;
         page-break-after: auto;
     }
-    
+
     thead {
         display: table-header-group;
     }
-    
+
     tbody tr:nth-child(even) {
         background: #f9f9f9 !important;
     }
-    
+
     @page {
         margin: 1cm;
         size: landscape;
     }
-    
-    /* Tampilkan header di setiap halaman */
-    .card-content h3 {
-        page-break-after: avoid;
-    }
 }
 
-/* Responsive Table */
+/* Responsive Table untuk mobile */
 @media (max-width: 860px) {
-    /* Hide statistics cards on very small screens */
-    .card-content > div:first-of-type > div:first-of-type {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-    
     .table thead {
         display: none;
     }
-    
-    .table, .table tbody, .table tr, .table td {
+
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
         display: block;
         width: 100%;
     }
-    
+
     .table tr {
         margin-bottom: 15px;
-        border: 2px solid #E8D5F2;
+        border: 1px solid #ddd;
         border-radius: 8px;
-        padding: 15px;
-        background: #fff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 10px;
+        background: #ffffff;
     }
-    
+
     .table td {
         text-align: right;
         padding-left: 50%;
         position: relative;
         border: none;
-        padding: 10px;
-        min-height: 40px;
+        padding: 8px 10px;
+        font-size: 13px;
     }
-    
+
     .table td:before {
         content: attr(data-label);
         position: absolute;
@@ -401,45 +457,7 @@ function exportToExcel() {
         text-align: left;
         color: #6A1B9A;
     }
-    
-    /* Adjust NIM and Status for mobile */
-    .table td[data-label="NIM"],
-    .table td[data-label="Status"] {
-        text-align: center;
-        padding-left: 10px;
-    }
-    
-    .table td[data-label="NIM"]:before,
-    .table td[data-label="Status"]:before {
-        width: 100%;
-        text-align: center;
-        position: relative;
-        left: 0;
-        display: block;
-        margin-bottom: 5px;
-    }
 }
-
-/* Animasi untuk statistik cards */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card-content > div:first-of-type > div > div {
-    animation: fadeInUp 0.5s ease-out;
-}
-
-.card-content > div:first-of-type > div > div:nth-child(1) { animation-delay: 0.1s; }
-.card-content > div:first-of-type > div > div:nth-child(2) { animation-delay: 0.2s; }
-.card-content > div:first-of-type > div > div:nth-child(3) { animation-delay: 0.3s; }
-.card-content > div:first-of-type > div > div:nth-child(4) { animation-delay: 0.4s; }
 </style>
 
 <?php include "views/layout/footer.php"; ?>

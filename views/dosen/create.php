@@ -112,17 +112,40 @@
                         <select name="dsnProdiId" id="prodi-select"
                             class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl" required>
                             <option value="0">-- Pilih Prodi --</option>
+                            <?php 
+                            $listProdi->data_seek(0); // Reset pointer
+                            while($p = $listProdi->fetch_assoc()): 
+                            ?>
+                                <option value="<?= $p['prodiId'] ?>" <?= ($old['dsnProdiId'] ?? '') == $p['prodiId'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($p['prodiNama']) ?> (<?= htmlspecialchars($p['prodiJenjang']) ?>)
+                                </option>
+                            <?php endwhile; ?>
                         </select>
                     </div>
 
-                    <!-- Kelas -->
+                    <!-- Pilih Kelas (Opsional) -->
                     <div class="space-y-2">
-                        <label class="block text-sm font-semibold text-gray-700">Kelas (Opsional)</label>
-                        <select name="klsId" id="kelas-select"
-                            class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
-                            <option value="0">-- Pilih Kelas --</option>
+                        <label class="block text-sm font-semibold text-gray-700">
+                            <i class="fas fa-chalkboard text-indigo-600 mr-2"></i>
+                            Daftarkan ke Kelas (Opsional)
+                        </label>
+                        <select name="klsId" id="klsId" 
+                                class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500">
+                            <option value="0">-- Tidak Didaftarkan ke Kelas --</option>
+                            <?php if(isset($listKelas)): ?>
+                                <?php while($k = $listKelas->fetch_assoc()): ?>
+                                    <option value="<?= $k['klsId'] ?>" 
+                                            data-prodi="<?= $k['klsProdiId'] ?>"
+                                            <?= isset($old['klsId']) && $old['klsId'] == $k['klsId'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($k['kelasLabel']) ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            <?php endif; ?>
                         </select>
-                        <p class="text-xs text-gray-500"><i class="fas fa-info-circle mr-1"></i>Dosen akan terdaftar pada semua matakuliah kelas tersebut</p>
+                        <p class="text-xs text-gray-500 flex items-center mt-1">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Dosen akan otomatis mengajar <strong>semua matakuliah</strong> yang ada di kelas ini
+                        </p>
                     </div>
 
                     <!-- Buttons -->
@@ -164,5 +187,37 @@
 
     </div>
 </div>
+
+<script>
+// Filter kelas berdasarkan prodi yang dipilih
+document.addEventListener('DOMContentLoaded', function() {
+    const prodiSelect = document.querySelector('select[name="dsnProdiId"]');
+    const kelasSelect = document.getElementById('klsId');
+    
+    if (prodiSelect && kelasSelect) {
+        // Simpan semua opsi kelas
+        const allKelasOptions = Array.from(kelasSelect.options);
+        
+        prodiSelect.addEventListener('change', function() {
+            const selectedProdiId = this.value;
+            
+            // Reset dropdown kelas
+            kelasSelect.innerHTML = '<option value="0">-- Tidak Didaftarkan ke Kelas --</option>';
+            
+            // Filter kelas berdasarkan prodi
+            allKelasOptions.forEach(option => {
+                if (option.value === '0' || option.dataset.prodi === selectedProdiId) {
+                    kelasSelect.appendChild(option.cloneNode(true));
+                }
+            });
+        });
+        
+        // Trigger saat pertama kali load (jika ada old value)
+        if (prodiSelect.value && prodiSelect.value !== '0') {
+            prodiSelect.dispatchEvent(new Event('change'));
+        }
+    }
+});
+</script>
 
 <?php include "views/layout/footer.php"; ?>

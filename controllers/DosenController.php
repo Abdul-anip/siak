@@ -20,10 +20,32 @@ if ($aksi == "index") {
 
 
 // FORM TAMBAH
+// FORM TAMBAH
 else if ($aksi == "tambah") {
 
     $jurusan = $jur->all();
     $listProdi = $prodi->all();
+    
+    // ✅ TAMBAHAN: Ambil daftar kelas aktif
+    $listKelas = $koneksi->query("
+        SELECT 
+            k.klsId, 
+            k.klsNama,
+            k.klsProdiId,
+            CONCAT(
+                t.thakdTahun, '/', (t.thakdTahun + 1), ' - ', 
+                CASE t.thakdSemester 
+                    WHEN '1' THEN 'Ganjil' 
+                    WHEN '2' THEN 'Genap' 
+                END,
+                ' | ', p.prodiNama, ' | Kelas ', k.klsNama
+            ) AS kelasLabel
+        FROM kelas k
+        JOIN tahun_akademik t ON k.klsThakdId = t.thakdId
+        JOIN program_studi p ON k.klsProdiId = p.prodiId
+        WHERE t.thakdIsAktif = 1
+        ORDER BY p.prodiNama, k.klsNama
+    ");
 
     require "views/dosen/create.php";
 }
@@ -39,7 +61,29 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
 
         $error     = $result['error'];   
         $jurusan   = $jur->all();        
-        $listProdi = $prodi->all();      
+        $listProdi = $prodi->all();
+        
+        // ✅ TAMBAHAN: Kirim ulang list kelas jika error
+        $listKelas = $koneksi->query("
+            SELECT 
+                k.klsId, 
+                k.klsNama,
+                k.klsProdiId,
+                CONCAT(
+                    t.thakdTahun, '/', (t.thakdTahun + 1), ' - ', 
+                    CASE t.thakdSemester 
+                        WHEN '1' THEN 'Ganjil' 
+                        WHEN '2' THEN 'Genap' 
+                    END,
+                    ' | ', p.prodiNama, ' | Kelas ', k.klsNama
+                ) AS kelasLabel
+            FROM kelas k
+            JOIN tahun_akademik t ON k.klsThakdId = t.thakdId
+            JOIN program_studi p ON k.klsProdiId = p.prodiId
+            WHERE t.thakdIsAktif = 1
+            ORDER BY p.prodiNama, k.klsNama
+        ");
+        
         $old       = $_POST;             
 
         require "views/dosen/create.php";

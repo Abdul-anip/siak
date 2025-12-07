@@ -101,6 +101,26 @@
                         </label>
                     </div>
 
+                    <!-- Pilih Kelas (Opsional) -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">
+                        Daftarkan ke Kelas (Opsional)
+                    </label>
+                    <select name="klsId" class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl">
+                        <option value="0">-- Tidak Didaftarkan ke Kelas --</option>
+                        <?php while($k = $listKelas->fetch_assoc()): ?>
+                            <option value="<?= $k['klsId'] ?>"
+                                <?= isset($old['klsId']) && $old['klsId'] == $k['klsId'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($k['kelasLabel']) ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                    <p class="text-xs text-gray-500">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Jika dipilih, matakuliah akan otomatis ditambahkan ke kelas ini
+                    </p>
+                </div>
+
                     <!-- Buttons -->
                     <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
                         <button type="submit" name="save_matkul"

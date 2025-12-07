@@ -129,14 +129,17 @@ class DaftarDosenKelas {
                 d.dsnGelarBelakang,
                 mk.mkNama,
                 mk.mkKode,
-                mk.mkSks
+                mk.mkSks,
+                kdsn.klsdsnIsAktif,
+                CASE 
+                    WHEN kdsn.klsdsnIsAktif = 1 THEN 'Aktif'
+                    ELSE 'Non-Aktif'
+                END AS Status
             FROM kelas_dosen kdsn
-            -- JOIN ke tabel Dosen
             JOIN dosen d ON kdsn.klsdsnDsnNidn = d.dsnNidn
-            -- JOIN ke tabel Mata Kuliah (PENTING!)
             JOIN matakuliah mk ON kdsn.klsdsnMkId = mk.mkId
             WHERE kdsn.klsdsnKlsId = '$klsId' 
-              AND kdsn.klsdsnIsAktif = 1
+            AND kdsn.klsdsnIsAktif = 1
             ORDER BY mk.mkNama, d.dsnNama
         ";
         

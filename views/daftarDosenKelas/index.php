@@ -211,19 +211,20 @@
                             <?= $r['mkSks'] ?>
                             </td>
                             <td data-label="Jam" class="px-4 py-3 text-center text-sm text-gray-700">
-                                <?
-                            echo "<pre>";
-                            print_r($r);
-                            echo "</pre>";
-                            exit;
-                            ?>
-                                <?= $r['JlhJam'] ?>
+                                
+                                <?= $r['mkSks'] ?>
                             </td>
                             <td data-label="Status" class="px-4 py-3 text-center text-sm">
-                                <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold <?= $statusClass ?>">
-                                    <?= $r['Status'] ?>
-                                </span>
-                            </td>
+                            <?php
+                            $isAktif = ($r['Status'] == 'Aktif');
+                            $statusClass = $isAktif 
+                                ? 'bg-green-100 text-green-700' 
+                                : 'bg-red-100 text-red-700';
+                            ?>
+                            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold <?= $statusClass ?>">
+                                <?= $r['Status'] ?>
+                            </span>
+                        </td>
                         </tr>
                         <?php endwhile; ?>
                     </tbody>
