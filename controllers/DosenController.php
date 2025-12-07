@@ -47,7 +47,7 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
     }
 
     /* =========================================================
-       PERBAIKAN CRITICAL: Daftarkan Dosen ke Kelas dengan Matakuliah
+       PERBAIKAN: Daftarkan Dosen ke Kelas dengan Matakuliah
        ========================================================= */
 
     $dsnNidn = $koneksi->real_escape_string($_POST['dsnNidn']);
@@ -56,11 +56,22 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
     // Hanya lanjutkan jika klsId valid (bukan 0)
     if ($klsId > 0) {
         
+        // Debug: Log untuk memastikan klsId diterima
+        error_log("DEBUG: klsId = $klsId, dsnNidn = $dsnNidn");
+        
         // Ambil SEMUA matakuliah di kelas ini
         $mkKelas = $koneksi->query("
-            SELECT klsmkMkId FROM kelas_matakuliah 
-            WHERE klsmkKlsId = " . $klsId
-        );
+            SELECT klsmkMkId 
+            FROM kelas_matakuliah 
+            WHERE klsmkKlsId = $klsId
+        ");
+        
+        // Debug: Cek jumlah matakuliah
+        if ($mkKelas) {
+            error_log("DEBUG: Jumlah matakuliah di kelas = " . $mkKelas->num_rows);
+        } else {
+            error_log("ERROR: Query kelas_matakuliah gagal - " . $koneksi->error);
+        }
         
         // Jika ada matakuliah di kelas
         if ($mkKelas && $mkKelas->num_rows > 0) {
@@ -69,12 +80,17 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
             $stmtEnroll = $koneksi->prepare("
                 INSERT INTO kelas_dosen (klsdsnKlsId, klsdsnDsnNidn, klsdsnMkId, klsdsnIsAktif)
                 VALUES (?, ?, ?, 1)
+                ON DUPLICATE KEY UPDATE klsdsnIsAktif = 1
             ");
             
             if (!$stmtEnroll) {
                 // Jika prepare gagal, log error
-                error_log("Prepare statement gagal: " . $koneksi->error);
+                error_log("ERROR: Prepare statement gagal - " . $koneksi->error);
             } else {
+                // Counter untuk tracking
+                $successCount = 0;
+                $errorCount = 0;
+                
                 // Loop untuk setiap matakuliah di kelas
                 while ($mk = $mkKelas->fetch_assoc()) {
                     $mkId = intval($mk['klsmkMkId']);
@@ -82,19 +98,38 @@ else if ($aksi == "save" && isset($_POST['save_dosen'])) {
                     // Bind parameter dan execute
                     $stmtEnroll->bind_param("isi", $klsId, $dsnNidn, $mkId);
                     
-                    if (!$stmtEnroll->execute()) {
-                        // Log jika insert gagal
-                        error_log("Insert kelas_dosen gagal untuk mkId=$mkId: " . $stmtEnroll->error);
+                    if ($stmtEnroll->execute()) {
+                        $successCount++;
+                        error_log("SUCCESS: Insert dosen $dsnNidn ke mkId=$mkId berhasil");
+                    } else {
+                        $errorCount++;
+                        error_log("ERROR: Insert kelas_dosen gagal untuk mkId=$mkId - " . $stmtEnroll->error);
                     }
                 }
                 
                 $stmtEnroll->close();
+                
+                // Log ringkasan
+                error_log("SUMMARY: $successCount berhasil, $errorCount gagal");
+                
+                // Set session message untuk user feedback
+                if ($successCount > 0) {
+                    $_SESSION['success'] = "Dosen berhasil ditambahkan dan didaftarkan ke $successCount matakuliah di kelas.";
+                }
+                if ($errorCount > 0) {
+                    $_SESSION['warning'] = "$errorCount matakuliah gagal didaftarkan.";
+                }
             }
             
         } else {
-            // Tidak ada matakuliah di kelas (opsional: tampilkan warning)
-            // $_SESSION['warning'] = "Kelas belum memiliki matakuliah yang terdaftar.";
+            // Tidak ada matakuliah di kelas - berikan feedback ke user
+            $_SESSION['warning'] = "Dosen berhasil ditambahkan, tetapi kelas belum memiliki matakuliah. Silakan tambahkan matakuliah ke kelas terlebih dahulu.";
+            error_log("WARNING: Kelas $klsId tidak memiliki matakuliah");
         }
+    } else {
+        // Jika klsId = 0, dosen hanya disimpan tanpa didaftarkan ke kelas
+        $_SESSION['info'] = "Dosen berhasil ditambahkan tanpa didaftarkan ke kelas.";
+        error_log("INFO: Dosen ditambahkan tanpa kelas (klsId = 0)");
     }
 
     // Redirect ke halaman daftar dosen

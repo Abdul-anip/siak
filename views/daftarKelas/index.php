@@ -1,152 +1,263 @@
 <?php include "views/layout/header.php"; ?>
 <?php include "views/layout/sidebar.php"; ?>
 
-<div class="topbar">
-    <h2>Daftar Data Kelas</h2>
+<!-- Header Section -->
+<div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 mb-6 text-white shadow-xl">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+            <h1 class="text-2xl font-bold mb-1">Daftar Data Kelas</h1>
+            <p class="text-white/90 text-sm">Cari dan kelola data kelas berdasarkan tahun akademik dan program studi</p>
+        </div>
+    </div>
 </div>
 
 <div class="card-content">
 
     <?php if (isset($error)): ?>
-        <div class="message-box error"> 
-            <?= $error ?>
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mb-6"> 
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle text-red-500 text-xl mr-3"></i>
+                <p class="text-red-700 font-medium"><?= $error ?></p>
+            </div>
         </div>
     <?php endif; ?>
 
     <!-- FORM PENCARIAN -->
-    <form method="get" action="index.php">
+    <form method="get" action="index.php" class="mb-6">
         <input type="hidden" name="page" value="daftarKelas">
 
-        <div style="background:#f0f7ff;padding:20px;border-radius:8px;margin-bottom:20px;border:1px solid #dbe9fb;">
-            <h3 style="margin-top:0;color:#0A3B6F;">Pencarian Daftar Data Kelas Berdasarkan:</h3>
-            
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
-                <!-- TAHUN AKADEMIK -->
-                <div>
-                    <label style="margin-top:0;font-weight:600;">Thn-Smt Akademik <span style="color:red">*</span></label>
-                    <select name="thakdId" class="input" required>
-                        <option value="">-- Pilih Tahun-Semester --</option>
-                        <?php 
-                        // Reset pointer hasil query
-                        $listTa->data_seek(0);
-                        while($t = $listTa->fetch_assoc()): 
-                            $semesterLabel = ($t['thakdSemester'] == '1') ? 'Ganjil' : 'Genap';
-                            $tahunDisplay = $t['thakdTahun'] . '/' . ($t['thakdTahun'] + 1) . ' - ' . $semesterLabel;
-                            $selected = (isset($thakdId) && $thakdId == $t['thakdId']) ? 'selected' : '';
-                        ?>
-                            <option value="<?= $t['thakdId'] ?>" <?= $selected ?>>
-                                <?= htmlspecialchars($tahunDisplay) ?>
-                                <?= $t['thakdIsAktif'] ? ' 🟢 Aktif' : '' ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                    <small style="color:#666;">Pilih tahun akademik dan semester</small>
-                </div>
-                
-                <!-- PROGRAM STUDI -->
-                <div>
-                    <label style="margin-top:0;font-weight:600;">Program Studi <span style="color:red">*</span></label>
-                    <select name="prodiId" class="input" required>
-                        <option value="">-- Pilih Program Studi --</option>
-                        <?php 
-                        // Reset pointer hasil query
-                        $listProdi->data_seek(0);
-                        while($p = $listProdi->fetch_assoc()): 
-                            $selected = (isset($prodiId) && $prodiId == $p['prodiId']) ? 'selected' : '';
-                        ?>
-                            <option value="<?= $p['prodiId'] ?>" <?= $selected ?>>
-                                <?= htmlspecialchars($p['prodiNama']) ?> (<?= htmlspecialchars($p['prodiJenjang']) ?>)
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                    <small style="color:#666;">Pilih program studi</small>
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <!-- Header Form -->
+            <div class="bg-gradient-to-r from-purple-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center">
+                    <i class="fas fa-search text-purple-600 text-xl mr-3"></i>
+                    <h3 class="text-lg font-bold text-gray-800">Pencarian Data Kelas</h3>
                 </div>
             </div>
 
-            <button class="btn" type="submit" name="cari" value="1" style="width:100%; background:#5cb85c; font-size:16px; padding:12px;">
-                🔍 Cari Data Kelas
-            </button>
+            <!-- Form Content -->
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    
+                    <!-- TAHUN AKADEMIK -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            <i class="fas fa-calendar-alt text-purple-600 mr-2"></i>
+                            Tahun-Semester Akademik <span class="text-red-500">*</span>
+                        </label>
+                        <select name="thakdId" class="input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200" required>
+                            <option value="">-- Pilih Tahun-Semester --</option>
+                            <?php 
+                            $listTa->data_seek(0);
+                            while($t = $listTa->fetch_assoc()): 
+                                $semesterLabel = ($t['thakdSemester'] == '1') ? 'Ganjil' : 'Genap';
+                                $tahunDisplay = $t['thakdTahun'] . '/' . ($t['thakdTahun'] + 1) . ' - ' . $semesterLabel;
+                                $selected = (isset($thakdId) && $thakdId == $t['thakdId']) ? 'selected' : '';
+                            ?>
+                                <option value="<?= $t['thakdId'] ?>" <?= $selected ?>>
+                                    <?= htmlspecialchars($tahunDisplay) ?>
+                                    <?= $t['thakdIsAktif'] ? ' 🟢 Aktif' : '' ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                        <p class="text-xs text-gray-500 flex items-center">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Pilih tahun akademik dan semester
+                        </p>
+                    </div>
+                    
+                    <!-- PROGRAM STUDI -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            <i class="fas fa-graduation-cap text-indigo-600 mr-2"></i>
+                            Program Studi <span class="text-red-500">*</span>
+                        </label>
+                        <select name="prodiId" class="input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" required>
+                            <option value="">-- Pilih Program Studi --</option>
+                            <?php 
+                            $listProdi->data_seek(0);
+                            while($p = $listProdi->fetch_assoc()): 
+                                $selected = (isset($prodiId) && $prodiId == $p['prodiId']) ? 'selected' : '';
+                            ?>
+                                <option value="<?= $p['prodiId'] ?>" <?= $selected ?>>
+                                    <?= htmlspecialchars($p['prodiNama']) ?> (<?= htmlspecialchars($p['prodiJenjang']) ?>)
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                        <p class="text-xs text-gray-500 flex items-center">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Pilih program studi yang ingin dicari
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <button class="btn w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 flex items-center justify-center" type="submit" name="cari" value="1">
+                    <i class="fas fa-search mr-2"></i>
+                    Cari Data Kelas
+                </button>
+            </div>
         </div>
     </form>
 
     <!-- HASIL PENCARIAN -->
     <?php if (isset($_GET['cari']) && $rows !== null): ?>
 
-        <div style="margin-bottom:15px;padding:12px;background:#e3f2fd;border-left:4px solid #2196F3;border-radius:4px;">
-            <strong>Menampilkan hasil untuk:</strong><br>
-            Tahun Akademik: <strong><?= isset($thakdId) ? htmlspecialchars($thakdId) : '-' ?></strong> | 
-            Program Studi: <strong><?= isset($prodiId) ? htmlspecialchars($prodiId) : '-' ?></strong>
+        <!-- Info Badge -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg mb-6">
+            <div class="flex items-center">
+                <i class="fas fa-info-circle text-blue-500 text-xl mr-3"></i>
+                <div>
+                    <p class="text-sm font-semibold text-blue-800">Menampilkan hasil pencarian</p>
+                    <p class="text-xs text-blue-600 mt-1">
+                        Tahun Akademik: <strong><?= isset($thakdId) ? htmlspecialchars($thakdId) : '-' ?></strong> | 
+                        Program Studi: <strong><?= isset($prodiId) ? htmlspecialchars($prodiId) : '-' ?></strong>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <?php if ($rows->num_rows > 0): ?>
 
-            <div style="overflow-x:auto;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th style="width:50px;">No.</th>
-                            <th>Nama Kelas</th>
-                            <th style="text-align:center;">Jlh Mahasiswa</th>
-                            <th style="text-align:center;">Jlh Dosen</th>
-                            <th style="text-align:center;">Jlh MK</th>
-                            <th style="text-align:center;">Jlh SKS</th>
-                            <th style="text-align:center;">Jlh Jam</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        $no = 1; 
-                        $totalMhs = 0;
-                        $totalDosen = 0;
-                        $totalMK = 0;
-                        $totalSKS = 0;
-                        $totalJam = 0;
-                        
-                        while($r = $rows->fetch_assoc()): 
-                            $totalMhs += $r['JlhMahasiswa'];
-                            $totalDosen += $r['JlhDosen'];
-                            $totalMK += $r['JlhMK'];
-                            $totalSKS += $r['JlhSKS'];
-                            $totalJam += $r['JlhJam'];
-                        ?>
-                        <tr>
-                            <td data-label="No."><?= $no++ ?></td>
-                            <td data-label="Nama Kelas"><strong><?= htmlspecialchars($r['NamaKelas']) ?></strong></td>
-                            <td data-label="Jlh Mahasiswa" style="text-align:center;"><?= $r['JlhMahasiswa'] ?></td>
-                            <td data-label="Jlh Dosen" style="text-align:center;"><?= $r['JlhDosen'] ?></td>
-                            <td data-label="Jlh MK" style="text-align:center;"><?= $r['JlhMK'] ?></td>
-                            <td data-label="Jlh SKS" style="text-align:center;"><?= $r['JlhSKS'] ?></td>
-                            <td data-label="Jlh Jam" style="text-align:center;"><?= $r['JlhJam'] ?></td>
-                        </tr>
-                        <?php endwhile; ?>
-                        
-                        <!-- TOTAL ROW -->
-                        <tr style="background:#f0f7ff;font-weight:bold;">
-                            <td colspan="2" style="text-align:right;">TOTAL:</td>
-                            <td style="text-align:center;"><?= $totalMhs ?></td>
-                            <td style="text-align:center;"><?= $totalDosen ?></td>
-                            <td style="text-align:center;"><?= $totalMK ?></td>
-                            <td style="text-align:center;"><?= $totalSKS ?></td>
-                            <td style="text-align:center;"><?= $totalJam ?></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <?php 
+                $totalMhs = 0;
+                $totalDosen = 0;
+                $totalMK = 0;
+                $totalSKS = 0;
+                $totalJam = 0;
+                $tempRows = $rows;
+                $tempRows->data_seek(0);
+                while($r = $tempRows->fetch_assoc()): 
+                    $totalMhs += $r['JlhMahasiswa'];
+                    $totalDosen += $r['JlhDosen'];
+                    $totalMK += $r['JlhMK'];
+                    $totalSKS += $r['JlhSKS'];
+                    $totalJam += $r['JlhJam'];
+                endwhile;
+                ?>
+                
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white shadow-lg">
+                    <div class="text-3xl font-bold mb-1"><?= $rows->num_rows ?></div>
+                    <div class="text-sm opacity-90">Total Kelas</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white shadow-lg">
+                    <div class="text-3xl font-bold mb-1"><?= $totalMhs ?></div>
+                    <div class="text-sm opacity-90">Mahasiswa</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white shadow-lg">
+                    <div class="text-3xl font-bold mb-1"><?= $totalSKS ?></div>
+                    <div class="text-sm opacity-90">Total SKS</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4 text-white shadow-lg">
+                    <div class="text-3xl font-bold mb-1"><?= $totalMK ?></div>
+                    <div class="text-sm opacity-90">Mata Kuliah</div>
+                </div>
             </div>
 
-            <div style="margin-top:15px;padding:12px;background:#f1f8e9;border-left:4px solid #8bc34a;border-radius:4px;">
-                ✅ Ditemukan <strong><?= $rows->num_rows ?></strong> kelas
+            <!-- Table Container -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                <div class="overflow-x-auto">
+                    <table class="table w-full">
+                        <thead>
+                            <tr class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+                                <th class="px-6 py-4 text-center text-sm font-bold" style="width:60px;">No.</th>
+                                <th class="px-6 py-4 text-left text-sm font-bold">Nama Kelas</th>
+                                <th class="px-6 py-4 text-center text-sm font-bold">Mahasiswa</th>
+                                <th class="px-6 py-4 text-center text-sm font-bold">Dosen</th>
+                                <th class="px-6 py-4 text-center text-sm font-bold">MK</th>
+                                <th class="px-6 py-4 text-center text-sm font-bold">SKS</th>
+                                <th class="px-6 py-4 text-center text-sm font-bold">Jam</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <?php 
+                            $no = 1; 
+                            $rows->data_seek(0);
+                            while($r = $rows->fetch_assoc()): 
+                            ?>
+                            <tr class="hover:bg-purple-50 transition duration-200">
+                                <td class="px-6 py-4 text-center text-sm font-semibold text-gray-700"><?= $no++ ?></td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-lg flex items-center justify-center text-white font-bold mr-3">
+                                            <?= substr($r['NamaKelas'], 0, 1) ?>
+                                        </div>
+                                        <span class="font-semibold text-gray-800"><?= htmlspecialchars($r['NamaKelas']) ?></span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                                        <i class="fas fa-users mr-1"></i>
+                                        <?= $r['JlhMahasiswa'] ?>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                                        <i class="fas fa-chalkboard-teacher mr-1"></i>
+                                        <?= $r['JlhDosen'] ?>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700">
+                                        <?= $r['JlhMK'] ?>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
+                                        <?= $r['JlhSKS'] ?>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold bg-pink-100 text-pink-700">
+                                        <?= $r['JlhJam'] ?>
+                                    </span>
+                                </td>
+                            </tr>
+                            <?php endwhile; ?>
+                            
+                            <!-- TOTAL ROW -->
+                            <tr class="bg-gradient-to-r from-purple-50 to-indigo-50 font-bold">
+                                <td colspan="2" class="px-6 py-4 text-right text-sm font-bold text-gray-800">TOTAL:</td>
+                                <td class="px-6 py-4 text-center text-sm font-bold text-blue-700"><?= $totalMhs ?></td>
+                                <td class="px-6 py-4 text-center text-sm font-bold text-green-700"><?= $totalDosen ?></td>
+                                <td class="px-6 py-4 text-center text-sm font-bold text-purple-700"><?= $totalMK ?></td>
+                                <td class="px-6 py-4 text-center text-sm font-bold text-orange-700"><?= $totalSKS ?></td>
+                                <td class="px-6 py-4 text-center text-sm font-bold text-pink-700"><?= $totalJam ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg mt-6">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
+                    <p class="text-sm font-semibold text-green-800">
+                        Ditemukan <strong><?= $rows->num_rows ?></strong> kelas
+                    </p>
+                </div>
             </div>
 
         <?php else: ?>
             
-            <div style="padding:40px;text-align:center;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;">
-                <div style="font-size:48px;margin-bottom:15px;">📭</div>
-                <h3 style="margin:0 0 10px 0;color:#856404;">Tidak Ada Data Kelas</h3>
-                <p style="color:#856404;margin-bottom:20px;">
+            <!-- Empty State -->
+            <div class="bg-white rounded-2xl shadow-lg p-12 text-center border border-gray-100">
+                <div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-inbox text-4xl text-yellow-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">Tidak Ada Data Kelas</h3>
+                <p class="text-gray-600 mb-6 max-w-md mx-auto">
                     Tidak ditemukan kelas untuk kombinasi Tahun Akademik dan Program Studi yang dipilih.
                 </p>
-                <a href="index.php?page=kelas&aksi=tambah" class="btn" style="background:#ff9800;">
-                    ➕ Tambah Kelas Baru
+                <a href="index.php?page=kelas&aksi=tambah" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200">
+                    <i class="fas fa-plus mr-2"></i>
+                    Tambah Kelas Baru
                 </a>
             </div>
 
@@ -154,42 +265,51 @@
 
     <?php elseif(isset($_GET['cari'])): ?>
         
-        <div style="padding:20px;text-align:center;background:#ffebee;border:1px solid #ef5350;border-radius:8px;">
-            <strong style="color:#c62828;">⚠️ Silakan isi form pencarian dengan lengkap!</strong>
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-triangle text-red-500 text-xl mr-3"></i>
+                <p class="text-sm font-semibold text-red-800">Silakan isi form pencarian dengan lengkap!</p>
+            </div>
         </div>
 
     <?php endif; ?>
 
 </div>
 
-<!-- DEBUG SECTION (Hanya untuk development) -->
-<?php if (isset($_GET['debug']) && isset($_GET['cari'])): ?>
-<div class="card-content" style="margin-top:20px;background:#fff3e0;border:2px solid #ff9800;">
-    <h3>🔧 Debug Information</h3>
-    <pre style="background:#fff;padding:15px;border-radius:4px;overflow:auto;">
-<strong>GET Parameters:</strong>
-<?php print_r($_GET); ?>
+<style>
+/* Custom Scrollbar */
+.overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+}
 
-<strong>Selected Values:</strong>
-thakdId: <?= isset($thakdId) ? $thakdId : 'NULL' ?>
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
 
-prodiId: <?= isset($prodiId) ? $prodiId : 'NULL' ?>
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 10px;
+}
 
-<strong>Query Result:</strong>
-Rows Found: <?= isset($rows) ? $rows->num_rows : 'NULL' ?>
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #9333ea;
+}
 
-<?php if(isset($rows) && $rows->num_rows > 0): ?>
-<strong>Data:</strong>
-<?php 
-$rows->data_seek(0);
-while($r = $rows->fetch_assoc()): 
-    print_r($r);
-endwhile;
-?>
-<?php endif; ?>
-    </pre>
-    <p><small>💡 Tambahkan <code>&debug=1</code> di URL untuk melihat debug info</small></p>
-</div>
-<?php endif; ?>
+/* Table Hover Animation */
+tbody tr {
+    transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus States */
+select:focus, input:focus {
+    outline: none;
+}
+</style>
 
 <?php include "views/layout/footer.php"; ?>
