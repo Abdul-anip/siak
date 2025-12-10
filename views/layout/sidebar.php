@@ -147,7 +147,7 @@
     <!-- Sidebar Footer -->
     <div class="sticky bottom-0 bg-gray-50 p-4 border-t">
         <div class="text-center text-xs text-gray-500">
-            <p>&copy; <?= date('Y') ?> SIAKAD</p>
+            <p>&copy; <?= date('Y') ?> SIAK</p>
             <p class="mt-1">Sistem Informasi Akademik</p>
         </div>
     </div>

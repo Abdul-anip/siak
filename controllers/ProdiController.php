@@ -10,7 +10,15 @@ $aksi = $_GET['aksi'] ?? 'index';
 
 // LIST
 if ($aksi == "index") {
-    $rows = $prodi->all();
+    
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $prodi->search($q);
+        } else {
+            $rows = $prodi->all();
+        }
+
     require "views/prodi/index.php";
 }
 

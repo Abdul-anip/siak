@@ -114,5 +114,17 @@ class Matkul {
     function delete($id){
         return $this->db->query("DELETE FROM matakuliah WHERE mkId = $id");
     }
+
+    function search($keyword){
+        $keyword = $this->db->real_escape_string($keyword);
+        return $this->db->query("
+            SELECT m.*, k.kurNama 
+            FROM matakuliah m 
+            LEFT JOIN kurikulum k ON m.mkKurId = k.kurId
+            WHERE m.mkKode LIKE '%$keyword%' OR m.mkNama LIKE '%$keyword%'
+            ORDER BY m.mkId DESC
+        ");
+    }
+
 }
 ?>

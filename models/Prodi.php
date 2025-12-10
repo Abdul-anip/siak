@@ -110,5 +110,20 @@ class Prodi {
     function delete($id){
         return $this->db->query("DELETE FROM program_studi WHERE prodiId = $id");
     }
+
+
+    function search($keyword){
+        $keyword = $this->db->real_escape_string($keyword);
+        return $this->db->query("
+            SELECT p.*, j.jurNama 
+            FROM program_studi p
+            LEFT JOIN jurusan j ON p.prodiJurId = j.jurId
+            WHERE p.prodiNama LIKE '%$keyword%' 
+               OR p.prodiKode LIKE '%$keyword%'
+               OR j.jurNama LIKE '%$keyword%'
+            ORDER BY p.prodiId ASC
+        ");
+    }
+
 }
 ?>

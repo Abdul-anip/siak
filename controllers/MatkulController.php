@@ -10,7 +10,15 @@ $aksi = $_GET['aksi'] ?? 'index';
 
 // LIST
 if ($aksi == "index") {
-    $rows = $matkul->all();
+    
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $matkul->search($q);
+        } else {
+            $rows = $matkul->all();
+        }
+
     require "views/matkul/index.php";
 }
 

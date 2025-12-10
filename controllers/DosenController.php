@@ -14,7 +14,14 @@ $aksi = $_GET['aksi'] ?? "index";
 // LIST
 if ($aksi == "index") {
 
-    $rows = $dosen->all();
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $dosen->search($q);
+        } else {
+            $rows = $dosen->all();
+        }
+
     require "views/dosen/index.php";
 }
 

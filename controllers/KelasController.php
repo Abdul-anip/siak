@@ -15,7 +15,15 @@ $aksi = $_GET['aksi'] ?? "index";
    LIST DATA KELAS
    ============================================================ */
 if ($aksi == "index") {
-    $rows = $kelas->all();
+
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $kelas->search($q);
+        } else {
+            $rows = $kelas->all();
+        }
+
     require "views/kelas/index.php";
 }
 

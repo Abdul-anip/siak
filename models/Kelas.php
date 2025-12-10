@@ -198,6 +198,34 @@ class Kelas {
         return $this->db->query($sql);
     }
 
+    function search($keyword)
+    {
+        // Amankan input
+        $keyword = $this->db->real_escape_string($keyword);
+
+        $sql = "
+            SELECT 
+                k.*,
+                p.prodiNama,
+                t.thakdTahun,
+                t.thakdSemester,
+                CONCAT(t.thakdTahun, ' - ', 
+                    CASE t.thakdSemester 
+                        WHEN '1' THEN 'Ganjil' 
+                        WHEN '2' THEN 'Genap' 
+                    END
+                ) AS tahunAkademikLabel
+            FROM kelas k
+            LEFT JOIN program_studi p ON k.klsProdiId = p.prodiId
+            LEFT JOIN tahun_akademik t ON k.klsThakdId = t.thakdId
+            WHERE k.klsNama LIKE '%$keyword%'
+               OR p.prodiNama LIKE '%$keyword%'
+               OR t.thakdTahun LIKE '%$keyword%'
+            ORDER BY k.klsThakdId DESC, k.klsNama ASC
+        ";
+
+        return $this->db->query($sql);
+    }
     
 }
 ?>

@@ -42,6 +42,18 @@
         <div class="flex items-center justify-between">
             <h3 class="text-lg font-bold text-gray-800">Daftar Kelas</h3>
 
+            <form method="GET" class="flex items-center space-x-3">
+                <input type="hidden" name="page" value="kelas">
+                <input type="text" name="q" value="<?= $_GET['q'] ?? '' ?>" 
+                    placeholder="Cari nama kelas / prodi..."
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500
+                        focus:border-primary-500 w-56 text-sm">
+
+                <button type="submit" 
+                    class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm">
+                    <i class="fas fa-search mr-1"></i> Cari
+                </button>
+
             <button onclick="window.print()"
                 class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 
                        hover:bg-gray-50 transition text-sm">

@@ -175,6 +175,27 @@ class Dosen {
         
         return $this->db->query($sql);
     }
+
+function search($keyword)
+{
+    // Amankan input
+    $keyword = $this->db->real_escape_string($keyword);
+
+    $sql = "
+        SELECT d.*, j.jurNama, p.prodiNama
+        FROM dosen d
+        LEFT JOIN jurusan j ON d.dsnJurId = j.jurId
+        LEFT JOIN program_studi p ON d.dsnProdiId = p.prodiId
+        WHERE d.dsnNama LIKE '%$keyword%'
+           OR d.dsnNidn LIKE '%$keyword%'
+           OR j.jurNama LIKE '%$keyword%'
+           OR p.prodiNama LIKE '%$keyword%'
+        ORDER BY d.dsnNama
+    ";
+
+    return $this->db->query($sql);
 }
 
+
+}
 ?>

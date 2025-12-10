@@ -31,7 +31,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Menu 1: Daftar Kelas -->
-        <a href="#" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-purple-300 transform hover:-translate-y-2">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-purple-300 transform hover:-translate-y-2">
             <div class="flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300 shadow-lg">
                     <img src="assets/img/jadwal_kuliah.png" alt="Jadwal Kuliah" class="w-16 h-16">
@@ -47,8 +47,7 @@
             </div>
         </a>
 
-        <!-- Menu 2: Daftar Mata Kuliah -->
-        <a href="#" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-blue-300 transform hover:-translate-y-2">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-blue-300 transform hover:-translate-y-2">
             <div class="flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300 shadow-lg">
                     <img src="assets/img/modul_kuliah.png" alt="Jadwal Kuliah" class="w-16 h-16">
@@ -64,8 +63,7 @@
             </div>
         </a>
 
-        <!-- Menu 3: Dosen Kelas -->
-        <a href="#" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-300 transform hover:-translate-y-2">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-300 transform hover:-translate-y-2">
             <div class="flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300 shadow-lg">
                     <img src="assets/img/presensi_kuliah.png" alt="Jadwal Kuliah" class="w-16 h-16">
@@ -81,8 +79,7 @@
             </div>
         </a>
 
-        <!-- Menu 4: Mahasiswa Kelas -->
-        <a href="#" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-orange-300 transform hover:-translate-y-2">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-orange-300 transform hover:-translate-y-2">
             <div class="flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300 shadow-lg">
                     <i class="fas fa-user-graduate text-3xl text-white"></i>

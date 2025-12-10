@@ -7,7 +7,15 @@ $aksi = $_GET['aksi'] ?? 'index';
 
 // --- LIST DATA ---
 if ($aksi == "index") {
-    $rows = $jurusan->all();
+    
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $jurusan->search($q);
+        } else {
+            $rows = $jurusan->all();
+        }
+
     require "views/jurusan/index.php";
 }
 

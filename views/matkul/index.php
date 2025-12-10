@@ -30,9 +30,32 @@
 <!-- Tabel Matakuliah -->
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
 
+    
     <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-        <h3 class="text-lg font-bold text-gray-800">Daftar Matakuliah</h3>
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-800">Daftar Jurusan</h3>
+            <div class="flex items-center space-x-2">
+            
+                <form method="GET" class="flex items-center space-x-3">
+                    <input type="hidden" name="page" value="matkul">
+                    <input type="text" name="q" value="<?= $_GET['q'] ?? '' ?>" 
+                        placeholder="Cari kode / nama matakuliah..."
+                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500
+                            focus:border-primary-500 w-56 text-sm">
+
+                    <button type="submit" 
+                        class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm">
+                        <i class="fas fa-search mr-1"></i> Cari
+                    </button>
+
+                
+                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm">
+                    <i class="fas fa-print mr-2"></i>Print
+                </button>
+            </div>
+        </div>
     </div>
+
 
     <div class="overflow-x-auto">
         <table class="w-full">

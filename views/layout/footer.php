@@ -6,11 +6,11 @@
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <div class="text-center md:text-left">
                     <p class="text-gray-600 text-sm">
-                        &copy; <?= date('Y') ?> <span class="font-semibold text-gray-800">SIAKAD</span>. 
-                        All rights reserved.
+                        &copy; <?= date('Y') ?> <span class="font-semibold text-gray-800">SIAK</span>. 
+                        
                     </p>
                     <p class="text-gray-500 text-xs mt-1">
-                        Sistem Informasi Akademik Modern
+                        Sistem Informasi Akademik
                     </p>
                 </div>
                 

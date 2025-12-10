@@ -58,7 +58,6 @@ switch ($page) {
         require "views/prakuliah/index.php";
         break;
 
-
     case "perkuliahan":
         require "views/perkuliahan/index.php";
         break;
@@ -76,7 +75,6 @@ switch ($page) {
         break;
 
     /* ===================== KONTEN PRAKULIAH ===================== */
-
     case "daftarKelas":
         require "controllers/DaftarKelasController.php";
         break;
@@ -90,9 +88,8 @@ switch ($page) {
         break;
 
     case "daftarMahasiswaKelas":
-    require "controllers/DaftarMahasiswaKelasController.php";
-    break;
-    
+        require "controllers/DaftarMahasiswaKelasController.php";
+        break;
 
     /* ===================== DATA MASTER ===================== */
     case "jurusan":
@@ -123,7 +120,11 @@ switch ($page) {
         require "controllers/TahunAkademikController.php";
         break;
 
-    /* ===================== USER ===================== */
+    /* ===================== USER MANAGEMENT ===================== */
+    case "user":
+        require "controllers/UserController.php";
+        break;
+
     case "password":
         require "controllers/PasswordController.php";
         break;
@@ -132,6 +133,14 @@ switch ($page) {
     default:
         require "views/404.php";
         break;
+
+    
+    /* ===================== HALAMAN KOSONG ===================== */
+    case "halamanKosong":
+        require "views/halamanKosong.php";
+        break;
+
+
 }
 
 ?>

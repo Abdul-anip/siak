@@ -92,5 +92,18 @@ class Kurikulum {
     function delete($id){
         return $this->db->query("DELETE FROM kurikulum WHERE kurId = $id");
     }
+
+
+    function search($keyword){
+        $keyword = $this->db->real_escape_string($keyword);
+        return $this->db->query("
+            SELECT k.*, p.prodiNama 
+            FROM kurikulum k
+            LEFT JOIN program_studi p ON k.kurProdiId = p.prodiId
+            WHERE k.kurNama LIKE '%$keyword%' OR p.prodiNama LIKE '%$keyword%'
+            ORDER BY k.kurId ASC
+        ");
+    }
+
 }
 ?>

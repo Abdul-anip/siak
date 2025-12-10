@@ -8,7 +8,7 @@ include "views/layout/sidebar.php";
     <div class="flex items-center justify-between flex-wrap gap-4">
         <div>
             <h1 class="text-3xl font-bold mb-2">
-                📚 Manajemen Data Mahasiswa
+                Manajemen Data Mahasiswa
             </h1>
             <p class="text-white/90">Kelola seluruh data dan aktivitas mahasiswa</p>
         </div>
@@ -46,7 +46,7 @@ include "views/layout/sidebar.php";
         </a>
 
         <!-- Menu 2: Aktivitas Kuliah -->
-        <a href="index.php?page=daftarMatkulKelas" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-300 transform hover:-translate-y-1">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition duration-300 shadow-lg">
                     <i class="fas fa-chalkboard-teacher text-3xl text-white"></i>
@@ -61,7 +61,7 @@ include "views/layout/sidebar.php";
         </a>
 
         <!-- Menu 3: Pembayaran UKT -->
-        <a href="index.php?page=pembayaranUKT" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-purple-300 transform hover:-translate-y-1">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-purple-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition duration-300 shadow-lg">
                     <i class="fas fa-money-bill-wave text-3xl text-white"></i>
@@ -76,7 +76,7 @@ include "views/layout/sidebar.php";
         </a>
 
         <!-- Menu 4: Tagihan Pembayaran -->
-        <a href="index.php?page=tagihanPembayaran" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-orange-300 transform hover:-translate-y-1">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-orange-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition duration-300 shadow-lg">
                     <i class="fas fa-file-invoice-dollar text-3xl text-white"></i>
@@ -91,7 +91,7 @@ include "views/layout/sidebar.php";
         </a>
 
         <!-- Menu 5: File Foto KTM -->
-        <a href="index.php?page=fotoKTM" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-pink-300 transform hover:-translate-y-1">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-pink-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition duration-300 shadow-lg">
                     <i class="fas fa-id-card text-3xl text-white"></i>
@@ -106,7 +106,7 @@ include "views/layout/sidebar.php";
         </a>
 
         <!-- Menu 6: File Foto Wisuda -->
-        <a href="index.php?page=fotoWisuda" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition duration-300 shadow-lg">
                     <i class="fas fa-user-graduate text-3xl text-white"></i>
@@ -122,51 +122,6 @@ include "views/layout/sidebar.php";
     </div>
 </div>
 
-<!-- Statistics Section -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    
-    <!-- Card 1 -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <i class="fas fa-user-check text-xl text-blue-600"></i>
-            </div>
-            <span class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">
-                Active
-            </span>
-        </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Mahasiswa Aktif</h3>
-        <p class="text-3xl font-bold text-gray-800">1,156</p>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                <i class="fas fa-pause-circle text-xl text-orange-600"></i>
-            </div>
-            <span class="bg-orange-100 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full">
-                Cuti
-            </span>
-        </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Mahasiswa Cuti</h3>
-        <p class="text-3xl font-bold text-gray-800">45</p>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <i class="fas fa-graduation-cap text-xl text-green-600"></i>
-            </div>
-            <span class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">
-                Graduate
-            </span>
-        </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Alumni Tahun Ini</h3>
-        <p class="text-3xl font-bold text-gray-800">33</p>
-    </div>
-</div>
 
 <style>
 /* Card Hover Animation */

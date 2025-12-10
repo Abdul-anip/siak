@@ -10,7 +10,15 @@ $aksi = $_GET['aksi'] ?? 'index';
 
 // LIST
 if ($aksi == "index") {
-    $rows = $kurikulum->all();
+    
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $kurikulum->search($q);
+        } else {
+            $rows = $kurikulum->all();
+        }
+
     require "views/kurikulum/index.php";
 }
 

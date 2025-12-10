@@ -109,5 +109,19 @@ class Mahasiswa {
         $nim = $this->db->real_escape_string($nim);
         return $this->db->query("DELETE FROM mahasiswa WHERE mhsNim = '$nim'");
     }
+
+    function search($keyword){
+        $keyword = $this->db->real_escape_string($keyword);
+        return $this->db->query("
+            SELECT m.*, j.jurNama, p.prodiNama 
+            FROM mahasiswa m
+            LEFT JOIN jurusan j ON m.mhsJurId = j.jurId
+            LEFT JOIN program_studi p ON m.mhsProdiId = p.prodiId
+            WHERE m.mhsNim LIKE '%$keyword%' OR m.mhsNama LIKE '%$keyword%'
+            ORDER BY m.mhsNama
+        ");
+    }
+
+
 }
 ?>

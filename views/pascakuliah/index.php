@@ -12,13 +12,6 @@ include "views/layout/sidebar.php";
             </h1>
             <p class="text-white/90">Manajemen alumni, wisuda, dan layanan pascakuliah</p>
         </div>
-        <div class="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-            <i class="fas fa-graduation-cap text-2xl"></i>
-            <div class="text-sm">
-                <p class="font-semibold">Status</p>
-                <p class="opacity-90">Layanan Aktif</p>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -32,7 +25,7 @@ include "views/layout/sidebar.php";
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Menu 1: Data Alumni -->
-        <a href="#" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition duration-300 shadow-lg">
                     <img src="assets/img/daftar_nilai.png" alt="Data Alumni" class="w-10 h-10">

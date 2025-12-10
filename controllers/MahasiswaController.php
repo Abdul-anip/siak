@@ -12,8 +12,15 @@ $aksi = $_GET['aksi'] ?? "index";
 
 // LIST
 if ($aksi == "index") {
-    $search = $_GET['search'] ?? "";
-    $rows = $mhs->all($search);
+    
+    $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $mhs->search($q);
+        } else {
+            $rows = $mhs->all();
+        }
+
     require "views/mahasiswa/index.php";
 }
 

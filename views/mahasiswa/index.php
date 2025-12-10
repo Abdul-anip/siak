@@ -13,33 +13,6 @@
     </a>
 </div>
 
-<!-- Search & Filter Section -->
-<div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100">
-    <form method="get" class="flex flex-col md:flex-row gap-4">
-        <input type="hidden" name="page" value="mahasiswa">
-        
-        <div class="flex-1 relative">
-            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-            <input 
-                type="text"
-                name="search" 
-                placeholder="🔍 Cari NIM atau Nama Mahasiswa..." 
-                value="<?= htmlspecialchars($_GET['search'] ?? '') ?>"
-                class="w-full pl-12 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:bg-white focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition duration-200 outline-none"
-            >
-        </div>
-        
-        <button type="submit" class="px-8 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition duration-200 shadow-lg hover:shadow-xl">
-            <i class="fas fa-search mr-2"></i>Cari
-        </button>
-        
-        <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-        <a href="index.php?page=mahasiswa" class="px-8 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition duration-200">
-            <i class="fas fa-times mr-2"></i>Reset
-        </a>
-        <?php endif; ?>
-    </form>
-</div>
 
 <!-- Statistics Cards -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -60,7 +33,28 @@
     
     <!-- Table Header -->
     <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-        <h3 class="text-lg font-bold text-gray-800">Daftar Mahasiswa</h3>
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-800">Daftar Jurusan</h3>
+            <div class="flex items-center space-x-2">
+            
+                <form method="GET" class="flex items-center space-x-3">
+                    <input type="hidden" name="page" value="mahasiswa">
+                    <input type="text" name="q" value="<?= $_GET['q'] ?? '' ?>" 
+                        placeholder="Cari NIM atau Nama Mahasiswa..."
+                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500
+                            focus:border-primary-500 w-56 text-sm">
+
+                    <button type="submit" 
+                        class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm">
+                        <i class="fas fa-search mr-1"></i> Cari
+                    </button>
+
+                
+                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm">
+                    <i class="fas fa-print mr-2"></i>Print
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Table Content -->

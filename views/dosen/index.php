@@ -7,7 +7,7 @@
 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
     <div>
         <h1 class="text-3xl font-bold text-gray-800 mb-2">
-            <i class="fas fa-chalkboard-user text-primary-600 mr-3"></i>Data Dosen
+            Data Dosen
         </h1>
         <p class="text-gray-600">Kelola data dosen secara efektif dan terstruktur</p>
     </div>
@@ -41,13 +41,26 @@
     <!-- Table Header -->
     <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
         <div class="flex items-center justify-between">
-            <h3 class="text-lg font-bold text-gray-800">Daftar Dosen</h3>
+            <h3 class="text-lg font-bold text-gray-800">Daftar Jurusan</h3>
+            <div class="flex items-center space-x-2">
+            
+                <form method="GET" class="flex items-center space-x-3">
+                    <input type="hidden" name="page" value="dosen">
+                    <input type="text" name="q" value="<?= $_GET['q'] ?? '' ?>" 
+                        placeholder="Cari nama / NIDN dosen..."
+                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500
+                            focus:border-primary-500 w-56 text-sm">
 
-            <button onclick="window.print()" 
-                class="px-4 py-2 bg-white border border-gray-300 rounded-lg 
-                text-gray-700 hover:bg-gray-50 transition text-sm">
-                <i class="fas fa-print mr-2"></i>Print
-            </button>
+                    <button type="submit" 
+                        class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm">
+                        <i class="fas fa-search mr-1"></i> Cari
+                    </button>
+
+                
+                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm">
+                    <i class="fas fa-print mr-2"></i>Print
+                </button>
+            </div>
         </div>
     </div>
 

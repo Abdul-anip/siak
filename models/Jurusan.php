@@ -86,5 +86,19 @@ class Jurusan {
     function delete($id){
         return $this->db->query("DELETE FROM jurusan WHERE jurId = $id");
     }
+
+
+    function search($keyword) {
+        $keyword = $this->db->real_escape_string($keyword);
+        $query = "
+            SELECT * FROM jurusan 
+            WHERE jurKode LIKE '%$keyword%' 
+            OR jurNama LIKE '%$keyword%'
+            ORDER BY jurId ASC
+        ";
+        return $this->db->query($query);
+    }
+
+
 }
 ?>
