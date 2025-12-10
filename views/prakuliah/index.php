@@ -8,7 +8,7 @@ include "views/layout/sidebar.php";
     <div class="flex items-center justify-between flex-wrap gap-4">
         <div>
             <h1 class="text-3xl font-bold mb-2">
-                📋 Pra Kuliah
+                Pra Kuliah
             </h1>
             <p class="text-white/90">Kelola data kelas dan persiapan perkuliahan</p>
         </div>

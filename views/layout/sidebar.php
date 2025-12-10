@@ -73,11 +73,6 @@
                 <span class="font-medium">Pasca Kuliah</span>
             </a>
             
-            <a href="index.php?page=dataMaster" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-database w-5 text-center"></i>
-                <span class="font-medium">Data Master</span>
-            </a>
-            
             <a href="index.php?page=user" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
                 <i class="fas fa-user-cog w-5 text-center"></i>
                 <span class="font-medium">User</span>

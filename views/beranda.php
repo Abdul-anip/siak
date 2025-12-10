@@ -137,13 +137,7 @@ include "views/layout/sidebar.php";
             <p class="text-sm font-semibold text-gray-800">Pasca Kuliah</p>
         </a>
 
-        <!-- Menu 5 -->
-        <a href="index.php?page=jurusan" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition duration-300 text-center card-hover border border-gray-100">
-            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300">
-                <i class="fas fa-folder text-2xl text-white"></i>
-            </div>
-            <p class="text-sm font-semibold text-gray-800">Data Master</p>
-        </a>
+    
 
         <!-- Menu 6 -->
         <a href="index.php?page=password" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition duration-300 text-center card-hover border border-gray-100">
