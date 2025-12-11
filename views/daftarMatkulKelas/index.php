@@ -63,7 +63,7 @@
                             ?>
                                 <option value="<?= $t['thakdId'] ?>" <?= $selected ?>>
                                     <?= htmlspecialchars($tahunDisplay) ?>
-                                    <?= $t['thakdIsAktif'] ? ' 🟢 Aktif' : '' ?>
+                                    <?= $t['thakdIsAktif'] ? '  Aktif' : '' ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
@@ -236,7 +236,11 @@
                                 <?= htmlspecialchars($r['mkKode']) ?>
                             </td>
                             <td class="px-4 py-3 text-sm text-gray-700">
-                                <?= htmlspecialchars($r['mkNama']) ?>
+                                <a href="index.php?page=detailMatkul&id=<?= $r['mkId'] ?>" 
+                                class="group inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200">
+                                    <?= htmlspecialchars($r['mkNama']) ?>
+                                    <i class="fas fa-external-link-alt ml-2 text-xs opacity-0 group-hover:opacity-100 transition duration-200"></i>
+                                </a>
                             </td>
                             <td class="px-4 py-3 text-center text-sm font-semibold text-gray-800">
                                 <?= $r['SKS'] ?>

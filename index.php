@@ -82,6 +82,10 @@ switch ($page) {
     case "daftarDosenKelas":
         require "controllers/DaftarDosenKelasController.php";
         break;
+    
+    case "detailDosen":
+        require "controllers/DetailDosenKelasController.php";
+        break;
 
     case "daftarMatkulKelas":
         require "controllers/DaftarMatkulKelasController.php";
@@ -89,6 +93,11 @@ switch ($page) {
 
     case "daftarMahasiswaKelas":
         require "controllers/DaftarMahasiswaKelasController.php";
+        break;
+    
+    /* ===================== DETAIL MATAKULIAH ===================== */
+    case "detailMatkul":
+        require "controllers/DetailMatkulController.php";
         break;
 
     /* ===================== DATA MASTER ===================== */

@@ -194,9 +194,13 @@
                                 <?= $no++ ?>
                             </td>
                             <td data-label="Nama Dosen" class="px-4 py-3 text-sm">
-                                <span class="font-semibold text-indigo-700">
-                                    <?= htmlspecialchars($namaDosen) ?>
-                                </span>
+                                <a href="index.php?page=detailDosen&nidn=<?= htmlspecialchars($r['dsnNidn']) ?>" 
+                                   class="group inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200">
+                                    <span class="font-semibold text-indigo-700">
+                                        <?= htmlspecialchars($namaDosen) ?>
+                                    </span>
+                                    <i class="fas fa-external-link-alt ml-2 text-xs opacity-0 group-hover:opacity-100 transition duration-200"></i>
+                               
                             </td>
                             <td data-label="Matakuliah" class="px-4 py-3 text-sm text-gray-700">
                                 <?= htmlspecialchars($r['mkNama']) ?>
