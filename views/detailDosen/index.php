@@ -69,20 +69,15 @@
                 <span class="flex-1">: <?= htmlspecialchars($dataDosen['namaLengkap']) ?></span>
             </div>
             <div class="flex">
-                <span class="w-32 font-semibold text-gray-600">Status Aktif</span>
-                <span class="flex-1">: 
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold 
-                        <?= $dataDosen['dsnIsAktif'] ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' ?>">
-                        <?= $dataDosen['dsnIsAktif'] ? 'Aktif Mengajar' : 'Tidak Aktif' ?>
-                    </span>
-                </span>
-            </div>
+                <span class="w-32 font-semibold text-gray-600">Gelar Depan</span>
+                <span class="flex-1">: <?= htmlspecialchars($dataDosen['dsnGelarDepan'] ?? '-') ?></span>
             <div class="flex">
                 <span class="w-32 font-semibold text-gray-600">Email</span>
                 <span class="flex-1">: <?= htmlspecialchars($dataDosen['dsnEmail'] ?? '-') ?></span>
             </div>
+            
             </div>
-    </div>
+        </div>
     
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 mb-8">
         <div class="bg-gray-50 px-6 py-4 border-b">

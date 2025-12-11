@@ -236,9 +236,12 @@
                                 </span>
                             </td>
                             <td data-label="Nama Mahasiswa" class="px-4 py-3 text-sm">
-                                <span class="font-semibold text-gray-800">
+                                <a href="index.php?page=detailMahasiswa&aksi=detail&id=<?= urlencode($r['NIM']) ?>" 
+                                   class="group inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200">
+                                
                                     <?= htmlspecialchars($r['NamaMahasiswa']) ?>
-                                </span>
+                                    <i class="fas fa-external-link-alt ml-2 text-xs opacity-0 group-hover:opacity-100 transition duration-200"></i>
+                                </a>
                             </td>
                             <td data-label="Tempat/Tgl Lahir" class="px-4 py-3 text-sm text-gray-700">
                                 <i class="far fa-calendar-alt text-gray-400 mr-1.5 text-xs"></i>

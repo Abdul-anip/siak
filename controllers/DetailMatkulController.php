@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controller: DetailMatkulController
+ * Menangani tampilan detail matakuliah
+ */
 
 require "models/Matkul.php";
 require "models/DaftarMatkulKelas.php";

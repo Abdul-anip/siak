@@ -94,6 +94,10 @@ switch ($page) {
     case "daftarMahasiswaKelas":
         require "controllers/DaftarMahasiswaKelasController.php";
         break;
+
+    case "detailMahasiswa":
+        require "controllers/DetailMahasiswaController.php";
+        break;
     
     /* ===================== DETAIL MATAKULIAH ===================== */
     case "detailMatkul":

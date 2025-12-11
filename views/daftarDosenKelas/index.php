@@ -189,47 +189,63 @@
                                 ? 'bg-green-100 text-green-700' 
                                 : 'bg-red-100 text-red-700';
                         ?>
+
                         <tr class="hover:bg-purple-50 transition duration-200">
                             <td data-label="No." class="px-4 py-3 text-center text-sm text-gray-700 font-semibold">
                                 <?= $no++ ?>
                             </td>
+                            
                             <td data-label="Nama Dosen" class="px-4 py-3 text-sm">
-                                <a href="index.php?page=detailDosen&nidn=<?= htmlspecialchars($r['dsnNidn']) ?>" 
-                                   class="group inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200">
+                                <a href="index.php?page=detailDosen&aksi=detail&id=<?= urlencode($r['dsnNidn']) ?>" 
+                                class="group inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200">
                                     <span class="font-semibold text-indigo-700">
-                                        <?= htmlspecialchars($namaDosen) ?>
+                                        <?php
+                                        $namaDosen = '';
+                                        if (!empty($r['dsnGelarDepan'])) {
+                                            $namaDosen .= $r['dsnGelarDepan'] . ' ';
+                                        }
+                                        $namaDosen .= $r['dsnNama'];
+                                        if (!empty($r['dsnGelarBelakang'])) {
+                                            $namaDosen .= ', ' . $r['dsnGelarBelakang'];
+                                        }
+                                        echo htmlspecialchars($namaDosen);
+                                        ?>
                                     </span>
                                     <i class="fas fa-external-link-alt ml-2 text-xs opacity-0 group-hover:opacity-100 transition duration-200"></i>
-                               
+                                </a>
                             </td>
+                            
                             <td data-label="Matakuliah" class="px-4 py-3 text-sm text-gray-700">
                                 <?= htmlspecialchars($r['mkNama']) ?>
                             </td>
+                            
                             <td data-label="Kode" class="px-4 py-3 text-center text-sm">
                                 <span class="inline-flex items-center justify-center px-3 py-1 rounded-md bg-blue-50 text-blue-700 font-semibold text-xs">
                                     <?= htmlspecialchars($r['mkKode']) ?>
                                 </span>
                             </td>
+                            
                             <td data-label="SKS" class="px-4 py-3 text-center text-sm font-semibold text-gray-800">
-                                
-                            <?= $r['mkSks'] ?>
-                            </td>
-                            <td data-label="Jam" class="px-4 py-3 text-center text-sm text-gray-700">
-                                
                                 <?= $r['mkSks'] ?>
                             </td>
+                            
+                            <td data-label="Jam" class="px-4 py-3 text-center text-sm text-gray-700">
+                                <?= $r['mkSks'] ?>
+                            </td>
+                            
                             <td data-label="Status" class="px-4 py-3 text-center text-sm">
-                            <?php
-                            $isAktif = ($r['Status'] == 'Aktif');
-                            $statusClass = $isAktif 
-                                ? 'bg-green-100 text-green-700' 
-                                : 'bg-red-100 text-red-700';
-                            ?>
-                            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold <?= $statusClass ?>">
-                                <?= $r['Status'] ?>
-                            </span>
-                        </td>
+                                <?php
+                                $isAktif = ($r['Status'] == 'Aktif');
+                                $statusClass = $isAktif 
+                                    ? 'bg-green-100 text-green-700' 
+                                    : 'bg-red-100 text-red-700';
+                                ?>
+                                <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold <?= $statusClass ?>">
+                                    <?= $r['Status'] ?>
+                                </span>
+                            </td>
                         </tr>
+
                         <?php endwhile; ?>
                     </tbody>
                 </table>
