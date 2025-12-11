@@ -58,20 +58,104 @@
                 <span class="font-medium">Mahasiswa</span>
             </a>
             
-            <a href="index.php?page=prakuliah" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-clipboard-list w-5 text-center"></i>
-                <span class="font-medium">Pra Kuliah</span>
-            </a>
+            <!-- ACCORDION MENU: Pra Kuliah -->
+            <div class="menu-accordion">
+                <button 
+                    onclick="toggleAccordion('prakuliah')"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                    data-menu="prakuliah"
+                >
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-clipboard-list w-5 text-center"></i>
+                        <span class="font-medium">Pra Kuliah</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
+                </button>
+                
+                <!-- Sub Menu Pra Kuliah -->
+                <div id="submenu-prakuliah" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="ml-8 mt-1 space-y-1">
+                        <a href="index.php?page=daftarKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Daftar Kelas</span>
+                        </a>
+                        <a href="index.php?page=daftarMatkulKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Daftar Mata Kuliah</span>
+                        </a>
+                        <a href="index.php?page=daftarDosenKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Dosen Kelas</span>
+                        </a>
+                        <a href="index.php?page=daftarMahasiswaKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Mahasiswa Kelas</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
-            <a href="index.php?page=perkuliahan" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-chalkboard-teacher w-5 text-center"></i>
-                <span class="font-medium">Perkuliahan</span>
-            </a>
+            <!-- ACCORDION MENU: Perkuliahan -->
+            <div class="menu-accordion">
+                <button 
+                    onclick="toggleAccordion('perkuliahan')"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                    data-menu="perkuliahan"
+                >
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-chalkboard-teacher w-5 text-center"></i>
+                        <span class="font-medium">Perkuliahan</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
+                </button>
+                
+                <!-- Sub Menu Perkuliahan -->
+                <div id="submenu-perkuliahan" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="ml-8 mt-1 space-y-1">
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Jadwal Kuliah</span>
+                        </a>
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Modul Kuliah</span>
+                        </a>
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Presensi Kuliah</span>
+                        </a>
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Surat Peringatan</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
-            <a href="index.php?page=pascakuliah" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-user-graduate w-5 text-center"></i>
-                <span class="font-medium">Pasca Kuliah</span>
-            </a>
+            <!-- ACCORDION MENU: Pasca Kuliah -->
+            <div class="menu-accordion">
+                <button 
+                    onclick="toggleAccordion('pascakuliah')"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                    data-menu="pascakuliah"
+                >
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-user-graduate w-5 text-center"></i>
+                        <span class="font-medium">Pasca Kuliah</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
+                </button>
+                
+                <!-- Sub Menu Pasca Kuliah -->
+                <div id="submenu-pascakuliah" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="ml-8 mt-1 space-y-1">
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span>Rapor Semester</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
             <a href="index.php?page=user" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
                 <i class="fas fa-user-cog w-5 text-center"></i>
@@ -201,6 +285,24 @@
         color: white;
     }
     
+    /* Accordion Trigger Active State */
+    .accordion-trigger.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    /* Accordion Icon Rotation */
+    .accordion-trigger.active .accordion-icon {
+        transform: rotate(180deg);
+    }
+    
+    /* Submenu Active State */
+    .submenu-link.active {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+        font-weight: 600;
+    }
+    
     /* Mobile Menu Animation */
     @keyframes slideIn {
         from {
@@ -217,7 +319,101 @@
 </style>
 
 <script>
-// Mobile Menu Toggle
+// ===== ACCORDION MENU FUNCTIONS =====
+
+/**
+ * Toggle accordion menu
+ */
+function toggleAccordion(menuId) {
+    const submenu = document.getElementById(`submenu-${menuId}`);
+    const trigger = document.querySelector(`[data-menu="${menuId}"]`);
+    const icon = trigger.querySelector('.accordion-icon');
+    
+    // Check if already open
+    const isOpen = submenu.style.maxHeight && submenu.style.maxHeight !== '0px';
+    
+    // Close all other accordions
+    document.querySelectorAll('.accordion-content').forEach(content => {
+        content.style.maxHeight = '0px';
+    });
+    
+    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Toggle current accordion
+    if (!isOpen) {
+        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+        trigger.classList.add('active');
+        
+        // Save state to localStorage
+        localStorage.setItem('activeAccordion', menuId);
+    } else {
+        submenu.style.maxHeight = '0px';
+        trigger.classList.remove('active');
+        localStorage.removeItem('activeAccordion');
+    }
+}
+
+/**
+ * Initialize accordion state on page load
+ */
+function initializeAccordionState() {
+    const currentPage = new URLSearchParams(window.location.search).get('page') || 'beranda';
+    
+    // Define page-to-accordion mapping
+    const pageAccordionMap = {
+        // Pra Kuliah
+        'prakuliah': 'prakuliah',
+        'daftarKelas': 'prakuliah',
+        'daftarMatkulKelas': 'prakuliah',
+        'daftarDosenKelas': 'prakuliah',
+        'daftarMahasiswaKelas': 'prakuliah',
+        
+        // Perkuliahan
+        'perkuliahan': 'perkuliahan',
+        
+        // Pasca Kuliah
+        'pascakuliah': 'pascakuliah'
+    };
+    
+    // Get accordion for current page
+    const accordionId = pageAccordionMap[currentPage];
+    
+    if (accordionId) {
+        const submenu = document.getElementById(`submenu-${accordionId}`);
+        const trigger = document.querySelector(`[data-menu="${accordionId}"]`);
+        
+        if (submenu && trigger) {
+            // Open accordion
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            trigger.classList.add('active');
+            
+            // Save to localStorage
+            localStorage.setItem('activeAccordion', accordionId);
+        }
+    }
+}
+
+/**
+ * Restore accordion state from localStorage
+ */
+function restoreAccordionState() {
+    const activeAccordion = localStorage.getItem('activeAccordion');
+    
+    if (activeAccordion) {
+        const submenu = document.getElementById(`submenu-${activeAccordion}`);
+        const trigger = document.querySelector(`[data-menu="${activeAccordion}"]`);
+        
+        if (submenu && trigger) {
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            trigger.classList.add('active');
+        }
+    }
+}
+
+// ===== MOBILE MENU FUNCTIONS =====
+
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const closeSidebarBtn = document.getElementById('closeSidebarBtn');
 const sidebar = document.getElementById('sidebar');
@@ -248,8 +444,11 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Active Link Highlighting
+// ===== ACTIVE LINK HIGHLIGHTING =====
+
 const currentPage = new URLSearchParams(window.location.search).get('page') || 'beranda';
+
+// Highlight current page link
 document.querySelectorAll('.sidebar-link').forEach(link => {
     const href = link.getAttribute('href');
     if (href && href.includes(`page=${currentPage}`)) {
@@ -259,14 +458,18 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
     }
 });
 
-// Update Page Title dynamically
+// ===== UPDATE PAGE TITLE =====
+
 const pageTitles = {
     'beranda': 'Dashboard',
     'contentMahasiswa': 'Mahasiswa',
     'prakuliah': 'Pra Kuliah',
+    'daftarKelas': 'Daftar Kelas',
+    'daftarMatkulKelas': 'Daftar Mata Kuliah',
+    'daftarDosenKelas': 'Dosen Kelas',
+    'daftarMahasiswaKelas': 'Mahasiswa Kelas',
     'perkuliahan': 'Perkuliahan',
     'pascakuliah': 'Pasca Kuliah',
-    'dataMaster': 'Data Master',
     'user': 'Manajemen User',
     'kelas': 'Data Kelas',
     'jurusan': 'Data Jurusan',
@@ -284,13 +487,44 @@ if (pageTitle && pageTitles[currentPage]) {
     pageTitle.textContent = pageTitles[currentPage];
 }
 
-// Add smooth hover effect
+// ===== SMOOTH HOVER EFFECT =====
+
 document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('mouseenter', function() {
         this.style.transform = 'translateX(4px)';
     });
     link.addEventListener('mouseleave', function() {
         this.style.transform = 'translateX(0)';
+    });
+});
+
+// ===== INITIALIZE ON PAGE LOAD =====
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize accordion based on current page
+    initializeAccordionState();
+    
+    // Optional: Restore previous state from localStorage
+    // restoreAccordionState();
+});
+
+// ===== HANDLE ACCORDION BUTTON CLICKS =====
+
+// When accordion menu (parent) is clicked, navigate to main page
+document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+        const menuName = this.getAttribute('data-menu');
+        
+        // Check if clicking to toggle or navigate
+        const isAlreadyActive = this.classList.contains('active');
+        
+        // If not active, navigate to main page
+        if (!isAlreadyActive) {
+            // Navigate to main page
+            window.location.href = `index.php?page=${menuName}`;
+        }
+        
+        // Toggle accordion will be handled by the toggleAccordion function
     });
 });
 </script>
