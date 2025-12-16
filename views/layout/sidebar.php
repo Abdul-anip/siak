@@ -204,10 +204,6 @@
                 <span class="font-medium">Mahasiswa</span>
             </a>
             
-            <a href="index.php?page=tahun_akademik" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-calendar-alt w-5 text-center"></i>
-                <span class="font-medium">Tahun Akademik</span>
-            </a>
         </div>
 
         <!-- User Menu -->

@@ -108,6 +108,18 @@ class Prodi {
     }
 
     function delete($id){
+
+        $id = $this->db->real_escape_string($id);
+
+        $cek = $this->db->query("
+            SELECT COUNT(*) as total FROM program_studi 
+            WHERE prodiId = '$id'
+        ")->fetch_assoc();
+
+        if ($cek['total'] > 0) {
+            throw new Exception("Program Studi dengan Id $id tidak dapat dihapus karena masih digunakan difitur lain.");
+        }
+
         return $this->db->query("DELETE FROM program_studi WHERE prodiId = $id");
     }
 

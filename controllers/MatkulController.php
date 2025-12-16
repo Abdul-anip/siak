@@ -127,7 +127,23 @@ else if ($aksi == "update" && isset($_POST['update_matkul'])) {
 
 // DELETE
 else if ($aksi == "delete" && isset($_GET['id'])) {
-    $matkul->delete($_GET['id']);
-    header("Location: index.php?page=matkul");
+    try {
+        $matkul->delete($_GET['id']);
+        header("Location: index.php?page=matkul&success=delete");
+        exit;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+
+        // Ambil ulang data untuk ditampilkan
+        $q = $_GET['q'] ?? '';
+        if ($q) {
+            $rows = $matkul->search($q);
+        } else {
+            $rows = $matkul->all();
+        }
+
+        require "views/matkul/index.php";
+        exit;
+}
 }
 ?>

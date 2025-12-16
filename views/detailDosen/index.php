@@ -71,10 +71,7 @@
             <div class="flex">
                 <span class="w-32 font-semibold text-gray-600">Gelar Depan</span>
                 <span class="flex-1">: <?= htmlspecialchars($dataDosen['dsnGelarDepan'] ?? '-') ?></span>
-            <div class="flex">
-                <span class="w-32 font-semibold text-gray-600">Email</span>
-                <span class="flex-1">: <?= htmlspecialchars($dataDosen['dsnEmail'] ?? '-') ?></span>
-            </div>
+            
             
             </div>
         </div>

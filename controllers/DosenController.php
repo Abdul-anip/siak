@@ -212,9 +212,24 @@ else if ($aksi == "update" && isset($_POST['update_dosen'])) {
 // DELETE
 else if ($aksi == "delete" && isset($_GET['id'])) {
 
-    $dosen->delete($_GET['id']);
+    try {
+        $dosen->delete($_GET['id']);
+        header("Location: index.php?page=dosen&success=delete");
+        exit;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
 
-    header("Location: index.php?page=dosen");
+        // Ambil ulang data untuk ditampilkan
+        $q = $_GET['q'] ?? '';
+        if ($q) {
+            $rows = $dosen->search($q);
+        } else {
+            $rows = $dosen->all();
+        }
+
+        require "views/dosen/index.php";
+        exit;
+    }
 }
 
 ?>

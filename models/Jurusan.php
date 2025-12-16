@@ -84,7 +84,18 @@ class Jurusan {
     }
 
     function delete($id){
-        return $this->db->query("DELETE FROM jurusan WHERE jurId = $id");
+        $id = $this->db->real_escape_string($id);
+
+        $cek = $this->db->query("
+            SELECT COUNT(*) as total FROM jurusan 
+            WHERE jurId = '$id'
+        ")->fetch_assoc();
+
+        if ($cek['total'] > 0) {
+            throw new Exception("Jurusan dengan Id $id tidak dapat dihapus karena masih digunakan difitur lain.");
+        }   
+
+        return $this->db->query("DELETE FROM jurusan WHERE jurId = '$id'");
     }
 
 

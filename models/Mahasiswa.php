@@ -106,8 +106,22 @@ class Mahasiswa {
     }
 
     function delete($nim){
+
         $nim = $this->db->real_escape_string($nim);
-        return $this->db->query("DELETE FROM mahasiswa WHERE mhsNim = '$nim'");
+
+        $cek = $this->db->query("
+            SELECT COUNT(*) as total 
+        FROM kelas_mahasiswa 
+        WHERE klsmhsMhsNim = '$nim'
+        ")->fetch_assoc();
+
+        if ($cek['total'] > 0) {
+            throw new Exception("Mahasiswa dengan NIM $nim tidak dapat dihapus karena masih terdaftar di kelas.");
+        }
+
+        return $this->db->query("
+        DELETE FROM mahasiswa WHERE mhsNim = '$nim'
+        ");
     }
 
     function search($keyword){

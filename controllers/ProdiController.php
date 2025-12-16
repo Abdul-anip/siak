@@ -62,8 +62,23 @@ else if ($aksi == "update" && isset($_POST['update_prodi'])) {
 
 // DELETE
 else if ($aksi == "delete" && isset($_GET['id'])) {
-    $prodi->delete($_GET['id']);
-    header("Location: index.php?page=prodi");
+    try {
+        $prodi->delete($_GET['id']);
+        header("Location: index.php?page=prodi");
+        exit;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+        // Tampilkan kembali halaman index dengan pesan error
+        $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $prodi->search($q);
+        } else {
+            $rows = $prodi->all();
+        }
+
+        require "views/prodi/index.php";
+    }
 }
 
 // --- FETCH PRODI BY JURUSAN (AJAX ENDPOINT) ---

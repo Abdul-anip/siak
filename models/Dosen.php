@@ -133,6 +133,16 @@ class Dosen {
 
     function delete($nidn){
         $nidn = $this->db->real_escape_string($nidn);
+
+        $cek = $this->db->query("
+            SELECT COUNT(*) as total FROM dosen 
+            WHERE dsnNidn = '$nidn'
+        ")->fetch_assoc();
+
+        if ($cek['total'] > 0) {
+            throw new Exception("Dosen dengan NIDN $nidn tidak dapat dihapus karena masih digunakan difitur lain.");
+        }
+
         return $this->db->query("DELETE FROM dosen WHERE dsnNidn = '$nidn'");
     }
 

@@ -1,6 +1,20 @@
 <?php include "views/layout/header.php"; ?>
 <?php include "views/layout/sidebar.php"; ?>
 
+<?php if (isset($error)): ?>
+<div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mb-4">
+    <strong>Gagal menghapus data!</strong><br>
+    <?= htmlspecialchars($error) ?>
+</div>
+<?php endif; ?>
+
+<?php if (isset($_GET['success']) && $_GET['success'] == 'delete'): ?>
+<div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg mb-4">
+    Data mahasiswa berhasil dihapus.
+</div>
+<?php endif; ?>
+
+
 <!-- Page Header -->
 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
     <div>

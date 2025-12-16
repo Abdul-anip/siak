@@ -1,6 +1,13 @@
 <?php include "views/layout/header.php"; ?>
 <?php include "views/layout/sidebar.php"; ?>
 
+<?php if (isset($error)): ?> 
+ 
+    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mb-4">
+        <strong>Gagal menghapus data!</strong><br>
+        <?= htmlspecialchars($error) ?>
+    </div>
+ <?php endif; ?>
 
 
 <!-- Page Header -->

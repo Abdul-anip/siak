@@ -1,5 +1,4 @@
 <?php
-// Pastikan sesi login tetap dipertahankan
 if (!isset($_SESSION['login'])) {
     header("Location: index.php?page=login");
     exit;
@@ -10,7 +9,7 @@ if (!isset($_SESSION['login'])) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIAKAD Modern - Sistem Informasi Akademik</title>
+<title>SIAK Modern - Sistem Informasi Akademik</title>
 
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>

@@ -102,8 +102,27 @@ else if ($aksi == "update" && isset($_POST['update_mahasiswa'])) {
 
 // DELETE
 else if ($aksi == "delete" && isset($_GET['id'])) {
-    $mhs->delete($_GET['id']);
-    header("Location: index.php?page=mahasiswa");
+    try {
+        $mhs->delete($_GET['id']);
+        header("Location: index.php?page=mahasiswa&success=delete");
+        exit;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+
+        // Ambil ulang data untuk ditampilkan
+        $q = $_GET['q'] ?? '';
+        if ($q) {
+            $rows = $mhs->search($q);
+        } else {
+            $rows = $mhs->all();
+        }
+
+        require "views/mahasiswa/index.php";
+        exit;
+    }
 }
+
+
+
 
 ?>

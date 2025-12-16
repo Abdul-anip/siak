@@ -90,6 +90,17 @@ class Kurikulum {
     }
 
     function delete($id){
+        $id = $this->db->real_escape_string($id);
+
+        $cek = $this->db->query("
+            SELECT COUNT(*) as total FROM kurikulum 
+            WHERE kurId = '$id'
+        ")->fetch_assoc();
+
+        if ($cek['total'] > 0) {
+            throw new Exception("Kurikulum dengan Id $id tidak dapat dihapus karena masih digunakan difitur lain.");
+        }
+
         return $this->db->query("DELETE FROM kurikulum WHERE kurId = $id");
     }
 

@@ -260,7 +260,8 @@
                     $queryDosen->data_seek(0);
                     while($d = $queryDosen->fetch_assoc()): 
                         $semesterLabel = ($d['thakdSemester'] == '1') ? 'Ganjil' : 'Genap';
-                        $tahunDisplay = $d['thakdTahun'] . '/' . ($d['thakdTahun'] + 1) . ' - ' . $semesterLabel;
+                        $tahunAwal = (int) $d['thakdTahun'];
+                        $tahunDisplay = $tahunAwal . '/' . ($tahunAwal + 1) . ' - ' . $semesterLabel;
                     ?>
                     <tr class="hover:bg-green-50 transition duration-200">
                         <td class="px-4 py-3 text-center text-sm font-semibold text-gray-700"><?= $no++ ?></td>

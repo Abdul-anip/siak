@@ -93,9 +93,24 @@ else if ($aksi == "update" && isset($_POST['update_kelas'])) {
    DELETE KELAS
    ============================================================ */
 else if ($aksi == "delete" && isset($_GET['id'])) {
-    $kelas->delete($_GET['id']);
-    header("Location: index.php?page=kelas");
-    exit;
+    try {
+        $kelas->delete($_GET['id']);
+        header("Location: index.php?page=kelas&success=delete");
+        exit;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+
+        // Ambil ulang data untuk ditampilkan
+        $q = $_GET['q'] ?? '';
+        if ($q) {
+            $rows = $kelas->search($q);
+        } else {
+            $rows = $kelas->all();
+        }
+
+        require "views/kelas/index.php";
+        exit;
+    }
 }
 
 ?>

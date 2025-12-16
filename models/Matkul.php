@@ -112,6 +112,18 @@ class Matkul {
     }
 
     function delete($id){
+
+        $id = $this->db->real_escape_string($id);
+
+        $cek = $this->db->query("
+            SELECT COUNT(*) as total FROM matakuliah 
+            WHERE mkId = '$id'
+        ")->fetch_assoc();
+
+        if ($cek['total'] > 0) {
+            throw new Exception("Matakuliah dengan Id $id tidak dapat dihapus karena masih digunakan difitur lain.");
+        }
+
         return $this->db->query("DELETE FROM matakuliah WHERE mkId = $id");
     }
 

@@ -49,8 +49,23 @@ else if ($aksi == "update" && isset($_POST['update_kurikulum'])) {
 
 // DELETE
 else if ($aksi == "delete" && isset($_GET['id'])) {
-    $kurikulum->delete($_GET['id']);
-    header("Location: index.php?page=kurikulum");
+    
+    try {
+        $kurikulum->delete($_GET['id']);
+        header("Location: index.php?page=kurikulum");
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+
+        $q = $_GET['q'] ?? '';
+
+        if ($q) {
+            $rows = $kurikulum->search($q);
+        } else {
+            $rows = $kurikulum->all();
+        }
+
+        require "views/kurikulum/index.php";
+    }
 }
 
 ?>

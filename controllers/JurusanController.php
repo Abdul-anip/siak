@@ -56,7 +56,17 @@ else if ($aksi == "update" && isset($_POST['update_jurusan'])) {
 
 // --- HAPUS ---
 else if ($aksi == "delete" && isset($_GET['id'])) {
-    $jurusan->delete($_GET['id']);
-    header("Location: index.php?page=jurusan");
+    try {
+        $jurusan->delete($_GET['id']);
+        header("Location: index.php?page=jurusan");
+        exit;
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+
+        // Tampilkan kembali halaman index dengan pesan error
+        $rows = $jurusan->all();
+        require "views/jurusan/index.php";
+        exit;
+    }
 }
 ?>
