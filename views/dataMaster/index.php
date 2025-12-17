@@ -24,7 +24,7 @@ include "views/layout/sidebar.php";
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Menu 1: Data Alumni -->
-        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=kelas" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <i class="fas fa-arrow-right text-2xl text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition duration-300"></i>
             </div>
@@ -34,7 +34,7 @@ include "views/layout/sidebar.php";
             </div>
         </a>
 
-        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=jurusan" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <i class="fas fa-arrow-right text-2xl text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition duration-300"></i>
             </div>
@@ -44,7 +44,7 @@ include "views/layout/sidebar.php";
             </div>
         </a>
 
-        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=prodi" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <i class="fas fa-arrow-right text-2xl text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition duration-300"></i>
             </div>
@@ -54,7 +54,7 @@ include "views/layout/sidebar.php";
             </div>
         </a>
 
-        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=matkul" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <i class="fas fa-arrow-right text-2xl text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition duration-300"></i>
             </div>
@@ -64,7 +64,7 @@ include "views/layout/sidebar.php";
             </div>
         </a>
 
-        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=dosen" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <i class="fas fa-arrow-right text-2xl text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition duration-300"></i>
             </div>
@@ -74,7 +74,7 @@ include "views/layout/sidebar.php";
             </div>
         </a>
 
-        <a href="index.php?page=halamanKosong" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
+        <a href="index.php?page=mahasiswa" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
                 <i class="fas fa-arrow-right text-2xl text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition duration-300"></i>
             </div>

@@ -2,36 +2,36 @@
 <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
 
 <!-- Sidebar -->
-<aside id="sidebar" class="sidebar no-print fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 w-72 bg-white shadow-2xl z-40 overflow-y-auto">
+<aside id="sidebar" class="sidebar no-print fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 w-80 bg-gradient-to-b from-indigo-50 to-white shadow-xl z-40 overflow-y-auto">
     
     <!-- Sidebar Header -->
-    <div class="sticky top-0 bg-gradient-to-r from-primary-600 to-secondary-600 p-6 z-10">
-        <div class="flex items-center justify-between">
+    <div class="sticky top-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 p-6 z-10 shadow-lg">
+        <div class="flex items-center justify-between mb-5">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-graduation-cap text-2xl text-primary-600"></i>
+                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-105 transition-transform">
+                    <i class="fas fa-graduation-cap text-2xl text-indigo-600"></i>
                 </div>
                 <div>
-                    <h1 class="text-white font-bold text-xl">SIAK</h1>
-                    <p class="text-white text-xs opacity-90">Sistem Akademik</p>
+                    <h1 class="text-white font-bold text-2xl tracking-tight">SIAK</h1>
+                    <p class="text-indigo-200 text-xs font-medium">Sistem Akademik</p>
                 </div>
             </div>
-            <button id="closeSidebarBtn" class="lg:hidden text-white hover:bg-white/20 rounded-lg p-2">
+            <button id="closeSidebarBtn" class="lg:hidden text-white hover:bg-white/20 rounded-xl p-2 transition-all">
                 <i class="fas fa-times text-xl"></i>
             </button>
         </div>
         
         <!-- User Info -->
-        <div class="mt-4 bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+        <div class="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20 shadow-lg">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-primary-600"></i>
+                <div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-md">
+                    <i class="fas fa-user text-indigo-600 text-lg"></i>
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-white font-semibold text-sm truncate">
                         <?= htmlspecialchars($_SESSION['user']) ?>
                     </p>
-                    <p class="text-white text-xs opacity-75">
+                    <p class="text-indigo-200 text-xs font-medium mt-0.5">
                         <?= htmlspecialchars($_SESSION['grup'] ?? 'User') ?>
                     </p>
                 </div>
@@ -40,118 +40,118 @@
     </div>
 
     <!-- Navigation Menu -->
-    <nav class="p-4 space-y-1">
+    <nav class="p-5 space-y-2">
         
         <!-- Menu Utama -->
-        <div class="mb-4">
-            <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+        <div class="mb-6">
+            <p class="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
                 Menu Utama
             </p>
             
-            <a href="index.php?page=beranda" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-home w-5 text-center"></i>
-                <span class="font-medium">Beranda</span>
+            <a href="index.php?page=beranda" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group">
+                <i class="fas fa-home w-5 text-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-semibold">Beranda</span>
             </a>
             
-            <a href="index.php?page=contentMahasiswa" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-users w-5 text-center"></i>
-                <span class="font-medium">Mahasiswa</span>
+            <a href="index.php?page=contentMahasiswa" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group">
+                <i class="fas fa-users w-5 text-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-semibold">Mahasiswa</span>
             </a>
             
             <!-- ACCORDION MENU: Pra Kuliah -->
-            <div class="menu-accordion">
+            <div class="menu-accordion mt-2">
                 <button 
                     onclick="toggleAccordion('prakuliah')"
-                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group"
                     data-menu="prakuliah"
                 >
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-clipboard-list w-5 text-center"></i>
-                        <span class="font-medium">Pra Kuliah</span>
+                        <i class="fas fa-clipboard-list w-5 text-center group-hover:scale-110 transition-transform"></i>
+                        <span class="font-semibold">Pra Kuliah</span>
                     </div>
                     <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
                 </button>
                 
                 <!-- Sub Menu Pra Kuliah -->
                 <div id="submenu-prakuliah" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
-                    <div class="ml-8 mt-1 space-y-1">
-                        <a href="index.php?page=daftarKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                    <div class="ml-6 mt-2 space-y-1 border-l-2 border-indigo-200 pl-4">
+                        <a href="index.php?page=daftarKelas" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Daftar Kelas</span>
+                            <span class="font-medium">Daftar Kelas</span>
                         </a>
-                        <a href="index.php?page=daftarMatkulKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                        <a href="index.php?page=daftarMatkulKelas" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Daftar Mata Kuliah</span>
+                            <span class="font-medium">Daftar Mata Kuliah</span>
                         </a>
-                        <a href="index.php?page=daftarDosenKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                        <a href="index.php?page=daftarDosenKelas" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Dosen Kelas</span>
+                            <span class="font-medium">Dosen Kelas</span>
                         </a>
-                        <a href="index.php?page=daftarMahasiswaKelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                        <a href="index.php?page=daftarMahasiswaKelas" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Mahasiswa Kelas</span>
+                            <span class="font-medium">Mahasiswa Kelas</span>
                         </a>
                     </div>
                 </div>
             </div>
             
             <!-- ACCORDION MENU: Perkuliahan -->
-            <div class="menu-accordion">
+            <div class="menu-accordion mt-2">
                 <button 
                     onclick="toggleAccordion('perkuliahan')"
-                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group"
                     data-menu="perkuliahan"
                 >
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-chalkboard-teacher w-5 text-center"></i>
-                        <span class="font-medium">Perkuliahan</span>
+                        <i class="fas fa-chalkboard-teacher w-5 text-center group-hover:scale-110 transition-transform"></i>
+                        <span class="font-semibold">Perkuliahan</span>
                     </div>
                     <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
                 </button>
                 
                 <!-- Sub Menu Perkuliahan -->
                 <div id="submenu-perkuliahan" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
-                    <div class="ml-8 mt-1 space-y-1">
-                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                    <div class="ml-6 mt-2 space-y-1 border-l-2 border-indigo-200 pl-4">
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Jadwal Kuliah</span>
+                            <span class="font-medium">Jadwal Kuliah</span>
                         </a>
-                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Modul Kuliah</span>
+                            <span class="font-medium">Modul Kuliah</span>
                         </a>
-                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Presensi Kuliah</span>
+                            <span class="font-medium">Presensi Kuliah</span>
                         </a>
-                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Surat Peringatan</span>
+                            <span class="font-medium">Surat Peringatan</span>
                         </a>
                     </div>
                 </div>
             </div>
             
             <!-- ACCORDION MENU: Pasca Kuliah -->
-            <div class="menu-accordion">
+            <div class="menu-accordion mt-2">
                 <button 
                     onclick="toggleAccordion('pascakuliah')"
-                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group"
                     data-menu="pascakuliah"
                 >
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-user-graduate w-5 text-center"></i>
-                        <span class="font-medium">Pasca Kuliah</span>
+                        <i class="fas fa-user-graduate w-5 text-center group-hover:scale-110 transition-transform"></i>
+                        <span class="font-semibold">Pasca Kuliah</span>
                     </div>
                     <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
                 </button>
                 
                 <!-- Sub Menu Pasca Kuliah -->
                 <div id="submenu-pascakuliah" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
-                    <div class="ml-8 mt-1 space-y-1">
-                        <a href="index.php?page=halamanKosong" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                    <div class="ml-6 mt-2 space-y-1 border-l-2 border-indigo-200 pl-4">
+                        <a href="index.php?page=raporSemester" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
                             <i class="fas fa-circle text-xs"></i>
-                            <span>Rapor Semester</span>
+                            <span class="font-medium">Rapor Semester</span>
                         </a>
                     </div>
                 </div>
@@ -159,83 +159,92 @@
         </div>
 
         <!-- Data Master -->
-            <div class="mb-4">
-                <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Data Master
-                </p>
-                <div class="menu-accordion">
-                    <button 
-                        type="button"
-                        onclick="toggleAccordion('dataMaster')"
-                        class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
-                        data-menu="dataMaster"
-                    >
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-database w-5 text-center"></i>
-                            <span class="font-medium">Data Master</span>
-                        </div>
-                        <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
-                    </button>
-                    
-                    <div id="submenu-dataMaster" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
-                        <div class="ml-8 mt-1 space-y-1">
-                            <a href="index.php?page=kelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
-                                <i class="fas fa-circle text-xs"></i>
-                                <span>Kelas</span>
-                            </a>
-                            <a href="index.php?page=jurusan" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
-                                <i class="fas fa-circle text-xs"></i>
-                                <span>Jurusan</span>
-                            </a>
-                            <a href="index.php?page=prodi" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
-                                <i class="fas fa-circle text-xs"></i>
-                                <span>Program Studi</span>
-                            </a>
-                            <a href="index.php?page=matkul" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
-                                <i class="fas fa-circle text-xs"></i>
-                                <span>Mata Kuliah</span>
-                            </a>
-                            <a href="index.php?page=dosen" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
-                                <i class="fas fa-circle text-xs"></i>
-                                <span>Dosen</span>
-                            </a>
-                            <a href="index.php?page=mahasiswa" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
-                                <i class="fas fa-circle text-xs"></i>
-                                <span>Data Mahasiswa</span>
-                            </a>
-                        </div>
+        <div class="mb-6">
+            <p class="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
+                Data Master
+            </p>
+            <div class="menu-accordion">
+                <button 
+                    type="button"
+                    onclick="toggleAccordion('dataMaster')"
+                    class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group"
+                    data-menu="dataMaster"
+                >
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-database w-5 text-center group-hover:scale-110 transition-transform"></i>
+                        <span class="font-semibold">Data Master</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
+                </button>
+                
+                <div id="submenu-dataMaster" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                    <div class="ml-6 mt-2 space-y-1 border-l-2 border-indigo-200 pl-4">
+                        <a href="index.php?page=kelas" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Kelas</span>
+                        </a>
+                        <a href="index.php?page=jurusan" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Jurusan</span>
+                        </a>
+                        <a href="index.php?page=prodi" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Program Studi</span>
+                        </a>
+                        <a href="index.php?page=matkul" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Mata Kuliah</span>
+                        </a>
+                        <a href="index.php?page=dosen" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Dosen</span>
+                        </a>
+                        <a href="index.php?page=mahasiswa" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Mahasiswa</span>
+                        </a>
+                        <a href="index.php?page=kurikulum" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Kurikulum</span>
+                        </a>
+                        <a href="index.php?page=tahun_akademik" class="sidebar-link submenu-link flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                            <i class="fas fa-circle text-xs"></i>
+                            <span class="font-medium">Tahun Akademik</span>
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-        <a href="index.php?page=user" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-user-cog w-5 text-center"></i>
-                <span class="font-medium">User</span>
-            </a>
+        <a href="index.php?page=user" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group">
+            <i class="fas fa-user-cog w-5 text-center group-hover:scale-110 transition-transform"></i>
+            <span class="font-semibold">User</span>
+        </a>
 
-        <!-- User Menu -->
-        <div class="mb-4">
-            <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+        <!-- Pengaturan -->
+        <div class="mb-4 pt-4 border-t border-gray-200">
+            <p class="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
                 Pengaturan
             </p>
             
-            <a href="index.php?page=password" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-key w-5 text-center"></i>
-                <span class="font-medium">Ubah Password</span>
+            <a href="index.php?page=password" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:text-indigo-600 transition-all duration-200 group">
+                <i class="fas fa-key w-5 text-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-semibold">Ubah Password</span>
             </a>
             
-            <a href="index.php?page=logout" onclick="return confirm('Yakin ingin logout?')" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 group">
-                <i class="fas fa-sign-out-alt w-5 text-center"></i>
-                <span class="font-medium">Logout</span>
+            <a href="index.php?page=logout" onclick="return confirm('Yakin ingin logout?')" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl text-red-600 hover:bg-red-50 hover:shadow-md transition-all duration-200 group">
+                <i class="fas fa-sign-out-alt w-5 text-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-semibold">Logout</span>
             </a>
         </div>
     </nav>
 
     <!-- Sidebar Footer -->
-    <div class="sticky bottom-0 bg-gray-50 p-4 border-t">
-        <div class="text-center text-xs text-gray-500">
-            <p>&copy; <?= date('Y') ?> SIAK</p>
-            <p class="mt-1">Sistem Informasi Akademik | Risqa Putri Hanifa</p>
+    <div class="sticky bottom-0 bg-gradient-to-t from-white via-indigo-50 to-transparent p-4 border-t border-indigo-100">
+        <div class="text-center text-xs text-gray-600">
+            <p class="font-semibold">&copy; <?= date('Y') ?> SIAK</p>
+            <p class="mt-1 text-gray-500">Sistem Informasi Akademik</p>
+            <p class="mt-0.5 text-indigo-600 font-medium">Risqa Putri Hanifa</p>
         </div>
     </div>
 
@@ -248,25 +257,25 @@
     <div class="no-print sticky top-0 z-30 bg-white border-b shadow-sm">
         <div class="flex items-center justify-between px-6 py-4">
             <div class="flex items-center space-x-4">
+                <button id="mobileMenuBtn" class="lg:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
                 <h2 class="text-2xl font-bold text-gray-800" id="pageTitle">Dashboard</h2>
             </div>
             
             <div class="flex items-center space-x-4">
-                <!-- Notifications -->
                 <button class="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-bell text-xl"></i>
                     <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
                 
-                <!-- Search -->
                 <button class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-search text-xl"></i>
                 </button>
                 
-                <!-- User Menu -->
                 <div class="relative">
                     <button class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg">
-                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
                             <span class="text-white font-bold text-sm">
                                 <?= strtoupper(substr($_SESSION['user'], 0, 1)) ?>
                             </span>
@@ -282,31 +291,53 @@
     <div class="p-6">
 
 <style>
-    /* Sidebar Active Link */
+    /* Scrollbar Styling */
+    .sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .sidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+        background: rgba(99, 102, 241, 0.3);
+        border-radius: 10px;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb:hover {
+        background: rgba(99, 102, 241, 0.5);
+    }
+
+    /* Active States */
     .sidebar-link.active {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
-    /* Accordion Trigger Active State */
     .accordion-trigger.active {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
-    /* Accordion Icon Rotation */
     .accordion-trigger.active .accordion-icon {
         transform: rotate(180deg);
     }
     
-    /* Submenu Active State */
     .submenu-link.active {
-        background: rgba(102, 126, 234, 0.1);
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
         color: #667eea;
-        font-weight: 600;
+        font-weight: 700;
+        border-left: 3px solid #667eea;
     }
     
-    /* Mobile Menu Animation */
+    /* Hover Effects */
+    .sidebar-link:hover {
+        transform: translateX(2px);
+    }
+    
+    /* Mobile Animation */
     @keyframes slideIn {
         from {
             transform: translateX(-100%);
@@ -322,81 +353,48 @@
 </style>
 
 <script>
-// ===== ACCORDION MENU FUNCTIONS =====
-
-/**
- * Toggle accordion menu
- */
 function toggleAccordion(menuId) {
     const submenu = document.getElementById(`submenu-${menuId}`);
     const trigger = document.querySelector(`[data-menu="${menuId}"]`);
-    const icon = trigger.querySelector('.accordion-icon');
-    
-    // Check if already open
     const isOpen = submenu.style.maxHeight && submenu.style.maxHeight !== '0px';
     
-    // Close all other accordions
     document.querySelectorAll('.accordion-content').forEach(content => {
         content.style.maxHeight = '0px';
     });
     
     document.querySelectorAll('.accordion-trigger').forEach(btn => {
-        trigger.addEventListener('click', function(e) {
-                // Jangan lakukan apa-apa selain toggle
-                e.preventDefault();
-                const menuId = this.getAttribute('data-menu');
-                toggleAccordion(menuId);
-            });
+        btn.classList.remove('active');
     });
     
-    // Toggle current accordion
     if (!isOpen) {
         submenu.style.maxHeight = submenu.scrollHeight + 'px';
         trigger.classList.add('active');
-        
-        // Save state to localStorage
         localStorage.setItem('activeAccordion', menuId);
     } else {
-        submenu.style.maxHeight = '0px';
-        trigger.classList.remove('active');
         localStorage.removeItem('activeAccordion');
     }
 }
 
-/**
- * Initialize accordion state on page load
- */
-/**
- * Initialize accordion state on page load
- */
 function initializeAccordionState() {
     const currentPage = new URLSearchParams(window.location.search).get('page') || 'beranda';
     
-    // Define page-to-accordion mapping
     const pageAccordionMap = {
-        // Pra Kuliah
-        'prakuliah': 'prakuliah',
         'daftarKelas': 'prakuliah',
         'daftarMatkulKelas': 'prakuliah',
         'daftarDosenKelas': 'prakuliah',
         'daftarMahasiswaKelas': 'prakuliah',
-        
-        // Perkuliahan
-        'perkuliahan': 'perkuliahan',
-        
-        // Pasca Kuliah
-        'pascakuliah': 'pascakuliah',
-
-        // DATA MASTER (Tambahkan mapping ini)
-        'kelas': 'datamaster',
-        'jurusan': 'datamaster',
-        'prodi': 'datamaster',
-        'matkul': 'datamaster',
-        'dosen': 'datamaster',
-        'mahasiswa': 'datamaster'
+        'raporSemester': 'pascakuliah',
+        'kelas': 'dataMaster',
+        'jurusan': 'dataMaster',
+        'prodi': 'dataMaster',
+        'matkul': 'dataMaster',
+        'dosen': 'dataMaster',
+        'mahasiswa': 'dataMaster',
+        'kurikulum': 'dataMaster',
+        'tahun_akademik': 'dataMaster',
+        'user': 'dataMaster'
     };
     
-    // Get accordion for current page
     const accordionId = pageAccordionMap[currentPage];
     
     if (accordionId) {
@@ -404,12 +402,10 @@ function initializeAccordionState() {
         const trigger = document.querySelector(`[data-menu="${accordionId}"]`);
         
         if (submenu && trigger) {
-            // Hilangkan transisi sementara agar menu langsung terbuka tanpa animasi saat page load
             submenu.style.transition = 'none';
             submenu.style.maxHeight = submenu.scrollHeight + 'px';
             trigger.classList.add('active');
             
-            // Kembalikan transisi setelah sedikit delay
             setTimeout(() => {
                 submenu.style.transition = 'max-height 0.3s ease';
             }, 10);
@@ -418,25 +414,6 @@ function initializeAccordionState() {
         }
     }
 }
-
-/**
- * Restore accordion state from localStorage
- */
-function restoreAccordionState() {
-    const activeAccordion = localStorage.getItem('activeAccordion');
-    
-    if (activeAccordion) {
-        const submenu = document.getElementById(`submenu-${activeAccordion}`);
-        const trigger = document.querySelector(`[data-menu="${activeAccordion}"]`);
-        
-        if (submenu && trigger) {
-            submenu.style.maxHeight = submenu.scrollHeight + 'px';
-            trigger.classList.add('active');
-        }
-    }
-}
-
-// ===== MOBILE MENU FUNCTIONS =====
 
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const closeSidebarBtn = document.getElementById('closeSidebarBtn');
@@ -461,47 +438,39 @@ mobileMenuBtn?.addEventListener('click', openSidebar);
 closeSidebarBtn?.addEventListener('click', closeSidebar);
 sidebarOverlay?.addEventListener('click', closeSidebar);
 
-// Close sidebar on ESC key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
         closeSidebar();
     }
 });
 
-// ===== ACTIVE LINK HIGHLIGHTING =====
-
 const currentPage = new URLSearchParams(window.location.search).get('page') || 'beranda';
 
-// Highlight current page link
 document.querySelectorAll('.sidebar-link').forEach(link => {
     const href = link.getAttribute('href');
     if (href && href.includes(`page=${currentPage}`)) {
         link.classList.add('active');
-        // Smooth scroll into view for active link
         link.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 });
 
-// ===== UPDATE PAGE TITLE =====
-
 const pageTitles = {
     'beranda': 'Dashboard',
     'contentMahasiswa': 'Mahasiswa',
-    'prakuliah': 'Pra Kuliah',
+    'pascakuliah': 'Pasca Kuliah',
+    'raporSemester': 'Rapor Semester',
     'daftarKelas': 'Daftar Kelas',
     'daftarMatkulKelas': 'Daftar Mata Kuliah',
     'daftarDosenKelas': 'Dosen Kelas',
     'daftarMahasiswaKelas': 'Mahasiswa Kelas',
-    'perkuliahan': 'Perkuliahan',
-    'pascakuliah': 'Pasca Kuliah',
     'user': 'Manajemen User',
     'kelas': 'Data Kelas',
     'jurusan': 'Data Jurusan',
     'prodi': 'Program Studi',
-    'kurikulum': 'Kurikulum',
     'matkul': 'Mata Kuliah',
     'dosen': 'Data Dosen',
     'mahasiswa': 'Data Mahasiswa',
+    'kurikulum': 'Data Kurikulum',
     'tahun_akademik': 'Tahun Akademik',
     'password': 'Ubah Password'
 };
@@ -511,44 +480,7 @@ if (pageTitle && pageTitles[currentPage]) {
     pageTitle.textContent = pageTitles[currentPage];
 }
 
-// ===== SMOOTH HOVER EFFECT =====
-
-document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateX(4px)';
-    });
-    link.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateX(0)';
-    });
-});
-
-// ===== INITIALIZE ON PAGE LOAD =====
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize accordion based on current page
     initializeAccordionState();
-    
-    // Optional: Restore previous state from localStorage
-    // restoreAccordionState();
-});
-
-// ===== HANDLE ACCORDION BUTTON CLICKS =====
-
-// When accordion menu (parent) is clicked, navigate to main page
-document.querySelectorAll('.accordion-trigger').forEach(trigger => {
-    trigger.addEventListener('click', function(e) {
-        const menuName = this.getAttribute('data-menu');
-        
-        // Check if clicking to toggle or navigate
-        const isAlreadyActive = this.classList.contains('active');
-        
-        // If not active, navigate to main page
-        if (!isAlreadyActive) {
-            // Navigate to main page
-            window.location.href = `index.php?page=${menuName}`;
-        }
-        
-        // Toggle accordion will be handled by the toggleAccordion function
-    });
 });
 </script>

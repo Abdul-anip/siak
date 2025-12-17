@@ -66,6 +66,11 @@ switch ($page) {
         require "views/pascakuliah/index.php";
         break;
     
+    // ✅ Tambahan: Rapor Semester (Pasca Kuliah)
+    case "raporSemester":
+        require "controllers/RaporSemesterController.php";
+        break;
+
     case "dataMaster":
         require "views/dataMaster/index.php";
         break;
