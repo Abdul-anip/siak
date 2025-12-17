@@ -66,6 +66,10 @@ switch ($page) {
         require "views/pascakuliah/index.php";
         break;
     
+    case "dataMaster":
+        require "views/dataMaster/index.php";
+        break;
+    
     case "contentMahasiswa":
         require "views/contentMahasiswa/index.php";
         break;

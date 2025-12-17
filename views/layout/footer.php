@@ -10,7 +10,7 @@
                         
                     </p>
                     <p class="text-gray-500 text-xs mt-1">
-                        Sistem Informasi Akademik
+                        Sistem Informasi Akademik | Risqa Putri Hanifa
                     </p>
                 </div>
                 
