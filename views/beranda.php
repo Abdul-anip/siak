@@ -136,7 +136,13 @@ include "views/layout/sidebar.php";
             </div>
             <p class="text-sm font-semibold text-gray-800">Pasca Kuliah</p>
         </a>
-
+        
+        <a href="index.php?page=pascakuliah" class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition duration-300 text-center card-hover border border-gray-100">
+            <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300">
+                <i class="fas fa-book-open w-5 text-center text-white"></i>
+            </div>
+            <p class="text-sm font-semibold text-gray-800">Kurikulum</p>
+        </a>
     
 
         <!-- Menu 6 -->

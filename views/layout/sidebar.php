@@ -12,7 +12,7 @@
                     <i class="fas fa-graduation-cap text-2xl text-primary-600"></i>
                 </div>
                 <div>
-                    <h1 class="text-white font-bold text-xl">SIAKAD</h1>
+                    <h1 class="text-white font-bold text-xl">SIAK</h1>
                     <p class="text-white text-xs opacity-90">Sistem Akademik</p>
                 </div>
             </div>
@@ -156,55 +156,62 @@
                     </div>
                 </div>
             </div>
-            
-            <a href="index.php?page=user" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-user-cog w-5 text-center"></i>
-                <span class="font-medium">User</span>
-            </a>
         </div>
 
         <!-- Data Master -->
-        <div class="mb-4">
-            <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Data Master
-            </p>
-            
-            <a href="index.php?page=kelas" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-door-open w-5 text-center"></i>
-                <span class="font-medium">Kelas</span>
+            <div class="mb-4">
+                <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Data Master
+                </p>
+                <div class="menu-accordion">
+                    <button 
+                        type="button"
+                        onclick="toggleAccordion('dataMaster')"
+                        class="sidebar-link accordion-trigger flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group"
+                        data-menu="dataMaster"
+                    >
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-database w-5 text-center"></i>
+                            <span class="font-medium">Data Master</span>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon transition-transform duration-300"></i>
+                    </button>
+                    
+                    <div id="submenu-dataMaster" class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="ml-8 mt-1 space-y-1">
+                            <a href="index.php?page=kelas" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                                <i class="fas fa-circle text-xs"></i>
+                                <span>Kelas</span>
+                            </a>
+                            <a href="index.php?page=jurusan" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                                <i class="fas fa-circle text-xs"></i>
+                                <span>Jurusan</span>
+                            </a>
+                            <a href="index.php?page=prodi" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                                <i class="fas fa-circle text-xs"></i>
+                                <span>Program Studi</span>
+                            </a>
+                            <a href="index.php?page=matkul" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                                <i class="fas fa-circle text-xs"></i>
+                                <span>Mata Kuliah</span>
+                            </a>
+                            <a href="index.php?page=dosen" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                                <i class="fas fa-circle text-xs"></i>
+                                <span>Dosen</span>
+                            </a>
+                            <a href="index.php?page=mahasiswa" class="sidebar-link submenu-link flex items-center space-x-2 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-primary-50 hover:text-primary-600">
+                                <i class="fas fa-circle text-xs"></i>
+                                <span>Data Mahasiswa</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <a href="index.php?page=user" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
+                <i class="fas fa-user-cog w-5 text-center"></i>
+                <span class="font-medium">User</span>
             </a>
-            
-            <a href="index.php?page=jurusan" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-folder w-5 text-center"></i>
-                <span class="font-medium">Jurusan</span>
-            </a>
-            
-            <a href="index.php?page=prodi" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-folder-open w-5 text-center"></i>
-                <span class="font-medium">Program Studi</span>
-            </a>
-            
-            <a href="index.php?page=kurikulum" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-book-open w-5 text-center"></i>
-                <span class="font-medium">Kurikulum</span>
-            </a>
-            
-            <a href="index.php?page=matkul" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-book w-5 text-center"></i>
-                <span class="font-medium">Mata Kuliah</span>
-            </a>
-            
-            <a href="index.php?page=dosen" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-chalkboard-user w-5 text-center"></i>
-                <span class="font-medium">Dosen</span>
-            </a>
-            
-            <a href="index.php?page=mahasiswa" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 group">
-                <i class="fas fa-user-graduate w-5 text-center"></i>
-                <span class="font-medium">Mahasiswa</span>
-            </a>
-            
-        </div>
 
         <!-- User Menu -->
         <div class="mb-4">
@@ -228,7 +235,7 @@
     <div class="sticky bottom-0 bg-gray-50 p-4 border-t">
         <div class="text-center text-xs text-gray-500">
             <p>&copy; <?= date('Y') ?> SIAK</p>
-            <p class="mt-1">Sistem Informasi Akademik</p>
+            <p class="mt-1">Sistem Informasi Akademik | Risqa Putri Hanifa</p>
         </div>
     </div>
 
@@ -334,7 +341,12 @@ function toggleAccordion(menuId) {
     });
     
     document.querySelectorAll('.accordion-trigger').forEach(btn => {
-        btn.classList.remove('active');
+        trigger.addEventListener('click', function(e) {
+                // Jangan lakukan apa-apa selain toggle
+                e.preventDefault();
+                const menuId = this.getAttribute('data-menu');
+                toggleAccordion(menuId);
+            });
     });
     
     // Toggle current accordion
@@ -354,6 +366,9 @@ function toggleAccordion(menuId) {
 /**
  * Initialize accordion state on page load
  */
+/**
+ * Initialize accordion state on page load
+ */
 function initializeAccordionState() {
     const currentPage = new URLSearchParams(window.location.search).get('page') || 'beranda';
     
@@ -370,7 +385,15 @@ function initializeAccordionState() {
         'perkuliahan': 'perkuliahan',
         
         // Pasca Kuliah
-        'pascakuliah': 'pascakuliah'
+        'pascakuliah': 'pascakuliah',
+
+        // DATA MASTER (Tambahkan mapping ini)
+        'kelas': 'datamaster',
+        'jurusan': 'datamaster',
+        'prodi': 'datamaster',
+        'matkul': 'datamaster',
+        'dosen': 'datamaster',
+        'mahasiswa': 'datamaster'
     };
     
     // Get accordion for current page
@@ -381,11 +404,16 @@ function initializeAccordionState() {
         const trigger = document.querySelector(`[data-menu="${accordionId}"]`);
         
         if (submenu && trigger) {
-            // Open accordion
+            // Hilangkan transisi sementara agar menu langsung terbuka tanpa animasi saat page load
+            submenu.style.transition = 'none';
             submenu.style.maxHeight = submenu.scrollHeight + 'px';
             trigger.classList.add('active');
             
-            // Save to localStorage
+            // Kembalikan transisi setelah sedikit delay
+            setTimeout(() => {
+                submenu.style.transition = 'max-height 0.3s ease';
+            }, 10);
+            
             localStorage.setItem('activeAccordion', accordionId);
         }
     }
